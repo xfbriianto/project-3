@@ -23,13 +23,6 @@
         </a>
       </li>
     @else
-      <!-- Nama user sebagai link ke profile/dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard') }}">
-          <i class="fas fa-user-cog fa-fw mr-2 text-gray-400"></i>
-          {{ Auth::user()->role == 'super-admin' ? 'Super Admin' : Auth::user()->name }}
-        </a>
-      </li>
 
       <!-- Logout langsung -->
       <li class="nav-item">

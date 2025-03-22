@@ -22,12 +22,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Dashboard khusus admin
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware('auth')->name('admin.dashboard');
+})->name('dashboard');
 
 // Dashboard untuk user biasa
 Route::get('/', function () {
     return view('index');
-})->middleware('auth')->name('dashboard');
+})->middleware('auth')->name('index');
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +63,12 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
+// halaman keranjang
+Route::get('/keranjang', function () {
+    return view('user.keranjang');
+})->name('keranjang');
+
+
+Route::get('/admin/databarang', function () {
+    return view('admin.databarang');
+})->name('admin.databarang');
