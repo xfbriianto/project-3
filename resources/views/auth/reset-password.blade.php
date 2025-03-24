@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up - CCTV Web</title>
+  <title>Reset Password</title>
 
-  <!-- Bootstrap CSS (CDN) -->
+  <!-- Bootstrap 5 (CDN) -->
   <link 
     rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
@@ -19,70 +19,64 @@
 
   <style>
     /* Ganti URL berikut dengan gambar background Anda */
-    .bg-login {
+    .bg-reset {
       background-image: url('https://via.placeholder.com/1600x900');
       background-size: cover;
       background-position: center;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-repeat: no-repeat;
+      /* Overlay warna kebiruan */
+      background-color: rgba(0, 59, 131, 0.7);
       background-blend-mode: multiply;
     }
   </style>
 </head>
-<body class="bg-login min-h-screen flex items-center justify-center">
+<body class="bg-reset min-h-screen flex items-center justify-center">
   
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="bg-white rounded-lg shadow-lg p-5" style="max-width: 400px; width: 100%;">
       
       <!-- Judul Halaman -->
-      <h2 class="text-center mb-4 font-bold text-2xl">Create an account</h2>
+      <h2 class="text-center mb-3 font-bold text-2xl">Enter New Password ?</h2>
+      <p class="text-center text-gray-600 mb-4">
+        Enter a new password below to change your password
+      </p>
 
-     
+      <!-- ALERT ERROR (jika ada) -->
+      @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
 
-      <!-- FORM REGISTER -->
-      <form action="{{ route('register.post') }}" method="POST">
+      <!-- ALERT SUCCESS (opsional) -->
+      @if (session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div>
+      @endif
+
+      <!-- FORM RESET PASSWORD -->
+      <form action="{{ route('reset.password.post') }}" method="POST">
         @csrf
-        
-        <!-- Form Nama Lengkap -->
-        <div class="mb-3">
-          <label for="name" class="form-label text-gray-700">Nama lengkap</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="name"
-            name="name" 
-            placeholder="Enter your name"
-            required
-          />
-        </div>
 
-        <!-- Form Email -->
+        <!-- Input Password -->
         <div class="mb-3">
-          <label for="email" class="form-label text-gray-700">Email</label>
-          <input 
-            type="email" 
-            class="form-control" 
-            id="email" 
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-
-        <!-- Form Password + Forgot? -->
-        <div class="mb-3">
-          <div class="d-flex justify-content-between align-items-center">
-</div>
+          <label for="password" class="form-label text-gray-700">Password</label>
           <input 
             type="password" 
             class="form-control" 
-            id="password"
-            name="password" 
-            placeholder="Enter your password"
+            id="password" 
+            name="password"
+            placeholder="Enter your new password"
             required
           />
         </div>
 
-        <!-- Form Confirm Password -->
+        <!-- Input Confirm Password -->
         <div class="mb-4">
           <label for="password_confirmation" class="form-label text-gray-700">Confirm Password</label>
           <input 
@@ -95,25 +89,16 @@
           />
         </div>
 
-        <!-- Tombol Create account -->
+        <!-- Tombol Recover Password -->
         <div class="mb-3">
           <button 
             class="btn btn-primary w-100 py-2 text-lg font-bold"
             type="submit"
           >
-            Create account
+            Recover Password
           </button>
         </div>
       </form>
-      <!-- END FORM REGISTER -->
-
-      <!-- Sudah punya akun? Log in -->
-      <div class="text-center">
-        <span class="text-gray-600">Already Have An Account?</span>
-        <a href="{{ route('login') }}" class="text-blue-600 font-semibold hover:underline">
-          Log In
-        </a>
-      </div>
 
     </div> <!-- End Card -->
   </div> <!-- End Container -->
