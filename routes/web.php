@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +37,27 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-// Tampilkan form register
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'processRegister'])->name('register.post');
 
-// Proses register
-Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+// Menampilkan form lupa password
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('forgot.password');
+
+// Memproses form lupa password (misal pakai controller)
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('forgot.password.post');
+
+
+
+
+// 1. Forgot Password (GET & POST)
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotForm'])->name('forgot.password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'processForgot'])->name('forgot.password.post');
+
+// 2. Get Your Code (GET & POST)
+Route::get('/get-your-code', [ForgotPasswordController::class, 'showOtpForm'])->name('get.your.code');
+Route::post('/get-your-code', [ForgotPasswordController::class, 'verifyOtp'])->name('verify.code');
+
+Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('reset.password');
+Route::post('/reset-password', [ForgotPasswordController::class, 'processReset'])->name('reset.password.post');
