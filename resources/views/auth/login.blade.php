@@ -18,9 +18,9 @@
   />
 
   <style>
-    /* Background + Overlay (sesuaikan URL jika perlu) */
+    /* Ganti URL berikut dengan gambar background Anda */
     .bg-login {
-      background-image: url('/assets/images/room-background.jpg');
+      background-image: url('/assets/images/gambar.jpg');
       background-size: cover;
       background-position: center;
       background-color: rgba(0, 0, 0, 0.4);

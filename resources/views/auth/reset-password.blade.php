@@ -20,12 +20,10 @@
   <style>
     /* Ganti URL berikut dengan gambar background Anda */
     .bg-reset {
-      background-image: url('https://via.placeholder.com/1600x900');
+      background-image: url('/assets/images/gambar.jpg');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
-      /* Overlay warna kebiruan */
-      background-color: rgba(0, 59, 131, 0.7);
+      background-color: rgba(0, 0, 0, 0.4);
       background-blend-mode: multiply;
     }
   </style>

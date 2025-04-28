@@ -20,7 +20,7 @@
   <style>
     /* Ganti URL berikut dengan gambar background Anda */
     .bg-code {
-      background-image: url('https://via.placeholder.com/1600x900');
+      background-image: url('/assets/images/gambar.jpg');
       background-size: cover;
       background-position: center;
       /* Overlay kebiruan */
