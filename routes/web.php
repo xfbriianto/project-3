@@ -29,7 +29,7 @@ Route::get('/admin/dashboard', function () {
 // Dashboard untuk user biasa
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('auth')->name('user.dashboard');
+})->middleware('auth')->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +61,4 @@ Route::post('/get-your-code', [ForgotPasswordController::class, 'verifyOtp'])->n
 
 Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('reset.password');
 Route::post('/reset-password', [ForgotPasswordController::class, 'processReset'])->name('reset.password.post');
+
