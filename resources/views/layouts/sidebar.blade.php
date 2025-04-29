@@ -5,7 +5,7 @@
     <div class="sidebar-brand-icon">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">Admin Panel</div>
+    <div class="sidebar-brand-text mx-3">view tech</div>
   </a>
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
@@ -16,13 +16,9 @@
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
-  <li class="nav-item">
+ <li class="nav-item">
     <a class="nav-link" href="{{ route('dashboard') }}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Database</span></a>
-  <!-- Tambahkan menu lainnya sesuai template -->
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('dashboard') }}">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Laporan Penjualan</span></a>
+      <span>Kelola Barang</span></a>
+  </li>
 </ul>

@@ -1,0 +1,248 @@
+:root {
+  --primary: #2b55ec;
+  --primary-dark: #1a3ac9;
+  --secondary: #ff6b6b;
+  --dark: #0a0a14;
+  --dark-light: #1a1a24;
+  --light: #f8f9fa;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Styles */
+body.dark-scheme {
+  background-color: var(--dark);
+  color: rgba(255,255,255,0.9);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-main {
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.btn-main:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(43,85,236,0.2);
+}
+
+/* Header Styles */
+header.transparent {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10,10,20,0.95);
+  backdrop-filter: blur(10px);
+}
+
+#mainmenu > li > a {
+  padding: 15px 20px;
+  position: relative;
+}
+
+#mainmenu > li > a:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: var(--transition);
+}
+
+#mainmenu > li:hover > a:after {
+  width: 100%;
+}
+
+/* Hero Slider */
+.swiper-inner {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.sw-caption {
+  position: relative;
+  z-index: 2;
+}
+
+.sw-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(10,10,20,0.9), rgba(10,10,20,0.6));
+}
+
+.cam-style {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Services Section */
+.service-card {
+  background: var(--dark-light);
+  border-radius: 15px;
+  padding: 30px;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.service-card img {
+  filter: invert(1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Why Choose Us Section */
+.triangle-bottomright-dark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 100px solid var(--dark-light);
+  border-left: 100px solid transparent;
+}
+
+/* Testimonials */
+.testimonial-card {
+  background: var(--dark-light);
+  border-radius: 15px;
+  padding: 30px;
+  position: relative;
+}
+
+.testimonial-card:after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 20px 20px 0;
+  border-style: solid;
+  border-color: var(--dark-light) transparent transparent;
+}
+
+/* FAQ Accordion */
+.accordion-section-title {
+  background: var(--dark-light);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+}
+
+.accordion-section-title:after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+}
+
+.accordion-section-title.active {
+  background: var(--primary);
+}
+
+.accordion-section-content {
+  display: none;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+  background: var(--dark-light);
+  padding: 80px 0 0;
+}
+
+.footer-widget h5 {
+  color: white;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-widget h5:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--primary);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .cam-style {
+      font-size: 3rem;
+  }
+  
+  #mainmenu {
+      display: none;
+  }
+  
+  .mobile-menu-visible #mainmenu {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--dark);
+      padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card {
+      margin-bottom: 30px;
+  }
+  
+  .testimonial-card {
+      margin: 15px;
+  }
+  
+  .cam-style {
+      font-size: 2.5rem;
+  }
+}

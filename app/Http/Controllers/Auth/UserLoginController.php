@@ -31,7 +31,7 @@ class UserLoginController extends Controller
             // Pastikan yang login adalah user dengan role='user'
             if (Auth::user()->role === 'user') {
                 // Beri akses, arahkan ke dashboard user
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/index');
             } else {
                 // Jika ternyata admin (atau role lain), logout & beri pesan error
                 Auth::logout();

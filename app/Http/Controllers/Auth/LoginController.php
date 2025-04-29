@@ -34,7 +34,7 @@ class LoginController extends Controller
                 return redirect()->intended('/admin/dashboard');
             } else {
                 // User biasa → ke halaman user
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/index');
             }
         }
 
