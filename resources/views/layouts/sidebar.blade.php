@@ -21,4 +21,8 @@
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Kelola Barang</span></a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.laporan-penjualan') }}">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Laporan Penjualan</span></a>
 </ul>

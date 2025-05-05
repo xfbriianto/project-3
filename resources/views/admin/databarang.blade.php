@@ -1,12 +1,14 @@
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kelola Barang</title>
+{{-- resources/views/admin/data_barang.blade.php --}}
+@extends('layouts.app')
+
+@section('title', 'Kelola Barang')
+
+@push('styles')
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-</head>
-<body class="bg-gray-50 font-sans min-h-screen">
+@endpush
+
+@section('content')
   <div class="container mx-auto px-4 py-8 max-w-7xl">
     <!-- Header dan Tombol Tambah -->
     <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
@@ -14,7 +16,6 @@
       <button
         onclick="openAddModal()"
         class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-white text-sm font-semibold shadow-md transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
-        aria-label="Tambah Barang Baru"
       >
         <i class="fas fa-plus"></i> Tambah Barang
       </button>
@@ -39,7 +40,11 @@
         </button>
         <h2 id="modalTitle" class="mb-6 text-xl font-bold text-gray-900">Tambah Barang Baru</h2>
 
-        <form id="itemForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+        <form id="itemForm" method="POST" enctype="multipart/form-data" class="space-y-5">
+          @csrf
+          <input type="hidden" name="_method" id="formMethod" value="POST">
+          <input type="hidden" name="id" id="itemId">
+
           <div>
             <label for="name" class="block text-sm font-medium text-gray-700">Nama Barang</label>
             <input
@@ -117,9 +122,7 @@
             <button
               type="submit"
               class="rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
-            >
-              Simpan
-            </button>
+            >Simpan</button>
           </div>
         </form>
       </div>
@@ -130,153 +133,65 @@
       <table class="min-w-full divide-y divide-gray-200 border border-gray-200">
         <thead class="bg-gray-50">
           <tr>
-            <th scope="col" class="whitespace-nowrap px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nama Barang</th>
-            <th scope="col" class="whitespace-nowrap px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Kategori</th>
-            <th scope="col" class="whitespace-nowrap px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-gray-500">Stok</th>
-            <th scope="col" class="whitespace-nowrap px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-gray-500">Harga</th>
-            <th scope="col" class="whitespace-nowrap px-6 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500">Aksi</th>
+            <th class="whitespace-nowrap px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nama Barang</th>
+            <th class="whitespace-nowrap px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Kategori</th>
+            <th class="whitespace-nowrap px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-gray-500">Stok</th>
+            <th class="whitespace-nowrap px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-gray-500">Harga</th>
+            <th class="whitespace-nowrap px-6 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500">Aksi</th>
           </tr>
         </thead>
-        <tbody id="itemTable" class="divide-y divide-gray-200 bg-white">
-          <tr class="hover:bg-gray-50 transition-colors">
-            <td class="whitespace-nowrap px-6 py-4 text-gray-900 font-medium">Kamera CCTV 4K</td>
-            <td class="whitespace-nowrap px-6 py-4 text-gray-700">Elektronik</td>
-            <td class="whitespace-nowrap px-6 py-4 text-right text-gray-900 font-semibold">15</td>
-            <td class="whitespace-nowrap px-6 py-4 text-right text-gray-900 font-semibold">Rp 1.500.000</td>
-            <td class="whitespace-nowrap px-6 py-4 text-center space-x-3">
-              <button
-                onclick="openEditModal(this)"
-                class="inline-flex items-center justify-center rounded-md p-2 text-blue-600 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Edit Barang"
-                title="Edit Barang"
-              >
-                <i class="fas fa-edit text-lg"></i>
-              </button>
-              <button
-                onclick="deleteItem(this)"
-                class="inline-flex items-center justify-center rounded-md p-2 text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500"
-                aria-label="Hapus Barang"
-                title="Hapus Barang"
-              >
-                <i class="fas fa-trash text-lg"></i>
-              </button>
-            </td>
-          </tr>
+        <tbody class="bg-white divide-y divide-gray-200">
+          @foreach($barangs as $barang)
+            <tr data-description="{{ $barang->description }}">
+              <td class="px-6 py-4 text-gray-900 font-medium">{{ $barang->name }}</td>
+              <td class="px-6 py-4 text-gray-700">{{ $barang->category }}</td>
+              <td class="px-6 py-4 text-right font-semibold text-gray-900">{{ $barang->stock }}</td>
+              <td class="px-6 py-4 text-right font-semibold text-gray-900">Rp {{ number_format($barang->price,0,',','.') }}</td>
+              <td class="px-6 py-4 text-center space-x-2">
+                <button onclick="editItem({{ $barang->id }})" class="p-2 rounded-md text-blue-600 hover:bg-blue-100 focus:ring-2 focus:ring-blue-500"><i class="fas fa-edit"></i></button>
+                <form action="{{ route('admin.databarang.destroy',$barang) }}" method="POST" class="inline-block">
+                  @csrf @method('DELETE')
+                  <button type="submit" onclick="return confirm('Hapus barang ini?')" class="p-2 rounded-md text-red-600 hover:bg-red-100 focus:ring-2 focus:ring-red-500"><i class="fas fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
   </div>
+@endsection
 
-  <script>
-    let currentEditingItem = null;
+@push('scripts')
+<script>
+  function openAddModal() {
+    const form = document.getElementById('itemForm');
+    form.reset();
+    form.action = '{{ route("admin.databarang.store") }}';
+    document.getElementById('formMethod').value = 'POST';
+    document.getElementById('modalTitle').textContent = 'Tambah Barang Baru';
+    document.getElementById('itemModal').classList.remove('hidden');
+  }
 
-    function openAddModal() {
-      document.getElementById('modalTitle').textContent = 'Tambah Barang Baru';
-      const form = document.getElementById('itemForm');
-      form.reset();
-      currentEditingItem = null;
-      document.getElementById('itemModal').classList.remove('hidden');
-      // Focus first input
-      setTimeout(() => form.elements.name.focus(), 100);
-    }
+  function editItem(id) {
+    const barangs = @json($barangs->keyBy('id'));
+    const data = barangs[id];
+    const form = document.getElementById('itemForm');
+    form.reset();
+    form.action = `/admin/databarang/${id}`;
+    document.getElementById('formMethod').value = 'PUT';
+    document.getElementById('modalTitle').textContent = 'Edit Barang';
+    document.getElementById('itemId').value = id;
+    form.elements.name.value = data.name;
+    form.elements.category.value = data.category;
+    form.elements.stock.value = data.stock;
+    form.elements.price.value = data.price;
+    form.elements.description.value = data.description;
+    document.getElementById('itemModal').classList.remove('hidden');
+  }
 
-    function openEditModal(button) {
-      const row = button.closest('tr');
-      const cells = row.getElementsByTagName('td');
-
-      document.getElementById('modalTitle').textContent = 'Edit Barang';
-      const form = document.getElementById('itemForm');
-
-      form.elements.name.value = cells[0].textContent.trim();
-      form.elements.category.value = cells[1].textContent.trim();
-      form.elements.stock.value = cells[2].textContent.trim();
-      // Remove non-digit characters for price input
-      form.elements.price.value = cells[3].textContent.replace(/\D/g, '').trim();
-      form.elements.description.value = row.dataset.description || '';
-
-      currentEditingItem = row;
-      document.getElementById('itemModal').classList.remove('hidden');
-      setTimeout(() => form.elements.name.focus(), 100);
-    }
-
-    function closeModal() {
-      document.getElementById('itemModal').classList.add('hidden');
-    }
-
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-
-      const newItem = {
-        name: formData.get('name').trim(),
-        category: formData.get('category'),
-        stock: formData.get('stock'),
-        price: 'Rp ' + parseInt(formData.get('price'), 10).toLocaleString('id-ID'),
-        description: formData.get('description').trim()
-      };
-
-      if (currentEditingItem) {
-        // Update existing item
-        const cells = currentEditingItem.getElementsByTagName('td');
-        cells[0].textContent = newItem.name;
-        cells[1].textContent = newItem.category;
-        cells[2].textContent = newItem.stock;
-        cells[3].textContent = newItem.price;
-        currentEditingItem.dataset.description = newItem.description;
-      } else {
-        // Add new item
-        const newRow = document.createElement('tr');
-        newRow.classList.add('hover:bg-gray-50', 'transition-colors');
-        newRow.dataset.description = newItem.description;
-        newRow.innerHTML = `
-          <td class="whitespace-nowrap px-6 py-4 text-gray-900 font-medium">${newItem.name}</td>
-          <td class="whitespace-nowrap px-6 py-4 text-gray-700">${newItem.category}</td>
-          <td class="whitespace-nowrap px-6 py-4 text-right text-gray-900 font-semibold">${newItem.stock}</td>
-          <td class="whitespace-nowrap px-6 py-4 text-right text-gray-900 font-semibold">${newItem.price}</td>
-          <td class="whitespace-nowrap px-6 py-4 text-center space-x-3">
-            <button
-              onclick="openEditModal(this)"
-              class="inline-flex items-center justify-center rounded-md p-2 text-blue-600 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Edit Barang"
-              title="Edit Barang"
-            >
-              <i class="fas fa-edit text-lg"></i>
-            </button>
-            <button
-              onclick="deleteItem(this)"
-              class="inline-flex items-center justify-center rounded-md p-2 text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500"
-              aria-label="Hapus Barang"
-              title="Hapus Barang"
-            >
-              <i class="fas fa-trash text-lg"></i>
-            </button>
-          </td>
-        `;
-        document.getElementById('itemTable').appendChild(newRow);
-      }
-
-      closeModal();
-    }
-
-    function deleteItem(button) {
-      if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
-        button.closest('tr').remove();
-      }
-    }
-
-    // Close modal on Escape key press
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !document.getElementById('itemModal').classList.contains('hidden')) {
-        closeModal();
-      }
-    });
-
-    // Close modal when clicking outside modal content
-    document.getElementById('itemModal').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) {
-        closeModal();
-      }
-    });
-  </script>
-</body>
-</html>
+  function closeModal() {
+    document.getElementById('itemModal').classList.add('hidden');
+  }
+</script>
+@endpush
