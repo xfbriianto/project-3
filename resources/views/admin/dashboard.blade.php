@@ -1,6 +1,6 @@
 <!-- resources/views/admin/dashboard.blade.php -->
-@extends('layouts.app')
 
+@extends('layouts.app')
 @section('title', 'Dashboard')
 
 @section('content')
@@ -16,7 +16,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Penjualan</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Rp 100.000.000</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($totalPenjualan, 0, ',', '.') }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -48,7 +48,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Stok Produk</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">320</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalStok }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-boxes fa-2x text-gray-300"></i>
@@ -92,30 +92,23 @@
               <th>Total Harga</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- Contoh Data Dummy -->
+             <tbody>
+        @forelse($penjualanTerbaru as $order)
+          @foreach($order->items as $item)
             <tr>
-              <td>1</td>
-              <td>2025-03-22</td>
-              <td>Kamera CCTV 1080p</td>
-              <td>3</td>
-              <td>Rp 4.500.000</td>
+              <td>{{ $loop->parent->iteration }}{{ $loop->count > 1 ? '.' . $loop->iteration : '' }}</td>
+              <td>{{ $order->created_at->format('Y-m-d') }}</td>
+              <td>{{ $item->barang->name ?? '-' }}</td>
+              <td>{{ $item->quantity }}</td>
+              <td>Rp {{ number_format($item->quantity * $item->price, 0, ',', '.') }}</td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>2025-03-21</td>
-              <td>DVR 16 Channel</td>
-              <td>1</td>
-              <td>Rp 2.000.000</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>2025-03-20</td>
-              <td>IP Camera Wireless</td>
-              <td>5</td>
-              <td>Rp 7.500.000</td>
-            </tr>
-          </tbody>
+          @endforeach
+        @empty
+          <tr>
+            <td colspan="5" class="text-center text-gray-500">Belum ada penjualan.</td>
+          </tr>
+        @endforelse
+      </tbody>
         </table>
       </div>
     </div>
@@ -150,20 +143,6 @@
       </div>
     </div>
 
-    <!-- Donut Chart -->
-    <div class="col-xl-4 col-lg-5 mb-4">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-        </div>
-        <div class="card-body">
-          <div class="chart-pie pt-4">
-            <canvas id="myPieChart"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 @endsection
 
@@ -187,19 +166,46 @@
         }
       });
 
-      // Bar Chart Example
-      var ctxBar = document.getElementById('myBarChart').getContext('2d');
-      new Chart(ctxBar, {
-        type: 'bar',
+      @push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Area Chart Example (Penjualan Bulanan)
+      var ctxArea = document.getElementById('myAreaChart').getContext('2d');
+      new Chart(ctxArea, {
+        type: 'line',
         data: {
-          labels: ["Kamera", "DVR", "IP Cam", "Sensor", "Alarm"],
+          labels: {!! json_encode($labels) !!},
           datasets: [{
-            label: "Jumlah Terjual",
-            data: [31, 12, 45, 25, 10]
+            label: "Penjualan",
+            data: {!! json_encode($data) !!},
+            fill: true,
+            tension: 0.4,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2
           }]
         }
       });
 
+      // Bar Chart Example (Penjualan Bulanan)
+      var ctxBar = document.getElementById('myBarChart').getContext('2d');
+      new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: {!! json_encode($labels) !!},
+          datasets: [{
+            label: "Penjualan",
+            data: {!! json_encode($data) !!},
+            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 2
+          }]
+        }
+      });
+    });
+  </script>
+@endpush
       // Donut Chart Example
       var ctxPie = document.getElementById('myPieChart').getContext('2d');
       new Chart(ctxPie, {
