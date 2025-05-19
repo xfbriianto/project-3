@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Product extends Model
+class Produk extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,7 @@ class Product extends Model
         'description',
         'stock',
         'price',
+        'image',
         // tambahkan kolom lain jika ada
     ];
 

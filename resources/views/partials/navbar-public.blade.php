@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title', 'Technocenter')</title>
+  <link rel="icon" href="{{ asset('images/logo_TC.png') }}" type="image/png">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -28,18 +29,20 @@
         <a href="{{ route('service') }}" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Service</a>
         <a href="#components" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Komponen</a>
         <a href="#paket" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Paket Produk</a>
-        <a href="#about" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Tentang Kita</a>
+        <a href="{{ route('about') }}" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Service</a><a href="#about" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Tentang Kita</a>
       </div>
 
       <!-- Right Menu -->
       <div class="flex items-center space-x-4">
         <a href="#contact" class="text-white font-bold">Contact</a>
-        <a href="#cart" class="text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-               viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
+        <a href="{{ route('keranjang') }}" class="text-white">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+       viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+  </svg>
+</a>
+
         </a>
 
         <!-- Profile Dropdown -->

@@ -9,10 +9,7 @@
         <h1 class="text-2xl font-bold text-gray-800">Daftar Paket</h1>
         <button onclick="openAddPackageModal()" 
                 class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-all duration-300 flex items-center gap-2 shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-            </svg>
-            Tambah Paket
+            <i class="fas fa-box"></i> Tambah Paket
         </button>
     </div>
 
@@ -34,7 +31,7 @@
     @endif
 
     <!-- Main table -->
-    <div class="overflow-hidden bg-white rounded-xl shadow-sm border border-gray-100">
+    <div class="overflow-hidden rounded-xl shadow-sm border border-gray-100">
         <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead>
                 <tr class="bg-gray-50">
@@ -105,7 +102,7 @@
 </div>
 
 <!-- Package Modal (Add & Edit) -->
-<div id="packageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-900 bg-opacity-60 transition-opacity duration-300">
+<div id="packageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4 modal-transition">
     <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-hidden transform transition-transform duration-300">
         <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
             <h3 id="modalTitle" class="text-lg font-semibold text-gray-800">Tambah Paket Baru</h3>
@@ -114,16 +111,30 @@
         <form id="packageForm" method="POST" action="{{ route('admin.paket.store') }}" class="px-6 py-5">
             @csrf
             <div id="method-field"></div>
-            
-            <div class="mb-5">
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Paket</label>
-                <input type="text" name="name" id="name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan nama paket" required>
-            </div>
-            
-            <div class="mb-5">
-                <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Harga (Rp)</label>
-                <input type="number" name="price" id="price" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Contoh: 100000" required>
-            </div>
+            <div class="mb-6">
+    <label for="name" class="block text-base font-semibold text-gray-700 mb-2">Nama Paket</label>
+    <input
+        type="text"
+        name="name"
+        id="name"
+        class="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm px-4 py-3 text-base focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        placeholder="Masukkan nama paket"
+        required
+    >
+</div>
+
+<div class="mb-6">
+    <label for="price" class="block text-base font-semibold text-gray-700 mb-2">Harga (Rp)</label>
+    <input
+        type="number"
+        name="price"
+        id="price"
+        class="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm px-4 py-3 text-base focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        placeholder="Contoh: 100000"
+        required
+    >
+</div>
+
             
             <div class="mb-5">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Item</label>
@@ -155,7 +166,7 @@
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div id="deleteModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-900 bg-opacity-60 transition-opacity duration-300">
+<div id="deleteModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4 modal-transition">
     <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 overflow-hidden transform transition-transform duration-300">
         <div class="bg-red-50 px-6 py-4 border-b border-red-100">
             <h3 class="text-lg font-semibold text-red-800">Konfirmasi Hapus</h3>
@@ -194,7 +205,7 @@
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         
-        // Tambahkan animasi fade-in
+        // Tambahkan animasi fade-in untuk modal content saja, bukan background
         setTimeout(() => {
             modal.querySelector('div').classList.add('scale-100', 'opacity-100');
             modal.querySelector('div').classList.remove('scale-95', 'opacity-0');
@@ -236,7 +247,7 @@
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
                 
-                // Tambahkan animasi fade-in
+                // Tambahkan animasi fade-in untuk modal content saja
                 setTimeout(() => {
                     modal.querySelector('div').classList.add('scale-100', 'opacity-100');
                     modal.querySelector('div').classList.remove('scale-95', 'opacity-0');
@@ -253,7 +264,7 @@
     function closePackageModal() {
         const modal = document.getElementById('packageModal');
         
-        // Tambahkan animasi fade-out
+        // Tambahkan animasi fade-out untuk modal content saja
         modal.querySelector('div').classList.add('scale-95', 'opacity-0');
         modal.querySelector('div').classList.remove('scale-100', 'opacity-100');
         
@@ -276,7 +287,7 @@
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         
-        // Tambahkan animasi fade-in
+        // Tambahkan animasi fade-in untuk modal content saja
         setTimeout(() => {
             modal.querySelector('div').classList.add('scale-100', 'opacity-100');
             modal.querySelector('div').classList.remove('scale-95', 'opacity-0');
@@ -287,7 +298,7 @@
     function closeDeleteModal() {
         const modal = document.getElementById('deleteModal');
         
-        // Tambahkan animasi fade-out
+        // Tambahkan animasi fade-out untuk modal content saja
         modal.querySelector('div').classList.add('scale-95', 'opacity-0');
         modal.querySelector('div').classList.remove('scale-100', 'opacity-100');
         
@@ -315,12 +326,21 @@
     function showToast(message, type = 'success') {
         // Buat elemen toast
         const toast = document.createElement('div');
-        toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 z-50 ${
+        toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-y-4 opacity-0 z-50 ${
             type === 'success' ? 'bg-green-50 text-green-800 border-l-4 border-green-500' : 'bg-red-50 text-red-800 border-l-4 border-red-500'
         }`;
         
-        
-        
+        // Isi toast
+        toast.innerHTML = `
+            <div class="flex items-center">
+                <svg class="h-5 w-5 ${type === 'success' ? 'text-green-500' : 'text-red-500'} mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${type === 'success' 
+                        ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />'
+                        : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />'}
+                </svg>
+                <p class="font-medium">${message}</p>
+            </div>
+        `;
         
         // Tambahkan toast ke body
         document.body.appendChild(toast);
@@ -345,18 +365,15 @@
 
     // Inisialisasi saat halaman dimuat
     document.addEventListener('DOMContentLoaded', function() {
-        // Tambahkan class untuk animasi pada modal
+        // Tambahkan class untuk animasi pada modal content (bukan background overlay)
         document.querySelectorAll('#packageModal > div, #deleteModal > div').forEach(modal => {
             modal.classList.add('transform', 'transition-all', 'duration-300', 'scale-95', 'opacity-0');
         });
         
-        // Tambahkan class untuk animasi pada alert
+        // Auto-close success alert setelah 3 detik
         if (document.getElementById('successAlert')) {
             document.getElementById('successAlert').classList.add('transition-opacity', 'duration-300');
-        }
-        
-        if (document.getElementById('errorAlert')) {
-            document.getElementById('errorAlert').classList.add('transition-opacity', 'duration-300');
+            setTimeout(closeSuccessAlert, 3000);
         }
     });
 </script>

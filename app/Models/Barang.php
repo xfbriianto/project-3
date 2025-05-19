@@ -30,4 +30,11 @@ protected $fillable = [
     {
         return $this->belongsToMany(Paket::class, 'barang_paket', 'barang_id', 'paket_id');
     }
+
+    // fungsi scope buat search
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('name', 'LIKE', "%{$keyword}%")
+                     ->orWhere('description', 'LIKE', "%{$keyword}%");
+    }
 }

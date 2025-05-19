@@ -20,7 +20,7 @@ class BarangController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|in:Elektronik,Perkakas,Material',
+            'category' => 'required|in:Elektronik,Perkakas,Material,Aksesoris,CCTV Indoor,CCTV Outdoor,IP Camera,DVR/NVR',
             'stock' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
@@ -44,7 +44,7 @@ class BarangController extends Controller
 
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|in:Elektronik,Perkakas,Material',
+           'category' => 'required|in:Elektronik,Perkakas,Material,Aksesoris,CCTV Indoor,CCTV Outdoor,IP Camera,DVR/NVR',
             'stock' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
@@ -77,4 +77,30 @@ class BarangController extends Controller
         $barang->delete();
         return redirect()->route('admin.databarang')->with('success', 'Barang berhasil dihapus!');
     }
+
+      public function bulkDestroy(Request $request)
+    {
+        $ids = $request->input('ids', []); // array id yg dikirim
+        if (count($ids) > 0) {
+            Barang::whereIn('id', $ids)->delete();
+            return redirect()->back()->with('success', count($ids) . ' barang berhasil dihapus.');
+        }
+        return redirect()->back()->with('error', 'Tidak ada barang yang dipilih.');
+    }
+
+    public function showPublic(Request $request)
+{
+    $query = $request->input('q');
+
+    $barangs = Barang::query()
+        ->when($query, function ($q) use ($query) {
+            $q->where('name', 'like', '%' . $query . '%')
+              ->orWhere('category', 'like', '%' . $query . '%')
+              ->orWhere('description', 'like', '%' . $query . '%');
+        })
+        ->get();
+
+    return view('produk.index', compact('produk'));
+}
+
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\Auth\LaporanPenjualanController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HomeController;
 
 
@@ -34,6 +35,9 @@ use App\Http\Controllers\HomeController;
         Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('reset.password');
         Route::post('/reset-password', [ForgotPasswordController::class, 'processReset'])->name('reset.password.post');
 
+Route::delete('admin/databarang/bulk', [App\Http\Controllers\BarangController::class, 'bulkDestroy'])
+    ->name('admin.databarang.bulkDestroy');
+
         // Public routes
         Route::get('/', function () {
             return view('index');
@@ -43,9 +47,7 @@ use App\Http\Controllers\HomeController;
             return view('index');
         })->name('index');
 
-        Route::get('/keranjang', function () {
-            return view('user.keranjang');
-        })->name('keranjang');
+      // Route untuk menampilkan halaman keranjang
 
         // Admin dashboard (auth required)
         Route::get('/admin/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
@@ -82,6 +84,28 @@ use App\Http\Controllers\HomeController;
             Route::put('paket/{paket}', [PaketController::class, 'update'])->name('paket.update');
             Route::delete('paket/{paket}', [PaketController::class, 'destroy'])->name('paket.destroy');
         });
+
+    
+// Route untuk menampilkan halaman keranjang
+Route::get('/keranjang', function () {
+    return view('keranjang');
+})->name('keranjang');
+
+// Route untuk menampilkan halaman tentang kami
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+// Route untuk menampilkan halaman produk dan melakukan pencarian
+Route::get('/produk/cari', [ProdukController::class, 'cari'])->name('produk.cari');
+
+Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+
+
+
+;
+
+
 
 
 
