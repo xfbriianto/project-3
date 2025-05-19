@@ -20,7 +20,7 @@
   <style>
     /* Ganti URL berikut dengan gambar background Anda */
     .bg-login {
-      background-image: url('/assets/images/gambar.jpg');
+      background-image: url('https://via.placeholder.com/1600x900');
       background-size: cover;
       background-position: center;
       background-color: rgba(0, 0, 0, 0.4);
@@ -50,7 +50,7 @@
             class="form-control" 
             id="name"
             name="name" 
-            placeholder="Enter your name"
+            placeholder="example"
             required
           />
         </div>
@@ -63,7 +63,7 @@
             class="form-control" 
             id="email" 
             name="email"
-            placeholder="Enter your email"
+            placeholder="example@gmail.com"
             required
           />
         </div>
@@ -71,7 +71,9 @@
         <!-- Form Password + Forgot? -->
         <div class="mb-3">
           <div class="d-flex justify-content-between align-items-center">
-</div>
+            <label for="password" class="form-label text-gray-700">Password</label>
+            <a href="#" class="text-blue-600 text-sm hover:underline">Forgot?</a>
+          </div>
           <input 
             type="password" 
             class="form-control" 

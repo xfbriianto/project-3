@@ -10,5 +10,24 @@ class Barang extends Model
     use HasFactory;
 
     protected $table = 'barangs';
-    protected $fillable = ['name', 'category', 'stock', 'price', 'description'];
+    // File app/Models/Barang.php
+protected $fillable = [
+    'name', 
+    'category', 
+    'stock', 
+    'price', 
+    'description', 
+    'image' // <- Pastikan ada
+];    
+
+    public function pakets()
+{
+    return $this->belongsToMany(Paket::class, 'barang_paket', 'barang_id', 'paket_id');
+}
+
+
+    public function items()
+    {
+        return $this->belongsToMany(Paket::class, 'barang_paket', 'barang_id', 'paket_id');
+    }
 }

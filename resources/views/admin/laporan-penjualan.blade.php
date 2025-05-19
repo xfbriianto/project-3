@@ -10,7 +10,7 @@
         <!-- Filter Section -->
         <div class="mt-6 bg-white rounded-lg shadow-md p-6">
             <h2 class="text-lg font-medium text-gray-700 mb-4">Filter Laporan</h2>
-            <form action="{{ route('admin.laporan-penjualan') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <form action="{{route('admin.laporan-penjualan') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label for="start_date" class="block text-sm font-medium text-gray-700">Tanggal Mulai</label>
                     <input type="date" name="start_date" id="start_date" value="{{ request('start_date') }}" 
@@ -27,10 +27,10 @@
                     <label for="status" class="block text-sm font-medium text-gray-700">Status Pesanan</label>
                     <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="">Semua Status</option>
-                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Selesai</option>
-                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="processing" {{ request('status') == 'processing' ? 'selected' : '' }}>Diproses</option>
-                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
+                        <option value="completed" {{request('status') == 'completed' ? 'selected' : '' }}>Selesai</option>
+                        <option value="pending" {{request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="processing" {{request('status') == 'processing' ? 'selected' : '' }}>Diproses</option>
+                        <option value="cancelled" {{request('status') == 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
                     </select>
                 </div>
                 
@@ -83,18 +83,11 @@
                 
                 <!-- Tombol Export -->
                 <div class="flex space-x-2">
-                    <a href="{{ route('admin.laporan-penjualan.export', request()->all()) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    <a href="{{ route('admin.laporan-penjualan.export',request()->all()) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        Export Excel
-                    </a>
-                    
-                    <a href="{{ route('admin.laporan-penjualan.export-pdf', request()->all()) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        Export PDF
+                        Export ke Excel
                     </a>
                 </div>
             </div>
@@ -138,7 +131,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('admin.orders.show', $order->id) }}" class="text-indigo-600 hover:text-indigo-900">Detail</a>
+                                <a href="{{route('admin.orders.show', $order->id) }}" class="text-indigo-600 hover:text-indigo-900">Detail</a>
                             </td>
                         </tr>
                         @empty
