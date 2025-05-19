@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "D:/java"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "D:/js"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "cctv-web"
+	}
+}

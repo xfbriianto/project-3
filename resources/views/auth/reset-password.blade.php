@@ -1,109 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reset Password</title>
-
-  <!-- Bootstrap 5 (CDN) -->
-  <link 
-    rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-  />
-
-  <!-- Tailwind CSS (CDN) -->
-  <link 
-    href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" 
-    rel="stylesheet"
-  />
-
-  <style>
-    /* Ganti URL berikut dengan gambar background Anda */
-    .bg-reset {
-      background-image: url('/assets/images/gambar.jpg');
-      background-size: cover;
-      background-position: center;
-      background-color: rgba(0, 0, 0, 0.4);
-      background-blend-mode: multiply;
-    }
-  </style>
-</head>
-<body class="bg-reset min-h-screen flex items-center justify-center">
-  
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="bg-white rounded-lg shadow-lg p-5" style="max-width: 400px; width: 100%;">
-      
-      <!-- Judul Halaman -->
-      <h2 class="text-center mb-3 font-bold text-2xl">Enter New Password ?</h2>
-      <p class="text-center text-gray-600 mb-4">
-        Enter a new password below to change your password
-      </p>
-
-      <!-- ALERT ERROR (jika ada) -->
-      @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
-
-      <!-- ALERT SUCCESS (opsional) -->
-      @if (session('success'))
-        <div class="alert alert-success">
-          {{ session('success') }}
-        </div>
-      @endif
-
-      <!-- FORM RESET PASSWORD -->
-      <form action="{{ route('reset.password.post') }}" method="POST">
+<x-guest-layout>
+    <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
-        <!-- Input Password -->
-        <div class="mb-3">
-          <label for="password" class="form-label text-gray-700">Password</label>
-          <input 
-            type="password" 
-            class="form-control" 
-            id="password" 
-            name="password"
-            placeholder="Enter your new password"
-            required
-          />
+        <!-- Password Reset Token -->
+        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+        <!-- Email Address -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Input Confirm Password -->
-        <div class="mb-4">
-          <label for="password_confirmation" class="form-label text-gray-700">Confirm Password</label>
-          <input 
-            type="password" 
-            class="form-control" 
-            id="password_confirmation" 
-            name="password_confirmation"
-            placeholder="Enter your password again"
-            required
-          />
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Tombol Recover Password -->
-        <div class="mb-3">
-          <button 
-            class="btn btn-primary w-100 py-2 text-lg font-bold"
-            type="submit"
-          >
-            Recover Password
-          </button>
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                type="password"
+                                name="password_confirmation" required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-      </form>
 
-    </div> <!-- End Card -->
-  </div> <!-- End Container -->
-
-  <!-- Bootstrap JS (CDN) -->
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-  </script>
-</body>
-</html>
+        <div class="flex items-center justify-end mt-4">
+            <x-primary-button>
+                {{ __('Reset Password') }}
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout>
