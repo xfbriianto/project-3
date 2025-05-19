@@ -66,11 +66,31 @@
             onclick="openAddModal()"
             class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-white text-sm font-medium shadow-sm transition duration-150 hover:bg-blue-700 hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
           >
-            <i class="fas fa-plus"></i> Tambah Barang
+            <i class="fas fa-boxes"></i> Tambah Produk
           </button>
         </div>
       </div>
     </div>
+
+    <div class="flex items-center justify-end px-6 py-4 bg-gray-50 border-b border-gray-100">
+  <div>
+    <button
+      id="bulkDeleteBtn"
+      class="relative inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white text-sm font-medium shadow-sm transition duration-150 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      disabled
+      onclick="submitBulkDelete()"
+    >
+      <i class="fas fa-trash-alt"></i>
+      Hapus Produk
+      <span id="bulkCount" class="ml-1 inline-block bg-white text-red-600 rounded-full px-2 py‑0.5 text-xs font-semibold">0</span>
+    </button>
+  </div>
+</div>
+<form id="bulkDeleteForm" action="{{ route('admin.databarang.bulkDestroy') }}" method="POST" style="display: none;">
+  @csrf
+  @method('DELETE')
+  {{-- Di sini nanti JS akan memasukkan <input name="ids[]" value="..."> untuk tiap ID terpilih --}}
+</form>
 
     <!-- Alert Sukses dengan desain minimalis -->
     @if(session('success'))
@@ -85,6 +105,11 @@
       </div>
     @endif
 
+    {{-- Tombol Bulk Delete (disabled kalau belum ada yang dicentang) --}}
+
+
+
+
     <!-- Tabel Barang dengan Desain Clean -->
     <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
       <!-- Header Bagian Table -->
@@ -96,69 +121,95 @@
       <!-- Tabel dengan hover effect -->
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200 table-hover">
-          <thead class="bg-gray-50">
-            <tr>
-              <th class="whitespace-nowrap px-6 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Gambar</th>
-              <th class="whitespace-nowrap px-6 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nama Barang</th>
-              <th class="whitespace-nowrap px-6 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Kategori</th>
-              <th class="whitespace-nowrap px-6 py-3.5 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Stok</th>
-              <th class="whitespace-nowrap px-6 py-3.5 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Harga</th>
-              <th class="whitespace-nowrap px-6 py-3.5 text-center text-xs font-medium uppercase tracking-wider text-gray-500">Aksi</th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-100">
-            @foreach($barangs as $barang)
-              <tr data-description="{{ $barang->description }}" class="hover:bg-gray-50">
-                <td class="px-6 py-4">
-                  @if($barang->image)
-                    <img src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->name }}" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-gray-200">
-                  @else
-                    <div class="h-14 w-14 bg-gray-100 flex items-center justify-center rounded-lg">
-                      <i class="fas fa-image text-gray-400 text-lg"></i>
-                    </div>
-                  @endif
-                </td>
-                <td class="px-6 py-4">
-                  <p class="text-gray-800 font-medium">{{ $barang->name }}</p>
-                  <p class="text-xs text-gray-500 mt-0.5 truncate max-w-xs">{{ $barang->description ?: 'Tidak ada deskripsi' }}</p>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                    {{ $barang->category == 'Elektronik' ? 'bg-blue-100 text-blue-800' : 
-                       ($barang->category == 'Perkakas' ? 'bg-amber-100 text-amber-800' : 
-                        'bg-emerald-100 text-emerald-800') }}">
-                    {{ $barang->category }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 text-right whitespace-nowrap">
-                  <span class="font-medium {{ $barang->stock > 10 ? 'text-green-600' : ($barang->stock > 5 ? 'text-yellow-600' : 'text-red-600') }}">
-                    {{ $barang->stock }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 text-right font-medium text-gray-800 whitespace-nowrap">Rp {{ number_format($barang->price,0,',','.') }}</td>
-                <td class="px-6 py-4 text-center">
-                  <div class="flex items-center justify-center space-x-2">
-                    <button
-                      type="button"
-                      class="p-1.5 rounded-md text-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-150"
-                      onclick="editItem({{ $barang->id }})"
-                      title="Edit"
-                    ><i class="fas fa-edit"></i></button>
-                    <button
-                      type="button"
-                      class="p-1.5 rounded-md text-red-500 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400 transition-colors duration-150"
-                      onclick="showDeleteModal({{ $barang->id }}, '{{ addslashes($barang->name) }}')"
-                      title="Hapus"
-                    ><i class="fas fa-trash-alt"></i></button>
-                    <form id="delete-form-{{ $barang->id }}" action="{{ route('admin.databarang.destroy', $barang) }}" method="POST" style="display:none;">
-                      @csrf @method('DELETE')
-                    </form>
-                  </div>
-                </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
+  <thead class="bg-gray-50">
+    <tr>
+      {{-- Kolom checkbox master --}}
+      <th class="whitespace-nowrap px-6 py-3.5 text-center">
+        <input
+          type="checkbox"
+          id="selectAll"
+          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        />
+      </th>
+      {{-- Kolom Gambar --}}
+      <th class="whitespace-nowrap px-6 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Gambar</th>
+      <th class="whitespace-nowrap px-6 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nama Barang</th>
+      <th class="whitespace-nowrap px-6 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Kategori</th>
+      <th class="whitespace-nowrap px-6 py-3.5 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Stok</th>
+      <th class="whitespace-nowrap px-6 py-3.5 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Harga</th>
+      <th class="whitespace-nowrap px-6 py-3.5 text-center text-xs font-medium uppercase tracking-wider text-gray-500">Aksi</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-100">
+    @foreach($barangs as $barang)
+      <tr data-id="{{ $barang->id }}" class="hover:bg-gray-50">
+        {{-- Checkbox per‐baris --}}
+        <td class="px-6 py-4 text-center">
+          <input
+            type="checkbox"
+            class="rowCheckbox h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            value="{{ $barang->id }}"
+          />
+        </td>
+        {{-- Kolom Gambar --}}
+        <td class="px-6 py-4">
+          @if($barang->image)
+            <img src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->name }}" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-gray-200">
+          @else
+            <div class="h-14 w-14 bg-gray-100 flex items-center justify-center rounded-lg">
+              <i class="fas fa-image text-gray-400 text-lg"></i>
+            </div>
+          @endif
+        </td>
+        {{-- Kolom Nama + Deskripsi --}}
+        <td class="px-6 py-4">
+          <p class="text-gray-800 font-medium">{{ $barang->name }}</p>
+          <p class="text-xs text-gray-500 mt-0.5 truncate max-w-xs">{{ $barang->description ?: 'Tidak ada deskripsi' }}</p>
+        </td>
+        {{-- Kolom Kategori --}}
+        <td class="px-6 py-4">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+            {{ $barang->category == 'Elektronik' ? 'bg-blue-100 text-blue-800' : 
+               ($barang->category == 'Perkakas' ? 'bg-amber-100 text-amber-800' : 
+                'bg-emerald-100 text-emerald-800') }}">
+            {{ $barang->category }}
+          </span>
+        </td>
+        {{-- Kolom Stok --}}
+        <td class="px-6 py-4 text-right whitespace-nowrap">
+          <span class="font-medium {{ $barang->stock > 10 ? 'text-green-600' : ($barang->stock > 5 ? 'text-yellow-600' : 'text-red-600') }}">
+            {{ $barang->stock }}
+          </span>
+        </td>
+        {{-- Kolom Harga --}}
+        <td class="px-6 py-4 text-right font-medium text-gray-800 whitespace-nowrap">
+          Rp {{ number_format($barang->price,0,',','.') }}
+        </td>
+        {{-- Kolom Aksi --}}
+        <td class="px-6 py-4 text-center">
+          <div class="flex items-center justify-center space-x-2">
+            <button
+              type="button"
+              class="p-1.5 rounded-md text-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors duration-150"
+              onclick="editItem({{ $barang->id }})"
+              title="Edit"
+            ><i class="fas fa-edit"></i></button>
+            <button
+              type="button"
+              class="p-1.5 rounded-md text-red-500 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400 transition-colors duration-150"
+              onclick="showDeleteModal({{ $barang->id }}, '{{ addslashes($barang->name) }}')"
+              title="Hapus"
+            ><i class="fas fa-trash-alt"></i></button>
+            <form id="delete-form-{{ $barang->id }}" action="{{ route('admin.databarang.destroy', $barang) }}" method="POST" style="display:none;">
+              @csrf @method('DELETE')
+            </form>
+          </div>
+        </td>
+      </tr>
+    @endforeach
+  </tbody>
+</table>
+
       </div>
       
       <!-- Empty State jika tidak ada barang -->
@@ -167,8 +218,8 @@
           <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
           </svg>
-          <h3 class="text-lg font-medium text-gray-900 mb-1">Belum ada barang</h3>
-          <p class="text-gray-500 text-center max-w-sm mb-4">Tambahkan barang baru untuk mulai mengelola inventaris Anda</p>
+          <h3 class="text-lg font-medium text-gray-900 mb-1">Belum ada produk</h3>
+          <p class="text-gray-500 text-center max-w-sm mb-4">Tambahkan produk baru untuk mulai mengelola inventaris Anda</p>
           <button
             onclick="openAddModal()"
             class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white text-sm font-medium"
@@ -226,8 +277,11 @@
               >
                 <option value="" disabled selected>Pilih Kategori</option>
                 <option value="Elektronik">Elektronik</option>
-                <option value="Perkakas">Perkakas</option>
-                <option value="Material">Material</option>
+                <option value="Aksesoris">Aksesoris</option>
+                <option value="CCTV Indoor">CCTV Indoor</option>
+                <option value="CCTV Outdoor">CCTV Outdoor</option>
+                <option value="IP Camera">IP Camera</option>
+                <option value="DVR/NVR">DVR/NVR</option>
               </select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
                 <i class="fas fa-chevron-down text-xs"></i>
@@ -253,7 +307,7 @@
               <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Harga (Rp)</label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span class="text-gray-500 sm:text-sm">Rp</span>
+                  <span class="text-gray-500 sm:text-sm"></span>
                 </div>
                 <input
                   type="number"
@@ -311,105 +365,6 @@
               type="submit"
               class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
             >Simpan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Modal Tambah Paket -->
-    <div
-      id="packageModal"
-      class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 p-4 modal-transition"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="packageModalTitle"
-    >
-      <div class="relative w-full max-w-md rounded-xl bg-white p-6 shadow-lg overflow-y-auto max-h-[90vh] modal-transition">
-        
-        <!-- Tombol Close -->
-        <button
-          type="button"
-          onclick="closePackageModal()"
-          class="absolute right-4 top-4 text-gray-400 hover:text-gray-600 focus:outline-none"
-          aria-label="Tutup Modal Paket"
-        >
-          <i class="fas fa-times text-lg"></i>
-        </button>
-
-        <!-- Judul Modal -->
-        <h2 id="packageModalTitle" class="text-xl font-semibold text-gray-800 mb-5">Tambah Paket Baru</h2>
-
-        <!-- Form Tambah Paket -->
-        <form id="packageForm" method="POST" action="{{ route('admin.paket.store') }}" class="space-y-4">
-          @csrf
-
-          <!-- Input Nama Paket -->
-          <div>
-            <label for="package_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Paket</label>
-            <input
-              type="text"
-              id="package_name"
-              name="name"
-              required
-              class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-800 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 sm:text-sm"
-              placeholder="Masukkan nama paket"
-            />
-          </div>
-
-          <!-- Pilih Barang -->
-          <div>
-            <label for="package_items" class="block text-sm font-medium text-gray-700 mb-1">Barang dalam Paket</label>
-            <div class="relative">
-              <select
-                id="package_items"
-                name="items[]"
-                multiple
-                required
-                class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-800 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 sm:text-sm"
-                size="4"
-              >
-                @foreach($barangs as $barang)
-                  <option value="{{ $barang->id }}">{{ $barang->name }}</option>
-                @endforeach
-              </select>
-            </div>
-            <p class="mt-1 text-xs text-gray-500">Tekan Ctrl (Windows) atau Cmd (Mac) untuk memilih lebih dari satu barang.</p>
-          </div>
-
-          <!-- Input Harga -->
-          <div>
-            <label for="package_price" class="block text-sm font-medium text-gray-700 mb-1">Harga Paket (Rp)</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span class="text-gray-500 sm:text-sm">Rp</span>
-              </div>
-              <input
-                type="number"
-                id="package_price"
-                name="price"
-                min="0"
-                required
-                class="block w-full rounded-lg border border-gray-300 bg-white pl-12 px-3 py-2 text-gray-800 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 sm:text-sm"
-                placeholder="Harga paket"
-              />
-            </div>
-          </div>
-
-          <!-- Tombol Aksi -->
-          <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 sticky bottom-0 bg-white mt-5">
-            <button
-              type="button"
-              onclick="closePackageModal()"
-              class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
-            >
-              Batal
-            </button>
-            <button
-              type="submit"
-              class="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1"
-            >
-              Simpan Paket
-            </button>
           </div>
         </form>
       </div>
@@ -654,6 +609,74 @@
     const alert = document.getElementById('successAlert');
     if(alert) alert.style.display = 'none';
   }
+
+  // Bulk delete
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const rowCheckboxes    = document.querySelectorAll('.rowCheckbox');
+    const bulkDeleteBtn    = document.getElementById('bulkDeleteBtn');
+    const bulkCountSpan    = document.getElementById('bulkCount');
+
+    // Fungsi untuk update jumlah ter‑check dan enable/disable tombol bulk
+    function updateBulkState() {
+      const checkedBoxes = document.querySelectorAll('.rowCheckbox:checked');
+      const count = checkedBoxes.length;
+      bulkCountSpan.textContent = count;
+      bulkDeleteBtn.disabled = (count === 0);
+    }
+
+    // Event: saat master checkbox (selectAll) diklik
+    selectAllCheckbox.addEventListener('change', function() {
+      const isChecked = this.checked;
+      rowCheckboxes.forEach(cb => {
+        cb.checked = isChecked;
+      });
+      updateBulkState();
+    });
+
+    // Event: saat satu row checkbox diklik
+    rowCheckboxes.forEach(cb => {
+      cb.addEventListener('change', function() {
+        // Kalau ada yang unchecked, auto uncheck master
+        if (!this.checked) {
+          selectAllCheckbox.checked = false;
+        } else {
+          // Jika semua row sudah dicek, maka set master jadi checked
+          const allChecked = Array.from(rowCheckboxes).every(c => c.checked);
+          selectAllCheckbox.checked = allChecked;
+        }
+        updateBulkState();
+      });
+    });
+  });
+
+  // Fungsi saat user klik “Hapus Terpilih”
+  function submitBulkDelete() {
+    // Ambil semua checkbox yang ter‐cek
+    const checkedBoxes = document.querySelectorAll('.rowCheckbox:checked');
+    if (checkedBoxes.length === 0) return;
+
+    // Minta konfirmasi sederhana
+    if (!confirm(`Anda yakin ingin menghapus ${checkedBoxes.length} barang terpilih?`)) {
+      return;
+    }
+
+    // Isi form bulkDeleteForm dengan hidden input untuk tiap id
+    const form = document.getElementById('bulkDeleteForm');
+    // Hapus dulu input sebelumnya, kalau ada
+    form.querySelectorAll('input[name="ids[]"]').forEach(i => i.remove());
+
+    checkedBoxes.forEach(cb => {
+      const hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = 'ids[]';
+      hidden.value = cb.value;
+      form.appendChild(hidden);
+    });
+
+    form.submit();
+  }
+
   @if(session('success'))
     setTimeout(() => closeSuccessAlert(), 3000);
   @endif

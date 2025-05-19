@@ -40,344 +40,89 @@
     <img alt="Two white security cameras mounted on a pole with a bright blue sky and some green tree branches" class="w-full h-full object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/b279a80a-a3a2-4d84-0555-50dd5ba4f70d.jpg" width="600"/>
    </div>
   </section>
-  <!-- Bottom Cards Section -->
-  <section class="max-w-[1200px] mx-auto mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
-  <article class="bg-[#F0E8D6] rounded-lg p-6 flex items-center justify-between h-72">
-    <div class="max-w-[160px]">
-      <h2 class="text-[#1E2E42] font-semibold text-[16px] leading-tight mb-4">
-        Everyday Fresh &amp; Clean with Our Products
-      </h2>
-      <button class="bg-[#E53E2F] text-white text-[12px] px-3 py-1 rounded-sm font-semibold hover:bg-[#b83227] transition">
-        Shop Now →
-      </button>
+ <!-- Our Services Section -->
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Our Services</h2>
+      <p class="text-slate-600 max-w-3xl mx-auto">We offer comprehensive security solutions to keep your property safe and secure</p>
     </div>
-    <img
-      src="https://storage.googleapis.com/a1aa/image/ef6ea38d-5087-4467-fb81-a1553c3095e7.jpg"
-      alt="Onions"
-      class="w-[140px] h-[140px] object-contain"
-    />
-  </article>
-
-  <article class="bg-[#F3E6E7] rounded-lg p-6 flex items-center justify-between h-72">
-    <div class="max-w-[160px]">
-      <h2 class="text-[#1E2E42] font-semibold text-[16px] leading-tight mb-4">
-        Make your Breakfast Healthy and Easy
-      </h2>
-      <button class="bg-[#E53E2F] text-white text-[12px] px-3 py-1 rounded-sm font-semibold hover:bg-[#b83227] transition">
-        Shop Now →
-      </button>
-    </div>
-    <img
-      src="https://storage.googleapis.com/a1aa/image/943b70e7-1634-42a3-027d-9c7bb8967580.jpg"
-      alt="Strawberry Juice"
-      class="w-[140px] h-[140px] object-contain"
-    />
-  </article>
-
-  <article class="bg-[#E3E7F0] rounded-lg p-6 flex items-center justify-between h-72">
-    <div class="max-w-[160px]">
-      <h2 class="text-[#1E2E42] font-semibold text-[16px] leading-tight mb-4">
-        The best Organic Products Online
-      </h2>
-      <button class="bg-[#E53E2F] text-white text-[12px] px-3 py-1 rounded-sm font-semibold hover:bg-[#b83227] transition">
-        Shop Now →
-      </button>
-    </div>
-    <img
-      src="https://storage.googleapis.com/a1aa/image/dd77d01e-dc4b-4e5c-463f-fbdbad081ba6.jpg"
-      alt="Organic Vegetables"
-      class="w-[140px] h-[140px] object-contain"
-    />
-  </article>
-</section>
-
- <!-- Produk Section -->
-  <section class="max-w-7xl mx-auto px-4 py-12">
-  <!-- Section Title and Categories -->
-  <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-    <h2 class="text-2xl font-semibold text-gray-700">Popular CCTV Products</h2>
-    <div class="flex flex-wrap gap-4 mt-4 md:mt-0">
-      <button class="text-green-500 font-medium">All</button>
-      <button class="text-gray-500 hover:text-green-500">Indoor Cameras</button>
-      <button class="text-gray-500 hover:text-green-500">Outdoor Cameras</button>
-      <button class="text-gray-500 hover:text-green-500">DVR Systems</button>
-      <button class="text-gray-500 hover:text-green-500">IP Cameras</button>
-      <button class="text-gray-500 hover:text-green-500">Accessories</button>
-      <button class="text-gray-500 hover:text-green-500">Packages</button>
-    </div>
-  </div>
-  
-  <!-- Products Grid - First Row -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-    <!-- Product Card 1 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <span class="absolute top-4 left-4 bg-pink-500 text-white text-xs px-3 py-1 rounded-full">Hot</span>
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="Dome Security Camera" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Indoor Cameras</div>
-      <h3 class="text-sm font-medium mb-2">HD Dome Security Camera 1080p Indoor</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★★</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Hikvision</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$28.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$32.8</span>
+    <div class="flex flex-wrap justify-center gap-8">
+      <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-emerald-200">
+          <div class="flex justify-center mb-4 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-emerald-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+            </svg>
+          </div>
+          <div class="flex justify-center mb-3">
+            <h5 class="text-slate-800 text-2xl font-semibold">Maintenance</h5>
+          </div>
+          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
+            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
+              Regular servicing and fixing of camera systems to ensure continuous functionality. Our maintenance service includes thorough inspection, cleaning of components, and resolving any technical issues promptly.
+            </p>
+            <a href="service-single.html" class="service-link inline-block mt-2 text-emerald-500 font-medium hover:text-emerald-600 transition-colors">
+            </a>
+          </div>
         </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
 
-    <!-- Product Card 2 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs px-3 py-1 rounded-full">Sale</span>
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="Bullet Camera" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Outdoor Cameras</div>
-      <h3 class="text-sm font-medium mb-2">Weatherproof Bullet Camera 4MP</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★☆☆</div>
-        <span class="text-xs text-gray-400 ml-2">(3.5)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Dahua</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$52.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$55.8</span>
+        <!-- Monitoring Card -->
+        <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-rose-200">
+          <div class="flex justify-center mb-4 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-rose-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" />
+            </svg>
+          </div>
+          <div class="flex justify-center mb-3">
+            <h5 class="text-slate-800 text-2xl font-semibold">Monitoring</h5>
+          </div>
+          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
+            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
+              Real-time monitoring of security cameras by professionals or automated systems. Our team keeps a watchful eye on your premises 24/7, ensuring immediate response to any security concerns.
+            </p>
+            <a href="service-single.html" class="service-link inline-block mt-2 text-rose-500 font-medium hover:text-rose-600 transition-colors">
+            </a>
+          </div>
         </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
 
-    <!-- Product Card 3 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <span class="absolute top-4 left-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full">New</span>
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="PTZ Camera" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">IP Cameras</div>
-      <h3 class="text-sm font-medium mb-2">PTZ IP Camera 5MP with 30x Zoom</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Axis</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$148.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$152.8</span>
+        <!-- Storage & Backup Card -->
+        <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-amber-200">
+          <div class="flex justify-center mb-4 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-amber-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+            </svg>
+          </div>
+          <div class="flex justify-center mb-3">
+            <h5 class="text-slate-800 text-2xl font-semibold">Storage & Backup</h5>
+          </div>
+          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
+            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
+              Offering cloud storage plans for secure, offsite storage of CCTV footage. We provide reliable backup solutions to ensure your surveillance data is always accessible when you need it.
+            </p>
+            <a href="service-single.html" class="service-link inline-block mt-2 text-amber-500 font-medium hover:text-amber-600 transition-colors">
+            </a>
+          </div>
         </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
 
-    <!-- Product Card 4 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="DVR System" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">DVR Systems</div>
-      <h3 class="text-sm font-medium mb-2">8-Channel DVR System with 1TB HDD</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Swann</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$117.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$129.8</span>
+        <!-- System Upgrades Card -->
+        <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-indigo-200">
+          <div class="flex justify-center mb-4 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-indigo-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+            </svg>
+          </div>
+          <div class="flex justify-center mb-3">
+            <h5 class="text-slate-800 text-2xl font-semibold">System Upgrades</h5>
+          </div>
+          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
+            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
+              Upgrading older analog systems to IP-based or HD analog systems. Our upgrade services help you leverage the latest security technology for enhanced protection and monitoring capabilities.
+            </p>
+            <a href="service-single.html" class="service-link inline-block mt-2 text-indigo-500 font-medium hover:text-indigo-600 transition-colors">
+            </a>
+          </div>
         </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
       </div>
     </div>
-
-    <!-- Product Card 5 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <span class="absolute top-4 left-4 bg-orange-500 text-white text-xs px-3 py-1 rounded-full">-14%</span>
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="Security Monitor" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Accessories</div>
-      <h3 class="text-sm font-medium mb-2">10" LCD Security Monitor with HDMI</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By ViewTech</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$73.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$85.8</span>
-        </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Products Grid - Second Row -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-    <!-- Product Card 6 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="Wireless Camera" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Indoor Cameras</div>
-      <h3 class="text-sm font-medium mb-2">Wireless IP Camera with Two-Way Audio</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Reolink</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$54.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$65.8</span>
-        </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
-
-    <!-- Product Card 7 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="CCTV Cable" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Accessories</div>
-      <h3 class="text-sm font-medium mb-2">100ft BNC Video Power Cable</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By CableMatters</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$32.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$35.8</span>
-        </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
-
-    <!-- Product Card 8 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs px-3 py-1 rounded-full">Sale</span>
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="Security NVR" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">DVR Systems</div>
-      <h3 class="text-sm font-medium mb-2">16-Channel NVR with 4TB Storage</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Amcrest</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$235.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$257.8</span>
-        </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
-
-    <!-- Product Card 9 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <span class="absolute top-4 left-4 bg-pink-500 text-white text-xs px-3 py-1 rounded-full">Hot</span>
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="Doorbell Camera" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Outdoor Cameras</div>
-      <h3 class="text-sm font-medium mb-2">Smart Video Doorbell with Motion Detection</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★☆</div>
-        <span class="text-xs text-gray-400 ml-2">(4.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Ring</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$123.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$135.8</span>
-        </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
-
-    <!-- Product Card 10 -->
-    <div class="bg-white rounded-lg shadow-sm p-4 relative">
-      <div class="mb-4 flex justify-center">
-        <img src="/api/placeholder/220/220" alt="CCTV Package" class="h-48 object-contain"/>
-      </div>
-      <div class="text-xs text-gray-500 mb-1">Packages</div>
-      <h3 class="text-sm font-medium mb-2">4-Camera Home Security System</h3>
-      <div class="flex items-center mb-2">
-        <div class="flex text-yellow-400">★★★★★</div>
-        <span class="text-xs text-gray-400 ml-2">(5.0)</span>
-      </div>
-      <div class="text-xs text-gray-500 mb-2">By Lorex</div>
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="text-green-500 font-medium">$322.85</span>
-          <span class="text-xs text-gray-400 line-through ml-2">$349.8</span>
-        </div>
-        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Add
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
+  </section>
 @endsection

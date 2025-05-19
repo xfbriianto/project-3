@@ -1,706 +1,210 @@
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Keranjang Belanja CCTV
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
-  @vite('resources/css/app.css')
-  <style>
-   body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
- </head>
- <body class="bg-gray-50 min-h-screen flex flex-col">
-  <header class="bg-white shadow-md">
-   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <div class="flex items-center space-x-3">
-     <img alt="Logo CCTV Shop, a stylized camera icon in blue and gray" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/0daa9f34-3a35-4662-27e6-60606cae89e4.jpg" width="40"/>
-     <h1 class="text-2xl font-semibold text-gray-800">
-      CCTV Shop
-     </h1>
-    </div>
-        <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
-         <a class="hover:text-blue-600 transition" href="{{ route('index') }}">
-          Beranda
-         </a>
-         <a class="hover:text-blue-600 transition" href="#">
-          Produk
-         </a>
-         <a class="hover:text-blue-600 transition" href="#">
-          Keranjang
-         </a>
-    </nav>
-    <div class="md:hidden">
-     <button class="text-gray-700 focus:outline-none" id="menu-btn">
-      <i class="fas fa-bars fa-lg">
-      </i>
-     </button>
-    </div>
-   </div>
-   <nav class="hidden bg-white border-t border-gray-200 md:hidden" id="mobile-menu">
-    <a class="block px-4 py-3 text-gray-700 font-medium hover:bg-gray-100" href="#">
-     Beranda
-    </a>
-    <a class="block px-4 py-3 text-gray-700 font-medium hover:bg-gray-100" href="#">
-     Produk
-    </a>
-    <a class="block px-4 py-3 text-gray-700 font-medium hover:bg-gray-100" href="#">
-     Kontak
-    </a>
-   </nav>
-  </header>
-  <main class="flex-grow container mx-auto px-4 py-8">
-   <h2 class="text-3xl font-semibold text-gray-800 mb-6">
-    Keranjang Belanja
-   </h2>
-   <div class="overflow-x-auto">
-    <table class="min-w-full bg-white rounded-lg shadow-md">
-     <thead>
-      <tr class="bg-blue-600 text-white text-left">
-       <th class="py-3 px-4 rounded-tl-lg">
-        Produk
-       </th>
-       <th class="py-3 px-4">
-        Harga
-       </th>
-       <th class="py-3 px-4">
-        Jumlah
-       </th>
-       <th class="py-3 px-4">
-        Subtotal
-       </th>
-       <th class="py-3 px-4 rounded-tr-lg">
-        Aksi
-       </th>
-      </tr>
-     </thead>
-     <tbody>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Dome Camera model with black casing and infrared LEDs" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/7b20d062-1a7f-4191-3e29-10f4427c6789.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Dome Camera HD
-         </p>
-         <p class="text-sm text-gray-500">
-          Resolusi 1080p, night vision
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 450.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Dome Camera HD" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Dome Camera HD" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="2"/>
-         <button aria-label="Tambah jumlah produk CCTV Dome Camera HD" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 900.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Dome Camera HD dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Bullet Camera with white casing and weatherproof design" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/90603cd4-669d-4d9c-95e6-9ba040dde686.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Bullet Camera 4MP
-         </p>
-         <p class="text-sm text-gray-500">
-          Waterproof, night vision
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 650.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Bullet Camera 4MP" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Bullet Camera 4MP" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Bullet Camera 4MP" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 650.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Bullet Camera 4MP dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV PTZ Camera with black body and motorized zoom lens" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/d0c1b793-8ea9-4c9d-911a-66d10342abf0.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV PTZ Camera 5MP
-         </p>
-         <p class="text-sm text-gray-500">
-          Motorized zoom, 360° rotation
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 1.200.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV PTZ Camera 5MP" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV PTZ Camera 5MP" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV PTZ Camera 5MP" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 1.200.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV PTZ Camera 5MP dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Wireless Camera with compact white design and antenna" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/2f5002e5-5799-49c7-9e28-372cd247d0c8.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Wireless Camera 1080p
-         </p>
-         <p class="text-sm text-gray-500">
-          WiFi, two-way audio
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 750.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Wireless Camera 1080p" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Wireless Camera 1080p" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="3"/>
-         <button aria-label="Tambah jumlah produk CCTV Wireless Camera 1080p" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 2.250.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Wireless Camera 1080p dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Hidden Camera disguised as a smoke detector in white" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/3e5f5f44-6b5d-496c-14ca-e8aa33694411.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Hidden Camera Mini
-         </p>
-         <p class="text-sm text-gray-500">
-          Disguised as smoke detector
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 500.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Hidden Camera Mini" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Hidden Camera Mini" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Hidden Camera Mini" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 500.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Hidden Camera Mini dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Outdoor Camera with black weatherproof casing and LED lights" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/c464d4d1-5b21-42b2-97d7-d43ca1ac66ef.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Outdoor Camera 4K
-         </p>
-         <p class="text-sm text-gray-500">
-          Weatherproof, night vision
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 1.100.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Outdoor Camera 4K" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Outdoor Camera 4K" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="2"/>
-         <button aria-label="Tambah jumlah produk CCTV Outdoor Camera 4K" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 2.200.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Outdoor Camera 4K dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Fisheye Camera with white circular design and wide angle lens" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/7f33e5ce-0dce-4e68-d365-3ac361e96228.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Fisheye Camera 360°
-         </p>
-         <p class="text-sm text-gray-500">
-          Wide angle, panoramic view
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 1.350.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Fisheye Camera 360°" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Fisheye Camera 360°" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Fisheye Camera 360°" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 1.350.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Fisheye Camera 360° dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV PTZ Camera with white casing and remote control" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/51bcd087-9b3d-4714-2f16-fa37a9a3488b.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV PTZ Camera 1080p
-         </p>
-         <p class="text-sm text-gray-500">
-          Remote control, night vision
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 1.000.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV PTZ Camera 1080p" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV PTZ Camera 1080p" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV PTZ Camera 1080p" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 1.000.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV PTZ Camera 1080p dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with integrated microphone and speaker in black" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/f09cfda3-de4f-4c8a-2cae-8f3bd8392ec7.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Camera with Audio
-         </p>
-         <p class="text-sm text-gray-500">
-          Two-way audio, 1080p
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 800.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Camera with Audio" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Camera with Audio" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="2"/>
-         <button aria-label="Tambah jumlah produk CCTV Camera with Audio" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 1.600.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Camera with Audio dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with night vision and motion detection in white" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/e3cd5717-3f94-4545-3951-31f78d18ad49.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Camera Night Vision
-         </p>
-         <p class="text-sm text-gray-500">
-          Motion detection, 1080p
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 700.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Camera Night Vision" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Camera Night Vision" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Camera Night Vision" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 700.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Camera Night Vision dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with cloud storage and mobile app support in black" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/a073b226-2f1a-4ba3-0fe3-37356df674af.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Camera Cloud Storage
-         </p>
-         <p class="text-sm text-gray-500">
-          Mobile app, 1080p
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 850.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Camera Cloud Storage" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Camera Cloud Storage" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Camera Cloud Storage" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 850.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Camera Cloud Storage dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with infrared LEDs and vandal-proof casing in black" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/a41efa6a-f2a7-4f94-6ed6-2c1b1080edf5.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Vandal-Proof Camera
-         </p>
-         <p class="text-sm text-gray-500">
-          Infrared, 1080p
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 900.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Vandal-Proof Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Vandal-Proof Camera" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Vandal-Proof Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 900.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Vandal-Proof Camera dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with pan and tilt function in white casing" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/11455266-7d29-43f1-f427-1006b32ca29c.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Pan &amp; Tilt Camera
-         </p>
-         <p class="text-sm text-gray-500">
-          Remote control, 1080p
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 950.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Pan &amp; Tilt Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Pan &amp; Tilt Camera" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Pan &amp; Tilt Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 950.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Pan &amp; Tilt Camera dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with 4K resolution and night vision in black casing" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/0858eaab-7e47-47fe-ac60-db3571fc53fe.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV 4K Ultra HD Camera
-         </p>
-         <p class="text-sm text-gray-500">
-          Night vision, 4K resolution
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 1.500.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV 4K Ultra HD Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV 4K Ultra HD Camera" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV 4K Ultra HD Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 1.500.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV 4K Ultra HD Camera dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-       <td class="py-4 px-4 flex items-center space-x-4">
-        <img alt="CCTV Camera with smart AI detection and white casing" class="w-20 h-20 object-cover rounded" height="80" src="https://storage.googleapis.com/a1aa/image/68189911-8bee-4636-7a76-d50c7630293b.jpg" width="80"/>
-        <div>
-         <p class="font-semibold text-gray-800">
-          CCTV Smart AI Camera
-         </p>
-         <p class="text-sm text-gray-500">
-          AI detection, 1080p
-         </p>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-700 font-semibold">
-        Rp 1.250.000
-       </td>
-       <td class="py-4 px-4">
-        <div class="flex items-center space-x-2">
-         <button aria-label="Kurangi jumlah produk CCTV Smart AI Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-minus">
-          </i>
-         </button>
-         <input aria-label="Jumlah produk CCTV Smart AI Camera" class="w-12 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" type="number" value="1"/>
-         <button aria-label="Tambah jumlah produk CCTV Smart AI Camera" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded hover:bg-gray-300 text-gray-700">
-          <i class="fas fa-plus">
-          </i>
-         </button>
-        </div>
-       </td>
-       <td class="py-4 px-4 text-gray-900 font-semibold">
-        Rp 1.250.000
-       </td>
-       <td class="py-4 px-4">
-        <button aria-label="Hapus produk CCTV Smart AI Camera dari keranjang" class="text-red-600 hover:text-red-800 focus:outline-none">
-         <i class="fas fa-trash-alt fa-lg">
-         </i>
-        </button>
-       </td>
-      </tr>
-     </tbody>
-    </table>
-   </div>
-   <div class="mt-8 max-w-md ml-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
-    <h3 class="text-xl font-semibold text-gray-800 mb-4">
-     Ringkasan Pesanan
-    </h3>
-    <div class="flex justify-between text-gray-700 mb-2">
-     <span>
-      Subtotal
-     </span>
-     <span>
-      Rp 13.850.000
-     </span>
-    </div>
-    <div class="flex justify-between text-gray-700 mb-2">
-     <span>
-      Biaya Pengiriman
-     </span>
-     <span>
-      Rp 50.000
-     </span>
-    </div>
-    <div class="border-t border-gray-300 my-3">
-    </div>
-    <div class="flex justify-between text-lg font-semibold text-gray-900 mb-6">
-     <span>
-      Total
-     </span>
-     <span>
-      Rp 13.900.000
-     </span>
-    </div>
-    <button aria-label="Lanjut ke pembayaran" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition focus:outline-none focus:ring-4 focus:ring-blue-300">
-     Lanjut ke Pembayaran
-    </button>
-   </div>
-  </main>
-  <footer class="bg-white border-t border-gray-200 py-6 mt-12">
-   <div class="container mx-auto px-4 text-center text-gray-600 text-sm">
-    © 2024 CCTV Shop. Semua hak cipta dilindungi.
-   </div>
-  </footer>
-  <script>
-   const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+{{-- resources/views/keranjang.blade.php --}}
+@extends('layouts.public')
 
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
- </body>
-</html>
+@section('title', 'Keranjang Belanja')
+
+@section('content')
+<div class="container mx-auto px-4 py-6">
+    @if (!Auth::check())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Oops!</strong>
+            <span class="block sm:inline">Kamu harus login atau register dulu untuk mengakses keranjang.</span>
+            <div class="mt-3 space-x-2">
+                <a href="{{ route('login') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Login</a>
+                <a href="{{ route('register') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Register</a>
+            </div>
+        </div>
+@else
+  <div x-data="{ show: true }" x-show="show" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+    <strong class="font-bold">Selamat datang, {{ Auth::user()->name }}!</strong>
+    <span class="block sm:inline"> Kamu sudah login. Silakan lanjutkan belanja.</span>
+    <button @click="show = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        <svg class="fill-current h-6 w-6 text-green-700" role="button" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+        </svg>
+    </button>
+</div>
+  <h1 class="text-xl font-semibold text-slate-900">Shopping Cart</h1>
+
+  <div class="grid lg:grid-cols-3 lg:gap-x-8 gap-x-6 gap-y-8 mt-6">
+    {{-- Daftar produk di kolom kiri (2/3 lebar) --}}
+    <div class="lg:col-span-2 space-y-6">
+      {{-- Item 1 --}}
+      <div class="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+        <div class="flex gap-6 sm:gap-4 max-sm:flex-col">
+          <div class="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
+            <img src="https://readymadeui.com/images/watch1.webp" class="w-full h-full object-contain" />
+          </div>
+          <div class="flex flex-col gap-4">
+            <div>
+              <h3 class="text-sm sm:text-base font-semibold text-slate-900">Stylish Golden Watch</h3>
+              <p class="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">
+                Color: <span class="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span>
+              </p>
+            </div>
+            <div class="mt-auto">
+              <h3 class="text-sm font-semibold text-slate-900">$120.00</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-auto flex flex-col">
+          <div class="flex items-start gap-4 justify-end">
+            {{-- Icon Favorite --}}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 cursor-pointer fill-slate-400 hover:fill-pink-600 inline-block" viewBox="0 0 64 64">
+              <path d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"></path>
+            </svg>
+
+            {{-- Icon Hapus --}}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 cursor-pointer fill-slate-400 hover:fill-red-600 inline-block" viewBox="0 0 24 24">
+              <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"></path>
+              <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"></path>
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mt-auto">
+            <button type="button" class="flex items-center justify-center w-[18px] h-[18px] bg-slate-400 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-2 fill-white" viewBox="0 0 124 124">
+                <path d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"></path>
+              </svg>
+            </button>
+            <span class="font-semibold text-base leading-[18px]">2</span>
+            <button type="button" class="flex items-center justify-center w-[18px] h-[18px] bg-slate-800 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-2 fill-white" viewBox="0 0 42 42">
+                <path d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {{-- Item 2 --}}
+      <div class="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+        <div class="flex gap-6 sm:gap-4 max-sm:flex-col">
+          <div class="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
+            <img src="https://readymadeui.com/images/watch5.webp" class="w-full h-full object-contain" />
+          </div>
+          <div class="flex flex-col gap-4">
+            <div>
+              <h3 class="text-sm sm:text-base font-semibold text-slate-900">Stylish Smart Watch</h3>
+              <p class="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">
+                Color: <span class="inline-block w-4 h-4 rounded-sm bg-[#e8dcdc]"></span>
+              </p>
+            </div>
+            <div class="mt-auto">
+              <h3 class="text-sm font-semibold text-slate-900">$70.00</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-auto flex flex-col">
+          <div class="flex items-start gap-4 justify-end">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 cursor-pointer fill-slate-400 hover:fill-pink-600 inline-block" viewBox="0 0 64 64">
+              <path d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 cursor-pointer fill‐slate-400 hover:fill-red-600 inline-block" viewBox="0 0 24 24">
+              <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"></path>
+              <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"></path>
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mt-auto">
+            <button type="button" class="flex items-center justify-center w-[18px] h-[18px] bg-slate-400 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-2 fill-white" viewBox="0 0 124 124">
+                <path d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"></path>
+              </svg>
+            </button>
+            <span class="font-semibold text-base leading-[18px]">1</span>
+            <button type="button" class="flex items-center justify-center w-[18px] h-[18px] bg-slate-800 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-2 fill-white" viewBox="0 0 42 42">
+                <path d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {{-- Item 3 --}}
+      <div class="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+        <div class="flex gap-6 sm:gap-4 max-sm:flex-col">
+          <div class="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
+            <img src="https://readymadeui.com/images/sunglass6.webp" class="w-full h-full object-contain" />
+          </div>
+          <div class="flex flex-col gap-4">
+            <div>
+              <h3 class="text-sm sm:text-base font-semibold text-slate-900">Round Glass</h3>
+              <p class="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">
+                Color: <span class="inline-block w-4 h-4 rounded-sm bg-black"></span>
+              </p>
+            </div>
+            <div class="mt-auto">
+              <h3 class="text-sm font-semibold text-slate-900">$20.00</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-auto flex flex-col">
+          <div class="flex items-start gap-4 justify-end">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 cursor-pointer fill-slate-400 hover:fill-pink-600 inline-block" viewBox="0 0 64 64">
+              <path d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 cursor-pointer fill-slate-400 hover:fill-red-600 inline-block" viewBox="0 0 24 24">
+              <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"></path>
+              <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"></path>
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mt-auto">
+            <button type="button" class="flex items-center justify-center w-[18px] h-[18px] bg-slate-400 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-2 fill-white" viewBox="0 0 124 124">
+                <path d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"></path>
+              </svg>
+            </button>
+            <span class="font-semibold text-base leading-[18px]">1</span>
+            <button type="button" class="flex items-center justify-center w-[18px] h-[18px] bg-slate-800 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-2 fill-white" viewBox="0 0 42 42">
+                <path d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{-- Ringkasan Pesanan --}}
+    <div class="bg-white rounded-md px-4 py-6 h-max shadow-sm border border-gray-200">
+      <ul class="text-slate-500 font-medium space-y-4">
+        <li class="flex flex-wrap gap-4 text-sm">Subtotal 
+          <span class="ml-auto font-semibold text-slate-900">$200.00</span>
+        </li>
+        <li class="flex flex-wrap gap-4 text-sm">Shipping 
+          <span class="ml-auto font-semibold text-slate-900">$2.00</span>
+        </li>
+        <li class="flex flex-wrap gap-4 text-sm">Tax 
+          <span class="ml-auto font-semibold text-slate-900">$4.00</span>
+        </li>
+        <hr class="border-slate-300" />
+        <li class="flex flex-wrap gap-4 text-sm font-semibold text-slate-900">Total 
+          <span class="ml-auto">$206.00</span>
+        </li>
+      </ul>
+
+      <div class="mt-8 space-y-4">
+        <button type="button" class="text-sm px-4 py-2.5 w-full font-medium tracking-wide bg-slate-800 hover:bg-slate-900 text-white rounded-md cursor-pointer">
+          Buy Now
+        </button>
+        <button type="button" class="text-sm px-4 py-2.5 w-full font-medium tracking-wide bg-slate-50 hover:bg-slate-100 text-slate-900 border border-gray-300 rounded-md cursor-pointer">
+          Continue Shopping
+        </button>
+      </div>
+      <div class="mt-5 flex flex-wrap justify-center gap-4">
+        <img src="https://readymadeui.com/images/master.webp" alt="card1" class="w-10 object-contain" />
+        <img src="https://readymadeui.com/images/visa.webp" alt="card2" class="w-10 object-contain" />
+        <img src="https://readymadeui.com/images/american-express.webp" alt="card3" class="w-10 object-contain" />
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+@endif

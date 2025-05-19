@@ -57,7 +57,7 @@
             transition-all duration-200 ease-in-out">
     Paket Produk
   </a>
-  <a href="#"
+  <a href="{{ route('about') }}"
      class="text-white py-2 px-1 border-t-2 border-transparent 
             hover:border-blue-300 hover:text-blue-300 
             transition-all duration-200 ease-in-out">
@@ -69,7 +69,7 @@
             <!-- Right Menu -->
             <div class="flex items-center space-x-4">
                 <a href="#" class="text-white font-bold">Contact</a>
-                <a href="#" class="text-white">
+                <a href="{{ route('keranjang') }}" class="text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
@@ -145,7 +145,7 @@
                     <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300">
                         Hubungi kami
                     </a>
-                    <a href="#" class="bg-transparent hover:bg-white hover:text-gray-900 text-white font-medium py-3 px-8 rounded-md border border-white transition duration-300">
+                    <a href="{{ route('produk.index') }}" class="bg-transparent hover:bg-white hover:text-gray-900 text-white font-medium py-3 px-8 rounded-md border border-white transition duration-300">
                         Produk
                     </a>
                     <a href="#" class="bg-transparent hover:bg-white hover:text-gray-900 text-white font-medium py-3 px-8 rounded-md border border-white transition duration-300">
@@ -489,7 +489,7 @@
                 <a href="#" class="bg-white text-blue-600 hover:bg-gray-100 font-medium py-3 px-8 rounded-md transition duration-300">
                     Hubungi Kami
                 </a>
-                <a href="#" class="bg-transparent hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md border border-white transition duration-300">
+                <a href="{{ route('produk.index') }}" class="bg-transparent hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md border border-white transition duration-300">
                     Lihat Produk
                 </a>
             </div>
