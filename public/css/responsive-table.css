@@ -1,0 +1,22 @@
+/* public/css/responsive-table.css */
+
+@container (max-width: 120px) {
+  .table-column-product {
+    display: none;
+  }
+}
+@container (max-width: 240px) {
+  .table-column-quantity {
+    display: none;
+  }
+}
+@container (max-width: 360px) {
+  .table-column-price {
+    display: none;
+  }
+}
+@container (max-width: 480px) {
+  .table-column-action {
+    display: none;
+  }
+}

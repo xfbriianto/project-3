@@ -1,4 +1,4 @@
-<!-- resources/views/layouts/public.blade.php -->
+{{-- resources/views/layouts/public.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -7,72 +7,131 @@
   <title>@yield('title', 'Technocenter')</title>
   <link rel="icon" href="{{ asset('images/logo_TC.png') }}" type="image/png">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <link rel="stylesheet" href="{{ asset('css/responsive-table.css') }}">
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
 
   {{-- NAVBAR --}}
-  <nav class="bg-gray-800 text-white py-4 px-4 sm:px-6 lg:px-8 shadow-md">
-    <div class="max-w-screen-xl mx-auto flex items-center justify-between">
-      <!-- Logo -->
-      <div class="flex items-center space-x-4">
-        <a href="{{ url('/') }}" class="flex items-center">
-          <img src="{{ asset('images/logo_TC.png') }}" alt="Technocenter" class="h-10">
-        </a>
-      </div>
-
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex space-x-8">
-        <a href="{{ url('/') }}" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Home</a>
-        <a href="{{ route('service') }}" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Service</a>
-        <a href="#components" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Komponen</a>
-        <a href="#paket" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Paket Produk</a>
-        <a href="{{ route('about') }}" class="text-white py-2 px-1 border-t-2 border-transparent hover:border-blue-300 hover:text-blue-300 transition-all duration-200 ease-in-out">Tentang Kita</a>
-      </div>
-
-      <!-- Right Menu -->
-      <div class="flex items-center space-x-4">
-        <a href="#contact" class="text-white font-bold">Contact</a>
-         <a href="{{ route('keranjang') }}" class="text-white">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-       viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-  </svg>
-        </a>
-
-        <!-- Profile Dropdown -->
-        <div class="relative ml-4" x-data="{ open: false }">
-          <button @click="open = !open" class="flex items-center focus:outline-none">
-            <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
-              <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-full h-full object-cover">
-            </div>
-            <svg class="ml-2 w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd" />
-            </svg>
-          </button>
-          <div x-show="open" @click.away="open = false" x-transition
-               class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20">
-            <ul class="py-1">
-              @guest
-                <li><a href="{{ route('login') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a></li>
-                <li><a href="{{ route('register') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Register</a></li>
-              @else
-                
-                <li>
-                  <a href="#" @click.prevent="document.getElementById('logout-form').submit()"
-                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
-                </li>
-              @endguest
-            </ul>
-          </div>
+  <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#eaedf0] px-10 py-3">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-4 text-[#111418]">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <a href="{{ url('/') }}" class="flex items-center gap-4">
+            <img src="{{ asset('images/logo_TC.png') }}" alt="Technocenter" class="h-8">
+            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">Technocenter</h2>
+          </a>
         </div>
       </div>
+      
+      <!-- Desktop Menu -->
+      <div class="flex items-center gap-9">
+        <a href="{{ url('/') }}" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Home</a>
+        <a href="{{ route('service') }}" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Service</a>
+        <a href="#components" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Komponen</a>
+        <a href="#paket" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Paket Produk</a>
+        <a href="{{ route('about') }}" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Tentang Kita</a>
+      </div>
+    </div>
+    
+    <div class="flex flex-1 justify-end gap-8">
+      <!-- Search Bar -->
+      
+      
+      <!-- Contact Link -->
+      <a href="#contact" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200 flex items-center">Contact</a>
+      
+      <!-- Cart Button -->
+      {{-- Mulai blok: ikon keranjang dengan badge --}}
+      @auth
+        @php
+          $countCart = Auth::user()->cartItems()->sum('quantity');
+        @endphp
+        <a href="{{ route('cart.index') }}" class="relative">
+          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 bg-[#eaedf0] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#d6dbe0] transition-colors duration-200">
+            <div class="text-[#111418]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+              </svg>
+            </div>
+          </button>
+          @if($countCart > 0)
+            <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1 min-w-[20px] h-5 flex items-center justify-center">
+              {{ $countCart }}
+            </span>
+          @endif
+        </a>
+      @else
+        <a href="{{ route('cart.index') }}" class="relative">
+          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 bg-[#eaedf0] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#d6dbe0] transition-colors duration-200">
+            <div class="text-[#111418]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+              </svg>
+            </div>
+          </button>
+        </a>
+      @endauth
+      {{-- Akhir blok ikon keranjang dengan badge --}}
+
+      <!-- Profile Dropdown -->
+      <div class="relative ml-4" x-data="{ open: false }">
+        <button @click="open = !open" class="flex items-center focus:outline-none">
+          <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+            <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-full h-full object-cover">
+          </div>
+          <svg class="ml-2 w-4 h-4 text-[#5f7186]" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div x-show="open" @click.away="open = false" x-transition
+             class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20">
+          <ul class="py-1">
+            @guest
+              <li><a href="{{ route('login') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a></li>
+              <li><a href="{{ route('register') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Register</a></li>
+            @else
+              <li>
+                <a href="#" @click.prevent="document.getElementById('logout-form').submit()"
+                   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
+              </li>
+            @endguest
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden ml-4" x-data="{ openMenu: false }">

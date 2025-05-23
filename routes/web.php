@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 
 
 /*
@@ -86,10 +87,7 @@ Route::delete('admin/databarang/bulk', [App\Http\Controllers\BarangController::c
         });
 
     
-// Route untuk menampilkan halaman keranjang
-Route::get('/keranjang', function () {
-    return view('keranjang');
-})->name('keranjang');
+;
 
 // Route untuk menampilkan halaman tentang kami
 Route::get('/about', function () {
@@ -101,9 +99,34 @@ Route::get('/produk/cari', [ProdukController::class, 'cari'])->name('produk.cari
 
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
 
+Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
 
 
-;
+// Tampilkan halaman keranjang
+Route::get('/keranjang', [CartController::class, 'index'])
+     ->name('cart.index')
+     ->middleware('auth');
+
+// Tambah ke keranjang (misal dari tombol di halaman produk)
+Route::post('/keranjang/tambah', [CartController::class, 'addToCart'])
+     ->name('cart.add')
+     ->middleware('auth');
+
+// Hapus item keranjang
+Route::delete('/keranjang/{id}', [CartController::class, 'remove'])
+     ->name('cart.remove')
+     ->middleware('auth');
+
+// Update quantity (increment/decrement)
+Route::patch('/keranjang/{id}', [CartController::class, 'update'])
+     ->name('cart.update')
+     ->middleware('auth');
+
+
+
+
+// Route untuk menampilkan halaman keranjang
+//Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index')->middleware('auth');
 
 
 

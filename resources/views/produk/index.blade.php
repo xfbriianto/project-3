@@ -1,167 +1,140 @@
 @extends('layouts.public')
 
-@section('title', 'SecureView CCTV - Produk')
+@section('title', 'Produk | Technocenter')
 
 @section('content')
   <!-- Hero Section with Search -->
-  <div class="bg-gradient-to-r from-slate-900 to-slate-800 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20">
-      <img src="https://img.freepik.com/premium-photo/cctv-security-camera-building-background-generative-ai_634053-3073.jpg" alt="Hero Image" class="w-full h-full object-cover">
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative py-12 sm:py-16 lg:py-20">
-      <div class="text-center">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Solusi Keamanan Terbaik Untuk Anda</h1>
-        <p class="text-slate-300 text-lg max-w-2xl mx-auto mb-8">Temukan produk CCTV berkualitas tinggi untuk keamanan rumah dan bisnis Anda</p>
-        <div class="max-w-xl mx-auto">
-          <div class="relative flex rounded-full shadow-lg overflow-hidden">
-           <form action="{{ route('produk.cari') }}" method="GET" class="relative w-full">
-  <input type="text" name="q" placeholder="Cari produk ..." class="w-full pl-5 pr-16 py-4 bg-white focus:outline-none text-gray-700">
-  <button type="submit" class="absolute right-0 top-0 bottom-0 px-5 bg-blue-600 hover:bg-blue-700 transition text-white flex items-center justify-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-    </svg>
-  </button>
-</form>
-
+  <div class="px-40 flex flex-1 justify-center py-5">
+    <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+      <div class="px-4 py-3">
+        <label class="flex flex-col min-w-40 h-12 w-full">
+          <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+            <div class="text-[#5f7186] flex border-none bg-[#eaedf0] items-center justify-center pl-4 rounded-l-xl border-r-0" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+              </svg>
+            </div>
+            <form action="{{ route('produk.cari') }}" method="GET" class="flex w-full">
+              <input type="text" name="q" placeholder="Search for products" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#eaedf0] focus:border-none h-full placeholder:text-[#5f7186] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" value="" />
+            </form>
           </div>
+        </label>
+      </div>
+
+      <!-- Product Categories -->
+      <div class="flex gap-3 p-3 flex-wrap pr-4">
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">All Products</p>
+        </div>
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Indoor Cameras</p>
+        </div>
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Outdoor Cameras</p>
+        </div>
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Wireless Systems</p>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Product Categories Tabs -->
-  <div class="bg-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex overflow-x-auto gap-2 pb-1 scrollbar-hide">
-        <button class="bg-blue-600 text-white px-5 py-2 rounded-full whitespace-nowrap font-medium text-sm">Semua Produk</button>
-        <button class="bg-white text-slate-700 hover:bg-slate-50 px-5 py-2 rounded-full whitespace-nowrap font-medium text-sm shadow-sm">CCTV Indoor</button>
-        <button class="bg-white text-slate-700 hover:bg-slate-50 px-5 py-2 rounded-full whitespace-nowrap font-medium text-sm shadow-sm">CCTV Outdoor</button>
-        <button class="bg-white text-slate-700 hover:bg-slate-50 px-5 py-2 rounded-full whitespace-nowrap font-medium text-sm shadow-sm">IP Camera</button>
-        <button class="bg-white text-slate-700 hover:bg-slate-50 px-5 py-2 rounded-full whitespace-nowrap font-medium text-sm shadow-sm">DVR/NVR</button>
-        <button class="bg-white text-slate-700 hover:bg-slate-50 px-5 py-2 rounded-full whitespace-nowrap font-medium text-sm shadow-sm">Aksesoris</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Products Grid -->
-  <section class="py-12 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center mb-8">
-        <h2 class="text-2xl font-bold text-slate-800">Katalog Produk</h2>
-        <div class="flex items-center gap-2">
-          <span class="text-sm text-slate-500">Urutkan:</span>
-          <select class="bg-white border border-slate-200 rounded-lg py-2 px-3 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            <option>Terbaru</option>
-            <option>Harga Terendah</option>
-            <option>Harga Tertinggi</option>
-            <option>Terlaris</option>
-          </select>
+      <!-- Sort Options -->
+      <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Sort by</h3>
+      <div class="flex gap-3 p-3 flex-wrap pr-4">
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Newest</p>
+        </div>
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Most Popular</p>
+        </div>
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Lowest Price</p>
+        </div>
+        <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#eaedf0] pl-4 pr-4">
+          <p class="text-[#111418] text-sm font-medium leading-normal">Highest Price</p>
         </div>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @forelse ($barangs as $barang)
-          <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden group">
-            <div class="relative">
-              @if ($barang->image)
-                <img src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->name }}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
-              @else
-                <div class="w-full h-48 bg-slate-200 flex items-center justify-center text-slate-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-              @endif
-              <div class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $barang->category }}</div>
-            </div>
-            
-            <div class="p-5">
-              <div class="min-h-[3rem]">
-                <h3 class="text-lg font-semibold text-slate-800 mb-1 line-clamp-2">{{ $barang->name }}</h3>
-              </div>
-              <div class="flex items-center mb-3">
-                <div class="flex text-amber-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500 text-xs ml-1">5.0 (120)</span>
-              </div>
-              <p class="text-slate-600 text-sm mb-3 line-clamp-2">{{ $barang->description }}</p>
-              <div class="flex justify-between items-center">
-                <p class="text-blue-600 font-bold text-lg">Rp {{ number_format($barang->price, 0, ',', '.') }}</p>
-                <button class="bg-slate-100 hover:bg-slate-200 transition text-slate-700 rounded-full p-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                </button>
-              </div>
-              <div class="pt-4 mt-4 border-t border-slate-100">
-                <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 transition text-white text-center py-2 rounded-lg font-medium">Lihat Detail</a>
-              </div>
+    <!-- Products Grid -->
+<div class="grid grid-cols-[repeat(auto-fill,minmax(280px,280px))] gap-4 p-4 justify-center">
+  @forelse ($barangs as $barang)
+    <div class="flex flex-col h-full gap-3 pb-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 max-w-[280px]">
+      <div class="relative group">
+        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+             style='background-image: url("{{ $barang->image ? asset('storage/' . $barang->image) : 'https://lh3.googleusercontent.com/aida-public/AB6AXuBM5gY2nc1auDrkV8mZUeydxBZ2SyNOQe6Q0YHd0upv8NWLCb_VlXs_gax86yIt5nq4KpCq7OdnJW6z48ZdqZdRrCXJUQok2KZRfdWm85VEJLP0fHN_jZKK26y68vBA258AukA9w2QEB7wCW0qaPrDeHROoSGSRGMX_F24oume6d31iQwKYlBPRo0zEDOoybUthzUHEjxO6znlsAAIDEqXy-3unWO-A8e8AYJl6GIcNphOBV-bnKw9cfTTIzy4yoidTd9n0vAvBH-2S' }}")'>
+        </div>
+        <!-- Wishlist Button -->
+        <button class="absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors duration-200 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600 hover:text-red-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex flex-col flex-1 px-3">
+        <div class="space-y-2 mb-3">
+          <h3 class="text-[#111418] text-base font-medium leading-normal line-clamp-2">{{ $barang->name }}</h3>
+          <p class="text-[#5f7186] text-sm font-normal leading-normal line-clamp-2">{{ Str::limit($barang->description, 45) }}</p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[#111418] text-sm font-bold">Rp {{ number_format($barang->price, 0, ',', '.') }}</span>
+              <span class="text-[#5f7186] text-sm font-normal leading-normal">Category: {{ $barang->category }}</span>
             </div>
           </div>
-        @empty
-          <div class="col-span-full bg-white rounded-xl p-12 text-center shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-slate-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+        </div>
+
+        <!-- Action Buttons - Always at bottom -->
+        <div class="flex gap-2 mt-auto">
+          <a href="{{ route('produk.show', $barang->id) }}"
+             class="flex-1 bg-[#111418] text-white text-xs font-medium py-2 px-3 rounded-md hover:bg-[#2a2a2a] transition-colors duration-200 text-center">
+            Detail
+          </a>
+          <button class="w-8 h-8 bg-[#eaedf0] hover:bg-[#d1d5db] rounded-md flex items-center justify-center transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#111418]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L5 3H2m5 10v6a1 1 0 001 1h12a1 1 0 001-1v-6M9 19v2m6-2v2" />
             </svg>
-            <p class="text-slate-600 text-lg mb-6">Belum ada produk yang tersedia saat ini.</p>
-            <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 transition text-white px-6 py-3 rounded-lg font-medium">Kembali ke Beranda</a>
+          </button>
+        </div>
+      </div>
+    </div>
+        
+  @empty
+          <!-- Empty State -->
+          <div class="col-span-full flex flex-col items-center justify-center p-8">
+            <div class="w-16 h-16 bg-[#eaedf0] rounded-full flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#5f7186]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+            </div>
+            <h3 class="text-[#111418] text-lg font-medium leading-normal mb-2">Belum Ada Produk</h3>
+            <p class="text-[#5f7186] text-sm font-normal leading-normal text-center max-w-md">
+              Produk belum tersedia saat ini. Silakan kembali lagi nanti atau jelajahi kategori lainnya.
+            </p>
           </div>
         @endforelse
       </div>
-      
-      <!-- Pagination -->
-      <div class="mt-12 flex justify-center">
-        <nav class="flex items-center space-x-1">
-          <a href="#" class="px-4 py-2 text-slate-500 bg-white rounded-md hover:bg-slate-100">
-            <span class="sr-only">Previous</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-          </a>
-          <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-md">1</a>
-          <a href="#" class="px-4 py-2 text-slate-700 bg-white rounded-md hover:bg-slate-100">2</a>
-          <a href="#" class="px-4 py-2 text-slate-700 bg-white rounded-md hover:bg-slate-100">3</a>
-          <span class="px-4 py-2 text-slate-400">...</span>
-          <a href="#" class="px-4 py-2 text-slate-700 bg-white rounded-md hover:bg-slate-100">8</a>
-          <a href="#" class="px-4 py-2 text-slate-500 bg-white rounded-md hover:bg-slate-100">
-            <span class="sr-only">Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-            </svg>
-          </a>
-        </nav>
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA Banner -->
-  <section class="bg-gradient-to-r from-blue-600 to-blue-800 py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
-      <div class="mb-6 md:mb-0">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Butuh Konsultasi?</h2>
-        <p class="text-blue-100">Tim ahli kami siap membantu kebutuhan keamanan Anda</p>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a href="#" class="bg-white hover:bg-slate-50 text-blue-600 px-6 py-3 rounded-lg font-medium text-center">Hubungi Kami</a>
-        <a href="#" class="bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-lg font-medium text-center">Jadwalkan Demo</a>
+      <!-- Pagination -->
+      <div class="flex items-center justify-center p-4">
+        <a href="#" class="flex size-10 items-center justify-center">
+          <div class="text-[#111418]" data-icon="CaretLeft" data-size="18px" data-weight="regular">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+            </svg>
+          </div>
+        </a>
+        <a class="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-[#111418] rounded-full bg-[#eaedf0]" href="#">1</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#111418] rounded-full" href="#">2</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#111418] rounded-full" href="#">3</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#111418] rounded-full" href="#">4</a>
+        <a href="#" class="flex size-10 items-center justify-center">
+          <div class="text-[#111418]" data-icon="CaretRight" data-size="18px" data-weight="regular">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+            </svg>
+          </div>
+        </a>
       </div>
     </div>
-  </section
+  </div>
 @endsection
