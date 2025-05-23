@@ -37,5 +37,12 @@ class ProdukController extends Controller
         return view('produk.index', compact('barangs'))
             ->with('keyword', $keyword);
     }
+
+    public function show($id)
+{
+    $barang = Barang::findOrFail($id);
+    return view('produk.detail', compact('barang'));
+}
+
 }
 

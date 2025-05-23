@@ -41,88 +41,100 @@
    </div>
   </section>
  <!-- Our Services Section -->
-<section class="py-16 bg-white">
-  <div class="container mx-auto px-4 max-w-7xl">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Our Services</h2>
-      <p class="text-slate-600 max-w-3xl mx-auto">We offer comprehensive security solutions to keep your property safe and secure</p>
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-6 max-w-8xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Our Services</h2>
+      <p class="text-slate-600 text-lg max-w-4xl mx-auto">We offer comprehensive security solutions to keep your property safe and secure</p>
     </div>
-    <div class="flex flex-wrap justify-center gap-8">
-      <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-emerald-200">
-          <div class="flex justify-center mb-4 mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-emerald-500">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
-            </svg>
-          </div>
-          <div class="flex justify-center mb-3">
-            <h5 class="text-slate-800 text-2xl font-semibold">Maintenance</h5>
-          </div>
-          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
-            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
-              Regular servicing and fixing of camera systems to ensure continuous functionality. Our maintenance service includes thorough inspection, cleaning of components, and resolving any technical issues promptly.
-            </p>
-            <a href="service-single.html" class="service-link inline-block mt-2 text-emerald-500 font-medium hover:text-emerald-600 transition-colors">
-            </a>
-          </div>
-        </div>
-
-        <!-- Monitoring Card -->
-        <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-rose-200">
-          <div class="flex justify-center mb-4 mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-rose-500">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" />
-            </svg>
-          </div>
-          <div class="flex justify-center mb-3">
-            <h5 class="text-slate-800 text-2xl font-semibold">Monitoring</h5>
-          </div>
-          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
-            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
-              Real-time monitoring of security cameras by professionals or automated systems. Our team keeps a watchful eye on your premises 24/7, ensuring immediate response to any security concerns.
-            </p>
-            <a href="service-single.html" class="service-link inline-block mt-2 text-rose-500 font-medium hover:text-rose-600 transition-colors">
-            </a>
-          </div>
-        </div>
-
-        <!-- Storage & Backup Card -->
-        <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-amber-200">
-          <div class="flex justify-center mb-4 mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-amber-500">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
-            </svg>
-          </div>
-          <div class="flex justify-center mb-3">
-            <h5 class="text-slate-800 text-2xl font-semibold">Storage & Backup</h5>
-          </div>
-          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
-            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
-              Offering cloud storage plans for secure, offsite storage of CCTV footage. We provide reliable backup solutions to ensure your surveillance data is always accessible when you need it.
-            </p>
-            <a href="service-single.html" class="service-link inline-block mt-2 text-amber-500 font-medium hover:text-amber-600 transition-colors">
-            </a>
-          </div>
-        </div>
-
-        <!-- System Upgrades Card -->
-        <div class="service-card relative w-96 bg-white shadow-sm border border-slate-200 rounded-lg p-3 pb-6 hover:border-indigo-200">
-          <div class="flex justify-center mb-4 mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon w-10 h-10 text-indigo-500">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-            </svg>
-          </div>
-          <div class="flex justify-center mb-3">
-            <h5 class="text-slate-800 text-2xl font-semibold">System Upgrades</h5>
-          </div>
-          <div class="p-3 mt-5 border-t border-slate-100 text-center max-h-60 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-slate-100">
-            <p class="block text-slate-600 leading-normal font-light mb-4 max-w-lg">
-              Upgrading older analog systems to IP-based or HD analog systems. Our upgrade services help you leverage the latest security technology for enhanced protection and monitoring capabilities.
-            </p>
-            <a href="service-single.html" class="service-link inline-block mt-2 text-indigo-500 font-medium hover:text-indigo-600 transition-colors">
-            </a>
+    <div class="relative flex size-full flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex grow flex-col">
+        <div class="px-8 lg:px-20 xl:px-40 flex flex-1 justify-center py-8">
+          <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+              <div class="flex flex-1 gap-4 rounded-xl border border-[#d0dbe7] bg-white p-6 flex-col transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-blue-100 hover:border-blue-200 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-blue-50 cursor-pointer group">
+                <div class="text-[#0e141b] group-hover:text-blue-600 transition-colors duration-300" data-icon="Camera" data-size="28px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-blue-800 transition-colors duration-300">Installation</h2>
+                  <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">Professional setup of your CCTV system with expert precision and attention to detail.</p>
+                </div>
+              </div>
+              <div class="flex flex-1 gap-4 rounded-xl border border-[#d0dbe7] bg-white p-6 flex-col transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-green-100 hover:border-green-200 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-green-50 cursor-pointer group">
+                <div class="text-[#0e141b] group-hover:text-green-600 transition-colors duration-300" data-icon="Nut" data-size="28px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M128,80a48,48,0,1,0,48,48A48.06,48.06,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm95.68-93.85L135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17h0a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,224,40,175.82V80.18L128,32l88,48.17v95.64Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-green-800 transition-colors duration-300">Maintenance</h2>
+                  <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">Regular checks and upkeep to ensure optimal performance and longevity of your security system.</p>
+                </div>
+              </div>
+              <div class="flex flex-1 gap-4 rounded-xl border border-[#d0dbe7] bg-white p-6 flex-col transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-purple-100 hover:border-purple-200 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-purple-50 cursor-pointer group">
+                <div class="text-[#0e141b] group-hover:text-purple-600 transition-colors duration-300" data-icon="ChatCircleDots" data-size="28px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM84,116a12,12,0,1,0,12,12A12,12,0,0,0,84,116Zm88,0a12,12,0,1,0,12,12A12,12,0,0,0,172,116Zm60,12A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Zm-16,0A88,88,0,1,0,51.81,172.06a8,8,0,0,1,.66,6.54L40,216,77.4,203.53a7.85,7.85,0,0,1,2.53-.42,8,8,0,0,1,4,1.08A88,88,0,0,0,216,128Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-purple-800 transition-colors duration-300">Consultation</h2>
+                  <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">Expert advice on system design and strategic placement for maximum security coverage.</p>
+                </div>
+              </div>
+              <div class="flex flex-1 gap-4 rounded-xl border border-[#d0dbe7] bg-white p-6 flex-col transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-orange-100 hover:border-orange-200 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-orange-50 cursor-pointer group">
+                <div class="text-[#0e141b] group-hover:text-orange-600 transition-colors duration-300" data-icon="Users" data-size="28px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-orange-800 transition-colors duration-300">User Training</h2>
+                  <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">Comprehensive training sessions for effective system use and management capabilities.</p>
+                </div>
+              </div>
+              <div class="flex flex-1 gap-4 rounded-xl border border-[#d0dbe7] bg-white p-6 flex-col transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-cyan-100 hover:border-cyan-200 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-cyan-50 cursor-pointer group">
+                <div class="text-[#0e141b] group-hover:text-cyan-600 transition-colors duration-300" data-icon="Headset" data-size="28px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-cyan-800 transition-colors duration-300">Technical Support</h2>
+                  <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">24/7 dedicated assistance for any technical issues and system troubleshooting.</p>
+                </div>
+              </div>
+              <div class="flex flex-1 gap-4 rounded-xl border border-[#d0dbe7] bg-white p-6 flex-col transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-indigo-100 hover:border-indigo-200 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-white hover:to-indigo-50 cursor-pointer group">
+                <div class="text-[#0e141b] group-hover:text-indigo-600 transition-colors duration-300" data-icon="Gear" data-size="28px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-indigo-800 transition-colors duration-300">Other Services</h2>
+                  <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">Additional services including system upgrades, repairs, and custom security solutions.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </section>
 @endsection
