@@ -4,169 +4,135 @@
 @section('title', 'Dashboard')
 
 @section('content')
-  <!-- Header Ringkasan Operasional -->
-  <h1 class="h3 mb-4 text-gray-800">Dashboard Operasional</h1>
+<div class="min-h-screen bg-slate-50" style='font-family: Inter, "Noto Sans", sans-serif;'>
+  <!-- Header -->
+  <div class="flex flex-wrap justify-between gap-3 p-4">
+    <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">Dashboard</p>
+  </div>
 
-  <!-- Ringkasan Operasional Bisnis -->
-  <div class="row">
+  <!-- Sales Overview -->
+  <h2 class="text-[#0d151c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Ringkasan Operasional</h2>
+  <div class="flex flex-wrap gap-4 p-4">
     <!-- Card Penjualan -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Penjualan</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($totalPenjualan, 0, ',', '.') }}</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Penjualan</p>
+      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">Rp {{ number_format($totalPenjualan, 0, ',', '.') }}</p>
+      <p class="text-[#078838] text-base font-medium leading-normal">+15%</p>
     </div>
+    
     <!-- Card Jadwal Teknisi -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Jadwal Teknisi</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Jadwal Teknisi</p>
+      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">12</p>
+      <p class="text-[#078838] text-base font-medium leading-normal">+5%</p>
     </div>
+    
     <!-- Card Stok Produk -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Stok Produk</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalStok }}</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-boxes fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Stok Produk</p>
+      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">{{ $totalStok }}</p>
+      <p class="text-[#078838] text-base font-medium leading-normal">+2%</p>
     </div>
+    
     <!-- Card Keluhan Pelanggan -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Keluhan Pelanggan</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Keluhan Pelanggan</p>
+      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">8</p>
+      <p class="text-[#e73908] text-base font-medium leading-normal">-3%</p>
     </div>
   </div>
 
-  <!-- Contoh Tabel Ringkasan Penjualan Terbaru -->
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Ringkasan Penjualan Terbaru</h6>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Tanggal</th>
-              <th>Produk</th>
-              <th>Jumlah</th>
-              <th>Total Harga</th>
-            </tr>
-          </thead>
-             <tbody>
-        @forelse($penjualanTerbaru as $order)
-          @foreach($order->items as $item)
-            <tr>
-              <td>{{ $loop->parent->iteration }}{{ $loop->count > 1 ? '.' . $loop->iteration : '' }}</td>
-              <td>{{ $order->created_at->format('Y-m-d') }}</td>
-              <td>{{ $item->barang->name ?? '-' }}</td>
-              <td>{{ $item->quantity }}</td>
-              <td>Rp {{ number_format($item->quantity * $item->price, 0, ',', '.') }}</td>
-            </tr>
-          @endforeach
-        @empty
-          <tr>
-            <td colspan="5" class="text-center text-gray-500">Belum ada penjualan.</td>
+  <!-- Ringkasan Penjualan Terbaru -->
+  <h2 class="text-[#0d151c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Ringkasan Penjualan Terbaru</h2>
+  <div class="px-4 py-3">
+    <div class="flex overflow-hidden rounded-xl border border-[#cedce8] bg-white shadow-sm">
+      <table class="flex-1">
+        <thead>
+          <tr class="bg-slate-50">
+            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">No</th>
+            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Tanggal</th>
+            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Produk</th>
+            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Jumlah</th>
+            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Total Harga</th>
           </tr>
-        @endforelse
-      </tbody>
-        </table>
-      </div>
+        </thead>
+        <tbody>
+          @forelse($penjualanTerbaru as $order)
+            @foreach($order->items as $item)
+              <tr class="border-t border-t-[#cedce8]">
+                <td class="h-[72px] px-4 py-2 text-[#0d151c] text-sm font-normal leading-normal">
+                  {{ $loop->parent->iteration }}{{ $loop->count > 1 ? '.' . $loop->iteration : '' }}
+                </td>
+                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
+                  {{ $order->created_at->format('Y-m-d') }}
+                </td>
+                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
+                  {{ $item->barang->name ?? '-' }}
+                </td>
+                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
+                  {{ $item->quantity }}
+                </td>
+                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
+                  Rp {{ number_format($item->quantity * $item->price, 0, ',', '.') }}
+                </td>
+              </tr>
+            @endforeach
+          @empty
+            <tr class="border-t border-t-[#cedce8]">
+              <td colspan="5" class="h-[72px] px-4 py-2 text-center text-[#49749c] text-sm font-normal leading-normal">
+                Belum ada penjualan.
+              </td>
+            </tr>
+          @endforelse
+        </tbody>
+      </table>
     </div>
   </div>
+
+  
 
   <!-- Charts Section -->
-  <div class="row">
-    <!-- Area & Bar Charts -->
-    <div class="col-xl-8 col-lg-7 mb-4">
-      <!-- Area Chart -->
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-        </div>
-        <div class="card-body">
-          <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
-          </div>
-        </div>
+  <h2 class="text-[#0d151c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Grafik Penjualan dan Produk</h2>
+  <div class="flex flex-wrap gap-4 px-4 py-6">
+    <!-- Area Chart -->
+    <div class="flex min-w-72 flex-1 flex-col gap-2 rounded-xl border border-[#cedce8] p-6 bg-white shadow-sm">
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Tren Penjualan</p>
+      <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight truncate">
+        Rp {{ number_format($totalPenjualan, 0, ',', '.') }}
+      </p>
+      <div class="flex gap-1">
+        <p class="text-[#49749c] text-base font-normal leading-normal">30 Hari Terakhir</p>
+        <p class="text-[#078838] text-base font-medium leading-normal">+15%</p>
       </div>
-
-      <!-- Bar Chart -->
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Penjualan</h6>
-        </div>
-        <div class="card-body">
-          <div class="chart-bar">
-            <canvas id="myBarChart"></canvas>
-          </div>
+      <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+        <div class="chart-area">
+          <canvas id="myAreaChart" style="height: 180px;"></canvas>
         </div>
       </div>
     </div>
 
-
+    <!-- Bar Chart -->
+    <div class="flex min-w-72 flex-1 flex-col gap-2 rounded-xl border border-[#cedce8] p-6 bg-white shadow-sm">
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Penjualan Produk</p>
+      <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight truncate">
+        Rp {{ number_format($totalPenjualan * 0.8, 0, ',', '.') }}
+      </p>
+      <div class="flex gap-1">
+        <p class="text-[#49749c] text-base font-normal leading-normal">30 Hari Terakhir</p>
+        <p class="text-[#e73908] text-base font-medium leading-normal">-5%</p>
+      </div>
+      <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+        <div class="chart-bar">
+          <canvas id="myBarChart" style="height: 180px;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('scripts')
   <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Area Chart Example
-      var ctxArea = document.getElementById('myAreaChart').getContext('2d');
-      new Chart(ctxArea, {
-        type: 'line',
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-          datasets: [{
-            label: "Penjualan",
-            data: [0, 10000, 5000, 15000, 10000, 20000, 15000],
-            fill: true,
-            tension: 0.4
-          }]
-        }
-      });
-
-      @push('scripts')
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -181,10 +147,45 @@
             data: {!! json_encode($data) !!},
             fill: true,
             tension: 0.4,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 2
+            backgroundColor: 'rgba(231, 237, 244, 0.5)',
+            borderColor: '#49749c',
+            borderWidth: 3,
+            pointBackgroundColor: '#49749c',
+            pointBorderColor: '#49749c',
+            pointBorderWidth: 2,
+            pointRadius: 4
           }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: '#49749c',
+                font: {
+                  size: 13,
+                  weight: 'bold'
+                }
+              }
+            },
+            y: {
+              grid: {
+                color: '#e7edf4'
+              },
+              ticks: {
+                display: false
+              }
+            }
+          }
         }
       });
 
@@ -197,24 +198,46 @@
           datasets: [{
             label: "Penjualan",
             data: {!! json_encode($data) !!},
-            backgroundColor: 'rgba(255, 206, 86, 0.2)',
-            borderColor: 'rgba(255, 206, 86, 1)',
-            borderWidth: 2
+            backgroundColor: '#e7edf4',
+            borderColor: '#49749c',
+            borderWidth: 2,
+            borderSkipped: false,
+            borderRadius: {
+              topLeft: 4,
+              topRight: 4
+            }
           }]
-        }
-      });
-    });
-  </script>
-@endpush
-      // Donut Chart Example
-      var ctxPie = document.getElementById('myPieChart').getContext('2d');
-      new Chart(ctxPie, {
-        type: 'doughnut',
-        data: {
-          labels: ["CCTV", "Sensor", "Akses Control"],
-          datasets: [{
-            data: [55, 30, 15]
-          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: '#49749c',
+                font: {
+                  size: 13,
+                  weight: 'bold'
+                }
+              }
+            },
+            y: {
+              grid: {
+                color: '#e7edf4'
+              },
+              ticks: {
+                display: false
+              }
+            }
+          }
         }
       });
     });
