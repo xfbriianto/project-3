@@ -176,12 +176,7 @@
                 Credit Card
                 <input type="radio" class="invisible absolute" name="347c929c-ad66-44ab-b011-f29ec6efb1b0" />
               </label>
-              <label
-                class="text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#d0dbe7] px-4 h-11 text-[#0e141b] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#1669c9] relative cursor-pointer"
-              >
-                PayPal
-                <input type="radio" class="invisible absolute" name="347c929c-ad66-44ab-b011-f29ec6efb1b0" />
-              </label>
+              
               <label
                 class="text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#d0dbe7] px-4 h-11 text-[#0e141b] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#1669c9] relative cursor-pointer"
               >
@@ -225,31 +220,24 @@
       alt="Mastercard"
       class="h-6 w-auto object-contain"
     />
-  </a>
+    </a>
   <a href="#" class="transition-transform duration-200 hover:scale-105 hover:opacity-80">
     <img
-      src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg"
-      alt="AmEx"
+      src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
+      alt="Google Pay"
       class="h-6 w-auto object-contain"
     />
   </a>
   <a href="#" class="transition-transform duration-200 hover:scale-105 hover:opacity-80">
     <img
-      src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
-      alt="PayPal"
+      src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg"
+      alt="Google Pay"
       class="h-6 w-auto object-contain"
     />
   </a>
   <a href="#" class="transition-transform duration-200 hover:scale-105 hover:opacity-80">
     <img
-      src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-      alt="Apple Pay"
-      class="h-6 w-auto object-contain"
-    />
-  </a>
-  <a href="#" class="transition-transform duration-200 hover:scale-105 hover:opacity-80">
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Pay_%28GPay%29_Logo_%282018%29.svg"
+      src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg"
       alt="Google Pay"
       class="h-6 w-auto object-contain"
     />

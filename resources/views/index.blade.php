@@ -2,120 +2,86 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Technocenter - Keamanan CCTV Terbaik</title>
     <link rel="icon" href="{{ asset('images/logo_TC.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="font-sans">
-    <!-- Top Banner -->
-    <div class="bg-gray-900 text-white py-4 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto flex items-center justify-center">
-            <p class="text-sm sm:text-base text-center">
-                Technocenter 😎 • Amankan rumah anda dengan memasang CCTV <span class="font-bold">kualitas terbaik dengan harga yang terjangkau</span>
-            </p>
-        </div>
+    {{-- Top Banner (fixed di atas) --}}
+<div class="fixed top-0 left-0 w-full bg-gray-900 text-white z-50">
+  <div class="py-3 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto flex items-center justify-center">
+      <p class="text-xs sm:text-sm lg:text-base text-center leading-tight">
+        Technocenter 😎 • Amankan rumah anda dengan memasang CCTV 
+        <span class="font-bold">kualitas terbaik dengan harga yang terjangkau</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+{{-- Navbar (fixed di bawah banner) --}}
+<header class="fixed top-[52px] sm:top-[56px] lg:top-[60px] left-0 w-full bg-white border-b border-solid border-b-[#eaedf0] px-4 md:px-10 py-3 z-40">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    {{-- Logo + Brand --}}
+    <div class="flex items-center gap-2 sm:gap-4">
+      <a href="{{ url('/') }}" class="flex items-center gap-1 sm:gap-2">
+        <img src="{{ asset('images/logo_TC.png') }}" alt="Technocenter" class="h-6 sm:h-8 w-auto">
+        <h2 class="text-[#111418] text-base sm:text-lg font-bold leading-tight tracking-[-0.015em]">Technocenter</h2>
+      </a>
     </div>
 
-    <body class="bg-gray-50" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+    {{-- Desktop Menu (lg ke atas) --}}
+    <nav class="hidden lg:flex items-center gap-6 xl:gap-9">
+      <a href="{{ url('/') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Home</a>
+      <a href="{{ route('service') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Service</a>
+      <a href="#components" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Komponen</a>
+      <a href="#paket" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Paket Produk</a>
+      <a href="{{ route('about') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Tentang Kita</a>
+      <a href="{{ route('contact') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Contact</a>
+    </nav>
 
-  {{-- NAVBAR --}}
-  <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#eaedf0] px-10 py-3">
-    <div class="flex items-center gap-8">
-      <div class="flex items-center gap-4 text-[#111418]">
-        <!-- Logo -->
-        <div class="flex items-center">
-          <a href="{{ url('/') }}" class="flex items-center gap-4">
-            <img src="{{ asset('images/logo_TC.png') }}" alt="Technocenter" class="h-8">
-            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">Technocenter</h2>
-          </a>
-        </div>
-      </div>
-      
-      <!-- Desktop Menu -->
-      <div class="flex items-center gap-9">
-        <a href="{{ url('/') }}" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Home</a>
-        <a href="{{ route('service') }}" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Service</a>
-        <a href="#components" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Komponen</a>
-        <a href="#paket" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Paket Produk</a>
-        <a href="{{ route('about') }}" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200">Tentang Kita</a>
-      </div>
-    </div>
-    
-    <div class="flex flex-1 justify-end gap-8">
-      <!-- Search Bar -->
-      <label class="flex flex-col min-w-40 !h-10 max-w-64">
-        <div class="flex w-full flex-1 items-stretch rounded h-full">
-          <div
-            class="text-[#5f7186] flex border-none bg-[#eaedf0] items-center justify-center pl-4 rounded-l border-r-0"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-            </svg>
-          </div>
-          <input
-            placeholder="Search"
-            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#eaedf0] focus:border-none h-full placeholder:text-[#5f7186] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-            value=""
-          />
-        </div>
-      </label>
-      
-      <!-- Contact Link -->
-      <a href="#contact" class="text-[#111418] text-sm font-medium leading-normal hover:text-blue-600 transition-colors duration-200 flex items-center">Contact</a>
-      
-      <!-- Cart Button -->
-      {{-- Mulai blok: ikon keranjang dengan badge --}}
+    {{-- Icons & Profile (desktop) --}}
+    <div class="hidden lg:flex items-center gap-4 xl:gap-6">
       @auth
         @php
           $countCart = Auth::user()->cartItems()->sum('quantity');
         @endphp
-        <a href="{{ route('cart.index') }}" class="relative">
-          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 bg-[#eaedf0] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#d6dbe0] transition-colors duration-200">
-            <div class="text-[#111418]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
-              </svg>
-            </div>
-          </button>
-          @if($countCart > 0)
-            <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1 min-w-[20px] h-5 flex items-center justify-center">
-              {{ $countCart }}
-            </span>
-          @endif
-        </a>
       @else
-        <a href="{{ route('cart.index') }}" class="relative">
-          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 bg-[#eaedf0] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#d6dbe0] transition-colors duration-200">
-            <div class="text-[#111418]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
-              </svg>
-            </div>
-          </button>
-        </a>
+        @php $countCart = 0; @endphp
       @endauth
-      {{-- Akhir blok ikon keranjang dengan badge --}}
+      <a href="{{ route('cart.index') }}" class="relative">
+        <button class="flex items-center justify-center h-9 w-9 xl:h-10 xl:w-10 rounded bg-[#eaedf0] hover:bg-[#d6dbe0] transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 xl:h-5 xl:w-5 text-[#111418]" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+          </svg>
+        </button>
+        @if($countCart > 0)
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1 h-4 flex items-center justify-center min-w-[16px]">
+            {{ $countCart }}
+          </span>
+        @endif
+      </a>
 
-      <!-- Profile Dropdown -->
-      <div class="relative ml-4" x-data="{ open: false }">
+      {{-- Profile Dropdown --}}
+      <div class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex items-center focus:outline-none">
-          <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+          <div class="w-8 h-8 xl:w-10 xl:h-10 rounded-full bg-gray-200 overflow-hidden">
             <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-full h-full object-cover">
           </div>
-          <svg class="ml-2 w-4 h-4 text-[#5f7186]" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="ml-1 w-3 h-3 xl:w-4 xl:h-4 text-[#5f7186]" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd"
                   d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
                   clip-rule="evenodd" />
           </svg>
         </button>
         <div x-show="open" @click.away="open = false" x-transition
-             class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20">
+             class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-20">
           <ul class="py-1">
             @guest
               <li><a href="{{ route('login') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a></li>
@@ -131,10 +97,65 @@
         </div>
       </div>
     </div>
-  </header>
+
+    {{-- Mobile menu button (lg:hidden) --}}
+    <div class="lg:hidden flex items-center gap-3">
+      {{-- Mobile Cart Icon --}}
+      <a href="{{ route('cart.index') }}" class="relative md:inline-block">
+        <button class="flex items-center justify-center h-8 w-8 rounded bg-[#eaedf0] hover:bg-[#d6dbe0] transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#111418]" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+          </svg>
+        </button>
+        @if($countCart > 0)
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1 h-4 flex items-center justify-center min-w-[16px]">
+            {{ $countCart }}
+          </span>
+        @endif
+      </a>
+
+      {{-- Hamburger Button --}}
+      <button @click="openMenu = !openMenu" class="text-[#111418] focus:outline-none" x-data="{ openMenu: false }">
+        <svg x-show="!openMenu" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="openMenu" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+        </svg>
+
+        {{-- Dropdown links mobile --}}
+        <div x-show="openMenu" @click.away="openMenu = false" x-transition
+             class="absolute top-12 sm:top-14 right-4 bg-white border border-gray-200 rounded-md shadow-lg w-48 z-30">
+          <nav class="flex flex-col">
+            <a href="{{ url('/') }}" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Home</a>
+            <a href="{{ route('service') }}" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Service</a>
+            <a href="#components" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Komponen</a>
+            <a href="#paket" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Paket Produk</a>
+            <a href="{{ route('about') }}" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Tentang Kita</a>
+            <a href="{{ route('contact') }}" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Contact</a>
+            @guest
+              <a href="{{ route('login') }}" class="block px-4 py-3 text-[#111418] hover:bg-gray-100 border-b border-gray-100">Login</a>
+              <a href="{{ route('register') }}" class="block px-4 py-3 text-[#111418] hover:bg-gray-100">Register</a>
+            @else
+              <a href="#" @click.prevent="document.getElementById('logout-form-mobile').submit()"
+                 class="block px-4 py-3 text-[#111418] hover:bg-gray-100">Logout</a>
+              <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
+            @endauth
+          </nav>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+
 
     <!-- Hero Section -->
-    <section class="relative h-screen bg-cover bg-center" style="background-image: url('https://c0.wallpaperflare.com/preview/801/601/165/cctv-security-camera-surveillance.jpg');">
+     <div class="pt-28"></div>
+   <section class="relative h-screen bg-cover bg-center" style="background-image: url('https://c0.wallpaperflare.com/preview/801/601/165/cctv-security-camera-surveillance.jpg');">
         <div class="absolute inset-0 bg-black bg-opacity-40"></div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center relative z-10">
             <div class="max-w-3xl text-white">
@@ -145,7 +166,7 @@
                     Tingkatkan Keamanan Rumah atau Bisnis Anda dengan Memasang CCTV.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300">
+                    <a href="{{ route('contact') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300">
                         Hubungi kami
                     </a>
                     <a href="{{ route('produk.index') }}" class="bg-transparent hover:bg-white hover:text-gray-900 text-white font-medium py-3 px-8 rounded-md border border-white transition duration-300">
@@ -617,14 +638,7 @@
         </button>
     </div>
 
-    <!-- Mobile Menu Button - Only visible on mobile -->
-    <div class="md:hidden fixed top-4 right-4 z-50">
-        <button id="mobile-menu-button" class="text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
-    </div>
+    
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-95 z-40 hidden flex flex-col items-center justify-center">

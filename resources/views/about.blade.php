@@ -32,51 +32,63 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="flex flex-col gap-1">
-                  <h2 class="text-[#0e141b] text-base font-bold leading-tight">Advanced Security</h2>
-                  <p class="text-[#4e7097] text-sm font-normal leading-normal">Robust protection against threats</p>
-                </div>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col">
-                <div class="text-[#0e141b]" data-icon="Video" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M164.44,105.34l-48-32A8,8,0,0,0,104,80v64a8,8,0,0,0,12.44,6.66l48-32a8,8,0,0,0,0-13.32ZM120,129.05V95l25.58,17ZM216,40H40A16,16,0,0,0,24,56V168a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,128H40V56H216V168Zm16,40a8,8,0,0,1-8,8H32a8,8,0,0,1,0-16H224A8,8,0,0,1,232,208Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="flex flex-col gap-1">
-                  <h2 class="text-[#0e141b] text-base font-bold leading-tight">High-Resolution Video</h2>
-                  <p class="text-[#4e7097] text-sm font-normal leading-normal">Crystal-clear video quality</p>
-                </div>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col">
-                <div class="text-[#0e141b]" data-icon="Cloud" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="flex flex-col gap-1">
-                  <h2 class="text-[#0e141b] text-base font-bold leading-tight">Cloud Storage</h2>
-                  <p class="text-[#4e7097] text-sm font-normal leading-normal">Secure and accessible footage</p>
-                </div>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col">
-                <div class="text-[#0e141b]" data-icon="Lock" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-68-56a12,12,0,1,1-12-12A12,12,0,0,1,140,152Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="flex flex-col gap-1">
-                  <h2 class="text-[#0e141b] text-base font-bold leading-tight">Data Protection</h2>
-                  <p class="text-[#4e7097] text-sm font-normal leading-normal">Ensuring privacy and security</p>
-                </div>
-              </div>
-            </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+  <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col transition duration-200 ease-in-out hover:shadow-lg hover:border-blue-300 hover:bg-white">
+    <div class="text-[#0e141b]" data-icon="Shield" data-size="24px" data-weight="regular">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+        <path
+          d="M128,24,32,68V132c0,61.86,42.23,117.57,96,132.67,53.77-15.1,96-70.81,96-132.67V68Zm8,186.2a8,8,0,0,1-16,0V159.73a7.89,7.89,0,0,1,4.31-7l23.39-11.7a8,8,0,1,1,7.38,14.32L136,157.45Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="flex flex-col gap-1">
+      <h2 class="text-[#0e141b] text-base font-bold leading-tight">Advanced Security</h2>
+      <p class="text-[#4e7097] text-sm font-normal leading-normal">Robust protection against threats</p>
+    </div>
+  </div>
+  <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col transition duration-200 ease-in-out hover:shadow-lg hover:border-blue-300 hover:bg-white">
+    <div class="text-[#0e141b]" data-icon="Video" data-size="24px" data-weight="regular">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+        <path
+          d="M164.44,105.34l-48-32A8,8,0,0,0,104,80v64a8,8,0,0,0,12.44,6.66l48-32a8,8,0,0,0,0-13.32ZM120,129.05V95l25.58,17ZM216,40H40A16,16,0,0,0,24,56V168a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,128H40V56H216V168Zm16,40a8,8,0,0,1-8,8H32a8,8,0,0,1,0-16H224A8,8,0,0,1,232,208Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="flex flex-col gap-1">
+      <h2 class="text-[#0e141b] text-base font-bold leading-tight">High-Resolution Video</h2>
+      <p class="text-[#4e7097] text-sm font-normal leading-normal">Crystal-clear video quality</p>
+    </div>
+  </div>
+
+  <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col transition duration-200 ease-in-out hover:shadow-lg hover:border-blue-300 hover:bg-white">
+    <div class="text-[#0e141b]" data-icon="Cloud" data-size="24px" data-weight="regular">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+        <path
+          d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="flex flex-col gap-1">
+      <h2 class="text-[#0e141b] text-base font-bold leading-tight">Cloud Storage</h2>
+      <p class="text-[#4e7097] text-sm font-normal leading-normal">Secure and accessible footage</p>
+    </div>
+  </div>
+
+  <div class="flex flex-1 gap-3 rounded-lg border border-[#d0dbe7] bg-slate-50 p-4 flex-col transition duration-200 ease-in-out hover:shadow-lg hover:border-blue-300 hover:bg-white">
+    <div class="text-[#0e141b]" data-icon="Lock" data-size="24px" data-weight="regular">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+        <path
+          d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-68-56a12,12,0,1,1-12-12A12,12,0,0,1,140,152Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="flex flex-col gap-1">
+      <h2 class="text-[#0e141b] text-base font-bold leading-tight">Data Protection</h2>
+      <p class="text-[#4e7097] text-sm font-normal leading-normal">Ensuring privacy and security</p>
+    </div>
+  </div>
+</div>
+
             <h2 class="text-[#0e141b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Impact</h2>
             <div class="flex flex-wrap gap-4 p-4">
               <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-[#e7edf3]">
