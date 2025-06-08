@@ -57,7 +57,7 @@
       <a href="{{ url('/') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Home</a>
       <a href="{{ route('service') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Service</a>
       <a href="#components" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Komponen</a>
-      <a href="#paket" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Paket Produk</a>
+      <a href="{{ route('paket.index') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Paket Produk</a>
       <a href="{{ route('about') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Tentang Kita</a>
       <a href="{{ route('contact') }}" class="text-[#111418] text-sm font-medium hover:text-blue-600 transition-colors">Contact</a>
     </nav>
@@ -136,9 +136,9 @@
             <a href="{{ url('/') }}" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Home</a>
             <a href="{{ route('service') }}" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Service</a>
             <a href="#components" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Komponen</a>
-            <a href="#paket" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Paket Produk</a>
+            <a href="{{ route('paket.index') }}" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Paket Produk</a>
             <a href="{{ route('about') }}" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Tentang Kita</a>
-            <a href="#contact" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Contact</a>
+            <a href="{{ route('contact') }}" class="block px-4 py-2 text-[#111418] hover:bg-gray-100">Contact</a>
             <hr class="my-1 border-gray-200">
             {{-- Biar user bisa akses Cart dan Login/Logout dari mobile --}}
             <a href="{{ route('cart.index') }}" class="flex items-center px-4 py-2 text-[#111418] hover:bg-gray-100">

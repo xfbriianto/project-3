@@ -23,6 +23,16 @@ class PaketController extends Controller
         return view('admin.create', compact('barangs'));
     }
 
+     // Public index method to display packages
+    public function publicIndex()
+    {
+        // Fetch all packages from the database
+        $pakets = Paket::all();
+
+        // Return the view with the packages
+        return view('paket.index', compact('pakets'));
+    }
+
     // Simpan data paket baru
     public function store(Request $request)
     {
@@ -85,4 +95,10 @@ class PaketController extends Controller
 
         return redirect()->route('admin.paket.index')->with('success', 'Paket berhasil dihapus.');
     }
+// Tampilkan detail paket
+public function show($id)
+{
+    $paket = Paket::findOrFail($id); // Ambil data paket berdasarkan ID
+    return view('paket.detail', compact('paket')); // Kirim data ke view
+}
 }

@@ -50,7 +50,7 @@ use App\Http\Controllers\CustomerController;
             return view('index');
         })->name('index');
 
-      // Route untuk menampilkan halaman keranjang
+        // Route untuk menampilkan halaman keranjang
 
          // Admin dashboard (auth required)
         Route::get('/admin/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
@@ -138,4 +138,7 @@ use App\Http\Controllers\CustomerController;
         })->name('checkout');
 
 
- 
+       
+        // Routes for Public Paket Views
+        Route::get('/paket', [PaketController::class, 'publicIndex'])->name('paket.index'); // Public view for listing packages
+        Route::get('/paket/{id}/detail', [PaketController::class, 'show'])->name('paket.detail'); // Public view for package details
