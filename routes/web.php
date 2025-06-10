@@ -12,13 +12,17 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
+    
+
 
         // Auth routes
         Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -51,45 +55,41 @@ use App\Http\Controllers\CustomerController;
         })->name('index');
 
         // Route untuk menampilkan halaman keranjang
-
          // Admin dashboard (auth required)
-        Route::get('/admin/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
-            ->middleware('auth')->name('dashboard');
-        Route::prefix('admin')->middleware('auth')->group(function() {
-            
-        // Barang CRUD
-        Route::get('databarang', [BarangController::class, 'index'])->name('admin.databarang');
-        Route::post('databarang', [BarangController::class, 'store'])->name('admin.databarang.store');
-        Route::get('databarang/{barang}/edit', [BarangController::class, 'edit'])->name('admin.databarang.edit'); // Tambahkan ini untuk edit
-        Route::put('databarang/{barang}', [BarangController::class, 'update'])->name('admin.databarang.update');
-        Route::delete('databarang/{barang}', [BarangController::class, 'destroy'])->name('admin.databarang.destroy');
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
+     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-       
-    
-        
-        // Laporan Penjualan
-        Route::get('laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('admin.laporan-penjualan');
-        Route::get('laporan-penjualan/export', [LaporanPenjualanController::class, 'exportExcel'])->name('admin.laporan-penjualan.export');
-        Route::get('laporan-penjualan/export-pdf', [LaporanPenjualanController::class, 'exportPDF'])->name('admin.laporan-penjualan.export-pdf');
+    // Barang CRUD
+    Route::prefix('databarang')->name('databarang.')->group(function () {
+        Route::get('/', [BarangController::class, 'index'])->name('index');
+        Route::post('/', [BarangController::class, 'store'])->name('store');
+        Route::get('/{barang}/edit', [BarangController::class, 'edit'])->name('edit');
+        Route::put('/{barang}', [BarangController::class, 'update'])->name('update');
+        Route::delete('/{barang}', [BarangController::class, 'destroy'])->name('destroy');
+    });
 
-        // Order detail
-        Route::get('orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
-        });
+    // Laporan Penjualan
+    Route::prefix('laporan-penjualan')->name('laporan-penjualan.')->group(function () {
+        Route::get('/', [LaporanPenjualanController::class, 'index'])->name('index');
+        Route::get('/export', [LaporanPenjualanController::class, 'exportExcel'])->name('export');
+        Route::get('/export-pdf', [LaporanPenjualanController::class, 'exportPDF'])->name('export-pdf');
+    });
 
-        // Service routes
-        Route::get('/service', function () {
-        return view('service.index');
-        })->name('service');
-    
-        // Paket routes
-        Route::prefix('admin')->name('admin.')->group(function() {
-            Route::get('paket', [PaketController::class, 'index'])->name('paket.index');
-            Route::post('paket', [PaketController::class, 'store'])->name('paket.store');
-            Route::get('paket/create', [PaketController::class, 'create'])->name('paket.create');
-            Route::get('paket/{paket}/edit', [PaketController::class, 'edit'])->name('paket.edit');
-            Route::put('paket/{paket}', [PaketController::class, 'update'])->name('paket.update');
-            Route::delete('paket/{paket}', [PaketController::class, 'destroy'])->name('paket.destroy');
-        });
+    // Order detail
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::get('/{order}', [OrderController::class, 'show'])->name('show');
+    });
+
+    // Paket routes
+    Route::prefix('paket')->name('paket.')->group(function () {
+        Route::get('/', [PaketController::class, 'index'])->name('index');
+        Route::post('/', [PaketController::class, 'store'])->name('store');
+        Route::get('/create', [PaketController::class, 'create'])->name('create');
+        Route::get('/{paket}/edit', [PaketController::class, 'edit'])->name('edit');
+        Route::put('/{paket}', [PaketController::class, 'update'])->name('update');
+        Route::delete('/{paket}', [PaketController::class, 'destroy'])->name('destroy');
+    });
+});
 
     
 
@@ -142,3 +142,16 @@ use App\Http\Controllers\CustomerController;
         // Routes for Public Paket Views
         Route::get('/paket', [PaketController::class, 'publicIndex'])->name('paket.index'); // Public view for listing packages
         Route::get('/paket/{id}/detail', [PaketController::class, 'show'])->name('paket.detail'); // Public view for package details
+
+
+        // Route untuk komponen
+        Route::get('/komponen', function () {
+            return view('komponen.index');
+        })->name('komponen.index');
+
+          // Service routes
+        Route::get('/service', function () {
+        return view('service.index');
+        })->name('service');
+
+       

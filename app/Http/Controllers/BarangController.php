@@ -35,7 +35,7 @@ class BarangController extends Controller
         }
         $barang->save();
 
-        return redirect()->route('admin.databarang')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('admin.databarang.index')->with('success', 'Barang berhasil ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -65,7 +65,7 @@ class BarangController extends Controller
         }
 
         $barang->update($data);
-        return redirect()->route('admin.databarang')->with('success', 'Barang berhasil diperbarui');
+        return redirect()->route('admin.databarang.index')->with('success', 'Barang berhasil diperbarui');
     }
 
     public function destroy(Barang $barang)
@@ -75,7 +75,7 @@ class BarangController extends Controller
             Storage::disk('public')->delete($barang->image);
         }
         $barang->delete();
-        return redirect()->route('admin.databarang')->with('success', 'Barang berhasil dihapus!');
+        return redirect()->route('admin.databarang.index')->with('success', 'Barang berhasil dihapus!');
     }
 
       public function bulkDestroy(Request $request)

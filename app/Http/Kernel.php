@@ -18,6 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        
 
         // ✅ Middleware custom untuk minify HTML
         \App\Http\Middleware\MinifyHtml::class,
@@ -58,6 +59,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'obfuscate' => \App\Http\Middleware\ObfuscateHtml::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class, // Middleware untuk admin
+        
+        
 
         // ✅ Middleware custom bisa dipakai per-route juga
         'minify' => \App\Http\Middleware\MinifyHtml::class,
