@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
+    public function dashboard()
+    {
+        return view('admin.dashboard'); // Pastikan view ini ada
+    }
     public function index()
 {
     $totalStok = Barang::sum('stock');

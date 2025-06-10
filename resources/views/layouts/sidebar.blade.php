@@ -12,7 +12,7 @@
       <nav class="mt-8">
         <div class="flex flex-col gap-1">
           <!-- Dashboard -->
-          <a href="{{route('dashboard')}}" 
+          <a href="{{route('admin.dashboard')}}" 
              class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('dashboard') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">
             <div class="text-[#0d151c] w-5 h-5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
@@ -23,7 +23,7 @@
           </a>
           
           <!-- Product Management -->
-          <a href="{{route('admin.databarang')}}" 
+          <a href="{{route('admin.databarang.index')}}" 
              class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.databarang') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">
             <div class="text-[#0d151c] w-5 h-5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
@@ -45,7 +45,7 @@
           </a>
           
           <!-- Sales Reports -->
-          <a href="{{route('admin.laporan-penjualan')}}" 
+          <a href="{{route('admin.laporan-penjualan.index')}}" 
              class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.laporan-penjualan') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">
             <div class="text-[#0d151c] w-5 h-5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">

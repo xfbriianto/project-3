@@ -10,7 +10,7 @@
         <!-- Filter Section -->
         <div class="mt-6 bg-white rounded-lg shadow-md p-6">
             <h2 class="text-lg font-medium text-gray-700 mb-4">Filter Laporan</h2>
-            <form action="{{route('admin.laporan-penjualan') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <form action="{{route('admin.laporan-penjualan.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label for="start_date" class="block text-sm font-medium text-gray-700">Tanggal Mulai</label>
                     <input type="date" name="start_date" id="start_date" value="{{ request('start_date') }}" 

@@ -60,6 +60,18 @@
                                     >
                                         <span class="truncate">Lihat Detail</span>
                                     </a>
+                                    <button
+                                        class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 flex-row-reverse bg-[#e9edf1] text-[#101419] text-sm font-medium leading-normal w-fit"
+                                        onclick="openConsultationModal('{{ $paket->name }}')"
+                                    >
+                                        <span class="truncate">Konsultasi</span>
+                                    </button>
+                                    <button
+                                        class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 flex-row-reverse bg-[#e9edf1] text-[#101419] text-sm font-medium leading-normal w-fit"
+                                        onclick="openOrderModal('{{ $paket->name }}', '{{ $paket->price }}')"
+                                    >
+                                        <span class="truncate">Pesan Sekarang</span>
+                                    </button>
                                 </div>
                             </div>
                             <div
@@ -77,13 +89,96 @@
                                 </svg>
                             </div>
                             <h3 class="text-lg font-medium text-gray-900 mb-2">Belum Ada Paket Tersedia</h3>
-                            <p class="text-gray-500">Paket keamanan CCTV akan segera hadir. Silakan hubungi kami untuk informasi lebih lanjut.</p>
+                            <p class="text-gray-500">Admin sedang malas.</p>
                         </div>
                     </div>
                     @endforelse
                 </div>
 
-               
+                <!-- Call to Action Section -->
+                <div class="p-4 mt-8">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-6 text-center text-white">
+                        <h3 class="text-xl font-bold mb-2">Butuh Konsultasi Khusus?</h3>
+                        <p class="mb-4 opacity-90">Tim ahli kami siap membantu Anda memilih paket yang tepat sesuai kebutuhan</p>
+                        <button
+                            class="bg-white text-blue-600 hover:bg-gray-100 font-medium py-2 px-6 rounded-lg transition-colors"
+                            onclick="openConsultationModal('Konsultasi Umum')"
+                        >
+                            Hubungi Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Consultation Modal -->
+<div id="consultationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6">
+        <h3 class="text-lg font-bold mb-4">Konsultasi Paket CCTV</h3>
+        <p class="text-gray-600 mb-4">Kami akan menghubungi Anda untuk memberikan konsultasi mengenai paket <span id="consultationPackage" class="font-semibold"></span></p>
+        <form>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nomor WhatsApp</label>
+                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Lokasi Pemasangan</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" placeholder="Alamat lengkap lokasi pemasangan"></textarea>
+            </div>
+            <div class="flex gap-3">
+                <button type="button" onclick="closeConsultationModal()" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
+                    Batal
+                </button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    Kirim Permintaan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Order Modal -->
+<div id="orderModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6">
+        <h3 class="text-lg font-bold mb-4">Pesan Paket CCTV</h3>
+        <div class="mb-4 p-3 bg-blue-50 rounded-lg">
+            <p class="text-sm text-gray-600">Paket: <span id="orderPackageName" class="font-semibold text-gray-900"></span></p>
+            <p class="text-sm text-gray-600">Harga: <span id="orderPackagePrice" class="font-semibold text-gray-900"></span></p>
+        </div>
+        <form>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nomor WhatsApp</label>
+                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Alamat Pemasangan</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" placeholder="Alamat lengkap untuk pemasangan CCTV" required></textarea>
+            </div>
+            <div class="flex gap-3">
+                <button type="button" onclick="closeOrderModal()" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
+                    Batal
+                </button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                    Pesan Sekarang
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
 function openConsultationModal(packageName) {
