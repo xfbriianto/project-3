@@ -18,7 +18,7 @@ Kami menyebutnya proyek *"CCTV"* bukan hanya karena ada kameranya, tapi karena k
 
 - 🎥 **Live View:** Biar kami bisa liat siapa yang sibuk ngoding, dan siapa yang sibuk rebahan nunggu hasil.
 - 🗃️ **History Rekaman:** Bisa diakses kapan pun untuk mengenang perjuangan satu-dua orang yang ditinggal “rekan” segrup.
-- 🧠 **Login & Auth:** Sayangnya, belum ada middleware `->checkIfDongo()` buat filterin yang gak ngerti-ngerti walau udah dijelasin 10 kali.
+- 🧠 **Login & Auth:** Sayangnya, belum ada middleware `->checkIfDongo()` buat filterin yang gak ngerti-ngerti walau udah dijelasin 10 kali(padahal kan bisa dipelajari dulu yaaa).
 - 🧾 **Dashboard Realita:** Menampilkan data, bukan ilusi. Dan jelas-jelas menunjukkan siapa yang kerja dan siapa yang jadi beban kolektif.
 
 ## Cara Instalasi
