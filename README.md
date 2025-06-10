@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **DIBACA DONGO**
 ---
 
@@ -50,3 +51,7 @@ Dengan segala keringat dan kelelahan,
 Dari kami yang benar-benar kerja,  
 Yang ngetik sambil nahan emosi,  
 Untuk kamu, yang hadir cuma waktu absen doang.
+=======
+# **Tolong dipahami dan pelajari ya project ini..biar paham semua**
+
+>>>>>>> 66ef11bd531f2b7a3cc31adc83ac0608881a9493
