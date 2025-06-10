@@ -1,2 +1,2 @@
-# **Tolong dipejari ya temen temen project ini..biar paham semua**
+# **Tolong dipahami dan pelajari ya project ini..biar paham semua**
 
