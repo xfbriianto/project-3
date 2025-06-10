@@ -16,7 +16,7 @@ Kami menyebutnya proyek *"CCTV"* bukan hanya karena ada kameranya, tapi karena k
 
 ## Fitur Utama
 
-- 🎥 **Live View:** Biar kami bisa liat siapa yang sibuk ngoding, dan siapa yang sibuk rebahan nunggu hasil.
+- 🎥 **Live View:** Biar kami bisa liat siapa yang sibuk ngoding, dan siapa yang sibuk rebahan nunggu hasil yang sambil nanya ("kapan push di github?").
 - 🗃️ **History Rekaman:** Bisa diakses kapan pun untuk mengenang perjuangan satu-dua orang yang ditinggal “rekan” segrup.
 - 🧠 **Login & Auth:** Sayangnya, belum ada middleware `->checkIfDongo()` buat filterin yang gak ngerti-ngerti walau udah dijelasin 10 kali(padahal kan bisa dipelajari dulu yaaa).
 - 🧾 **Dashboard Realita:** Menampilkan data, bukan ilusi. Dan jelas-jelas menunjukkan siapa yang kerja dan siapa yang jadi beban kolektif.
@@ -25,10 +25,10 @@ Kami menyebutnya proyek *"CCTV"* bukan hanya karena ada kameranya, tapi karena k
 
 Buat kamu yang baru nanya "ini project apa sih?" di minggu presentasi, nih baca pelan-pelan (atau minta bacain temen yang ngerti):
 
-1. Clone repo ini. Jangan cuma copy-paste hasil kerja orang.
-2. Jalankan `composer install` – bukan `composer copas`.
-3. Copy `.env.example` ke `.env`, dan konekin ke database. Ya, itu yang waktu kuliah basis data kamu tinggalin demi rebahan itu.
-4. Jalankan `php artisan migrate` dan `php artisan serve`, bukan `php artisan ngilang`.
+1. Clone project ini. Iya, clone. Bukan copas jawaban waktu presentasi.
+2. Jalankan `composer install`. Jangan panik kalau belum tahu, belajar itu masih gratis.
+3. Setup `.env`. Kalau gak ngerti, boleh izin dulu untuk belajar cara buka dokumentasi.
+4. Jalankan `php artisan migrate` dan `php artisan serve`, karena proyek butuh hasil nyata, bukan sekadar *“aku support kok bro”*.
 
 ## Kontribusi (Atau Kekurangannya)
 
