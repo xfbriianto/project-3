@@ -19,26 +19,17 @@ class LaporanPenjualanController extends Controller
     /**
      * Menampilkan halaman laporan penjualan
      */
-    public function index(Request $request)
+   public function index()
     {
-        $query = SalesReport::with('user');
+        // Ambil semua laporan penjualan dengan status completed
+        $laporan = SalesReport::with('user')
+            ->where('status', 'completed')
+            ->orderBy('transaction_date', 'desc')
+            ->paginate(15);
 
-        // Filter tanggal
-        if ($request->filled('start_date')) {
-            $query->whereDate('transaction_date', '>=', $request->start_date);
-        }
-        if ($request->filled('end_date')) {
-            $query->whereDate('transaction_date', '<=', $request->end_date);
-        }
-        // Filter status
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        $reports = $query->orderBy('transaction_date', 'desc')->paginate(15);
-
-        return view('admin.laporan-penjualan', compact('reports'));
+        return view('admin.laporan-penjualan', compact('laporan'));
     }
+
     /**
      * Mengunduh laporan penjualan sebagai file Excel
      */

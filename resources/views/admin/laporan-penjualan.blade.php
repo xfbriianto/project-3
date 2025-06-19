@@ -55,39 +55,39 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($reports as $report)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->order_id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                {{ $report->user ? $report->user->name : '-' }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp {{ number_format($report->total, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                @if($report->status == 'completed')
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai</span>
-                                @elseif($report->status == 'pending')
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                                @elseif($report->status == 'cancelled')
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Dibatalkan</span>
-                                @else
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">{{ ucfirst($report->status) }}</span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                {{ $report->transaction_date ? \Carbon\Carbon::parse($report->transaction_date)->format('d/m/Y H:i') : '-' }}
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Tidak ada data penjualan</td>
-                        </tr>
-                        @endforelse
+                        @forelse($laporan as $report)
+<tr>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->id }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->order_id }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+       {{ $report->user ? $report->user->name : '-' }}
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp {{ number_format($report->total, 0, ',', '.') }}</td>
+    <td class="px-6 py-4 whitespace-nowrap">
+        @if($report->status == 'completed')
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai</span>
+        @elseif($report->status == 'pending')
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+        @elseif($report->status == 'cancelled')
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Dibatalkan</span>
+        @else
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">{{ ucfirst($report->status) }}</span>
+        @endif
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+        {{ $report->transaction_date ? \Carbon\Carbon::parse($report->transaction_date)->format('d/m/Y H:i') : '-' }}
+    </td>
+</tr>
+@empty
+<tr>
+    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Tidak ada data penjualan</td>
+</tr>
+@endforelse
                     </tbody>
                 </table>
             </div>
             <div class="px-6 py-4 bg-white border-t border-gray-200">
-                {{ $reports->withQueryString()->links() }}
+                {{ $laporan->withQueryString()->links() }}
             </div>
         </div>
     </div>
