@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Barang;
 use Illuminate\Support\Facades\DB;
+use App\Models\SalesReport; // Pastikan model ini ada
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,7 @@ class DashboardController extends Controller
     public function index()
 {
     $totalStok = Barang::sum('stock');
-    $totalPenjualan = Order::where('status', 'completed')->sum('total');
+    $totalPenjualan = SalesReport::where('status', 'completed')->sum('total');
 
     // Data penjualan per bulan (7 bulan terakhir)
     $penjualanBulanan = Order::select(

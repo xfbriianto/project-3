@@ -19,6 +19,6 @@ class SalesReport extends Model
     // Relasi ke user (jika ingin)
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
