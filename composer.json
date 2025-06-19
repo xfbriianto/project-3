@@ -11,6 +11,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
+        "midtrans/midtrans-php": "^2.6",
         "phpoffice/phpspreadsheet": "^4.0"
     },
     "require-dev": {
