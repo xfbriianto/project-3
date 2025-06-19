@@ -31,7 +31,7 @@ class PaymentController extends Controller
             return $item->barang->price * $item->quantity;
         });
 
-        $total = $subtotal; // Tidak ada shipping dan tax
+        $total = $subtotal;
 
         // Buat order_id unik
         $orderId = 'ORD' . time() . Auth::id();
@@ -59,14 +59,16 @@ class PaymentController extends Controller
         try {
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-            // Simpan data ke sales_reports dengan status pending
-            SalesReport::create([
-                'order_id' => $orderId,
-                'user_id' => Auth::id(),
-                'total' => $total,
-                'status' => 'pending',
-                'transaction_date' => now(),
-            ]);
+            // Simpan data ke sales_reports dengan status pending, hindari duplikasi order_id
+            SalesReport::updateOrCreate(
+                ['order_id' => $orderId],
+                [
+                    'user_id' => Auth::id(),
+                    'total' => $total,
+                    'status' => 'pending',
+                    'transaction_date' => now(),
+                ]
+            );
 
             return response()->json(['snap_token' => $snapToken]);
         } catch (\Exception $e) {
@@ -77,33 +79,37 @@ class PaymentController extends Controller
     /**
      * Callback dari Midtrans untuk update status pembayaran.
      */
-   public function handleCallback(Request $request)
-{
-    $notification = new \Midtrans\Notification();
+    public function handleCallback(Request $request)
+    {
+        $notification = new \Midtrans\Notification();
 
-    $transactionStatus = $notification->transaction_status;
-    $orderId = $notification->order_id;
+        $transactionStatus = $notification->transaction_status;
+        $orderId = $notification->order_id;
 
-    \Log::info('Midtrans callback', [
-        'order_id' => $orderId,
-        'transaction_status' => $transactionStatus
-    ]);
+        $salesReport = SalesReport::where('order_id', $orderId)->first();
 
-    $salesReport = SalesReport::where('order_id', $orderId)->first();
-
-    if ($salesReport) {
-        if (in_array($transactionStatus, ['settlement', 'capture'])) {
-            $salesReport->update([
-                'status' => 'completed',
+        if ($salesReport) {
+            if (in_array($transactionStatus, ['settlement', 'capture'])) {
+                $salesReport->update([
+                    'status' => 'completed',
+                    'transaction_date' => now(),
+                ]);
+            } elseif ($transactionStatus == 'pending') {
+                $salesReport->update(['status' => 'pending']);
+            } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
+                $salesReport->update(['status' => 'cancelled']);
+            }
+        } else {
+            // Jika belum ada, buat data baru (antisipasi jika callback datang sebelum insert)
+            SalesReport::create([
+                'order_id' => $orderId,
+                'user_id' => null,
+                'total' => 0,
+                'status' => $transactionStatus == 'pending' ? 'pending' : ($transactionStatus == 'settlement' || $transactionStatus == 'capture' ? 'completed' : 'cancelled'),
                 'transaction_date' => now(),
             ]);
-        } elseif ($transactionStatus == 'pending') {
-            $salesReport->update(['status' => 'pending']);
-        } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
-            $salesReport->update(['status' => 'cancelled']);
         }
-    }
 
-    return response()->json(['message' => 'Callback processed']);
-}
+        return response()->json(['message' => 'Callback processed']);
+    }
 }

@@ -60,9 +60,11 @@
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->id }}</td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->order_id }}</td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-       {{ $report->user ? $report->user->name : '-' }}
+        {{ optional($report->user)->name ?? '-' }}
     </td>
-    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp {{ number_format($report->total, 0, ',', '.') }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+        Rp {{ number_format($report->total, 0, ',', '.') }}
+    </td>
     <td class="px-6 py-4 whitespace-nowrap">
         @if($report->status == 'completed')
             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai</span>
@@ -87,7 +89,7 @@
                 </table>
             </div>
             <div class="px-6 py-4 bg-white border-t border-gray-200">
-                {{ $laporan->withQueryString()->links() }}
+                {{ $laporan->links() }}
             </div>
         </div>
     </div>
