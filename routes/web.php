@@ -14,7 +14,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\Auth\SalesReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,5 +155,10 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
         Route::get('/service', function () {
         return view('service.index');
         })->name('service');
+
+        // Route Payment
+        
+Route::post('/payment', [PaymentController::class, 'createTransaction'])->name('payment.create');
+Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
 
        
