@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CartItem;
 use App\Models\SalesReport;
+use Illuminate\Support\Str; 
+use Midtrans\Notification;
+use App\Models\User;
+use App\Models\Order;
 
 class PaymentController extends Controller
 {
@@ -60,15 +64,20 @@ class PaymentController extends Controller
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
             // Simpan data ke sales_reports dengan status pending, hindari duplikasi order_id
+             $barangList = $cartItems->map(function ($item) {
+            return $item->barang->name . ' (x' . $item->quantity . ')';
+        })->implode(', ');
+
             SalesReport::updateOrCreate(
-                ['order_id' => $orderId],
-                [
-                    'user_id' => Auth::id(),
-                    'total' => $total,
-                    'status' => 'pending',
-                    'transaction_date' => now(),
-                ]
-            );
+            ['order_id' => $orderId],
+            [
+                'user_id' => Auth::id(),
+                'total' => $total,
+                'status' => 'pending',
+                'transaction_date' => now(),
+                'barang' => $barangList, // ✅ simpan nama barang di kolom 'barang'
+            ]
+        );
 
             return response()->json(['snap_token' => $snapToken]);
         } catch (\Exception $e) {
@@ -80,36 +89,65 @@ class PaymentController extends Controller
      * Callback dari Midtrans untuk update status pembayaran.
      */
     public function handleCallback(Request $request)
-    {
-        $notification = new \Midtrans\Notification();
+{
+    $notification = new \Midtrans\Notification();
 
-        $transactionStatus = $notification->transaction_status;
-        $orderId = $notification->order_id;
+    $transactionStatus = $notification->transaction_status;
+    $orderId = $notification->order_id;
 
-        $salesReport = SalesReport::where('order_id', $orderId)->first();
+    $salesReport = SalesReport::where('order_id', $orderId)->first();
 
-        if ($salesReport) {
-            if (in_array($transactionStatus, ['settlement', 'capture'])) {
-                $salesReport->update([
-                    'status' => 'completed',
-                    'transaction_date' => now(),
-                ]);
-            } elseif ($transactionStatus == 'pending') {
-                $salesReport->update(['status' => 'pending']);
-            } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
-                $salesReport->update(['status' => 'cancelled']);
-            }
-        } else {
-            // Jika belum ada, buat data baru (antisipasi jika callback datang sebelum insert)
-            SalesReport::create([
-                'order_id' => $orderId,
-                'user_id' => null,
-                'total' => 0,
-                'status' => $transactionStatus == 'pending' ? 'pending' : ($transactionStatus == 'settlement' || $transactionStatus == 'capture' ? 'completed' : 'cancelled'),
+    if ($salesReport) {
+        $userId = $salesReport->user_id;
+
+        if (in_array($transactionStatus, ['settlement', 'capture'])) {
+            $salesReport->update([
+                'status' => 'completed',
                 'transaction_date' => now(),
             ]);
-        }
 
-        return response()->json(['message' => 'Callback processed']);
+            // ✅ Simpan ke tabel orders dan order_items
+            $existingOrder = \App\Models\Order::where('id', $salesReport->order_id)->first();
+
+            if (!$existingOrder && $userId) {
+                // Buat order baru
+                $order = \App\Models\Order::create([
+                    'user_id' => $userId,
+                    'total' => $salesReport->total,
+                    'status' => 'completed',
+                ]);
+
+                // Ambil data cart user
+                $cartItems = \App\Models\CartItem::where('user_id', $userId)->with('barang')->get();
+
+                foreach ($cartItems as $item) {
+                    $order->items()->create([
+                        'barang_id' => $item->barang_id,
+                        'quantity' => $item->quantity,
+                        'price' => $item->barang->price,
+                    ]);
+                }
+
+                // Hapus cart setelah transaksi sukses
+                \App\Models\CartItem::where('user_id', $userId)->delete();
+            }
+
+        } elseif ($transactionStatus == 'pending') {
+            $salesReport->update(['status' => 'pending']);
+        } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
+            $salesReport->update(['status' => 'cancelled']);
+        }
+    } else {
+        // Jika belum ada, buat data sales_reports baru
+        \App\Models\SalesReport::create([
+            'order_id' => $orderId,
+            'user_id' => null,
+            'total' => 0,
+            'status' => $transactionStatus == 'pending' ? 'pending' : ($transactionStatus == 'settlement' || $transactionStatus == 'capture' ? 'completed' : 'cancelled'),
+            'transaction_date' => now(),
+        ]);
     }
+
+    return response()->json(['message' => 'Callback processed']);
+}
 }

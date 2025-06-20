@@ -47,44 +47,74 @@
   <div class="px-4 py-3">
     <div class="flex overflow-hidden rounded-xl border border-[#cedce8] bg-white shadow-sm">
       <table class="flex-1">
-        <thead>
-          <tr class="bg-slate-50">
-            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">No</th>
-            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Tanggal</th>
-            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Produk</th>
-            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Jumlah</th>
-            <th class="px-4 py-3 text-left text-[#0d151c] text-sm font-medium leading-normal">Total Harga</th>
+             <thead class="bg-gray-50">
+          <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pelanggan</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Barang</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
           </tr>
-        </thead>
-        <tbody>
-          @forelse($penjualanTerbaru as $order)
-            @foreach($order->items as $item)
-              <tr class="border-t border-t-[#cedce8]">
-                <td class="h-[72px] px-4 py-2 text-[#0d151c] text-sm font-normal leading-normal">
-                  {{ $loop->parent->iteration }}{{ $loop->count > 1 ? '.' . $loop->iteration : '' }}
-                </td>
-                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
-                  {{ $order->created_at->format('Y-m-d') }}
-                </td>
-                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
-                  {{ $item->barang->name ?? '-' }}
-                </td>
-                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
-                  {{ $item->quantity }}
-                </td>
-                <td class="h-[72px] px-4 py-2 text-[#49749c] text-sm font-normal leading-normal">
-                  Rp {{ number_format($item->quantity * $item->price, 0, ',', '.') }}
-                </td>
-              </tr>
-            @endforeach
-          @empty
-            <tr class="border-t border-t-[#cedce8]">
-              <td colspan="5" class="h-[72px] px-4 py-2 text-center text-[#49749c] text-sm font-normal leading-normal">
-                Belum ada penjualan.
-              </td>
-            </tr>
-          @endforelse
-        </tbody>
+      </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+    @forelse($laporan as $report)
+        <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->id }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->order_id ?? 'ORD-' . str_pad($report->id, 6, '0', STR_PAD_LEFT) }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->user_name ?? 'User tidak ditemukan' }}
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-900 max-w-xs">
+                {{ $report->barang_list ?? 'Barang tidak tersedia' }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                Rp {{ number_format($report->total, 0, ',', '.') }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                @switch($report->status)
+                    @case('completed')
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Selesai
+                        </span>
+                        @break
+
+                    @case('pending')
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                            Pending
+                        </span>
+                        @break
+
+                    @case('cancelled')
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                            Dibatalkan
+                        </span>
+                        @break
+
+                    @default
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                            {{ ucfirst($report->status) }}
+                        </span>
+                @endswitch
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->transaction_date ? \Carbon\Carbon::parse($report->transaction_date)->format('d/m/Y H:i') : '-' }}
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                Tidak ada data penjualan
+            </td>
+        </tr>
+    @endforelse
+</tbody>
+
       </table>
     </div>
   </div>

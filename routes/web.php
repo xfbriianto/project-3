@@ -18,6 +18,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Auth\SalesReportController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +76,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
         Route::get('/', [LaporanPenjualanController::class, 'index'])->name('index');
         Route::get('/export', [LaporanPenjualanController::class, 'exportExcel'])->name('export');
         Route::get('/export-pdf', [LaporanPenjualanController::class, 'exportPDF'])->name('export-pdf');
+        Route::get('/laporan-detail', [LaporanPenjualanController::class, 'detail'])->name('detail');
     });
 
     // Order detail
