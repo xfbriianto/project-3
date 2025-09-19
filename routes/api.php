@@ -53,6 +53,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // 🧾 ORDER DETAIL
     Route::get('/orders/{order}', [OrderController::class, 'show']);
+
+    // 📊 RATING PRODUK
+    Route::post('/rating', [RatingController::class, 'store'])->middleware('auth');
+    Route::get('/rating/{barang_id}', [RatingController::class, 'show']);
+
+
 });
 
 // 📦 PRODUK (tidak perlu login)

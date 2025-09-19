@@ -35,19 +35,24 @@
             @endforeach
         </div>
         <div class="flex justify-stretch">
-            <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
-                <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#3490f3] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
-                >
-                    <span class="truncate">Add to Cart</span>
-                </button>
-                <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e7edf4] text-[#0d141c] text-sm font-bold leading-normal tracking-[0.015em]"
-                >
-                    <span class="truncate">Add to My Favorites</span>
-                </button>
-            </div>
-        </div>
+    <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
+        <form method="POST" action="{{ route('cart.add') }}">
+            @csrf
+            <input type="hidden" name="paket_id" value="{{ $paket->id }}">
+            <button
+                type="submit"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#3490f3] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+                <span class="truncate">Tambah ke Keranjang</span>
+            </button>
+        </form>
+        <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e7edf4] text-[#0d141c] text-sm font-bold leading-normal tracking-[0.015em]"
+        >
+            <span class="truncate">Add to My Favorites</span>
+        </button>
+    </div>
+</div>
     </div>
 </div>
 @endsection

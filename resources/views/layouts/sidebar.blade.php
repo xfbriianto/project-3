@@ -44,6 +44,17 @@
             <span class="text-[#0d151c] text-sm font-medium">Manajemen Paket</span>
           </a>
           
+          <!-- Komponen CCTV Management (Admin) -->
+          <a href="{{ route('admin.komponen.index') }}"
+             class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.komponen.*') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">
+            <div class="text-[#0d151c] w-5 h-5">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+            </div>
+            <span class="text-[#0d151c] text-sm font-medium">Komponen CCTV</span>
+          </a>
+          
           <!-- Sales Reports -->
           <a href="{{route('admin.laporan-penjualan.index')}}" 
              class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.laporan-penjualan') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">

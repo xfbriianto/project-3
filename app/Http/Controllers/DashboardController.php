@@ -4,24 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Barang;
-use App\Models\SalesReport;
 use App\Models\Order;
-use App\Models\CartItem;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Total semua stok barang
+        // Total stok semua barang
         $totalStok = Barang::sum('stock');
 
-        // Total penjualan dari orders yang completed
+        // Total penjualan dari order yang selesai
         $totalPenjualan = Order::where('status', 'completed')->sum('total');
 
-        // Ambil penjualan per bulan dari orders
+        // Penjualan 6 bulan terakhir
         $penjualanBulanan = Order::select(
                 DB::raw('DATE_FORMAT(created_at, "%b %Y") as bulan'),
                 DB::raw('SUM(total) as total')
@@ -33,7 +30,7 @@ class DashboardController extends Controller
             ->pluck('total', 'bulan')
             ->toArray();
 
-        // Siapkan label dan data grafik
+        // Label dan data grafik
         $labels = [];
         $data = [];
         for ($i = 6; $i >= 0; $i--) {
@@ -42,7 +39,7 @@ class DashboardController extends Controller
             $data[] = $penjualanBulanan[$label] ?? 0;
         }
 
-        // SOLUSI BARU: Ambil data dari orders dengan items
+        // Ambil data penjualan terbaru
         $laporan = $this->getRecentPurchases();
 
         return view('admin.dashboard', compact(
@@ -55,38 +52,36 @@ class DashboardController extends Controller
     }
 
     /**
-     * Method untuk mengambil pembelian terbaru dari orders
+     * Mengambil 10 pembelian terbaru beserta user dan barang.
      */
-    private function getRecentPurchases()
-    {
-        // Ambil orders terbaru dengan relasi user dan items
-        $orders = Order::with([
-                'user:id,name,email',
-                'items:id,order_id,barang_id,quantity,price',
-                'items.barang:id,name,price'
-            ])
-            ->whereHas('items') // Pastikan order memiliki items
-            ->latest('created_at')
-            ->take(10)
-            ->get();
+   private function getRecentPurchases()
+{
+    $orders = Order::with([
+            'user:id,name,email',
+            'items:id,order_id,barang_id,quantity,price',
+            'items.barang:id,name,price' // <-- disesuaikan di sini
+        ])
+        ->whereHas('items')
+        ->latest('created_at')
+        ->take(10)
+        ->get();
 
-        // Transform data untuk sesuai dengan format yang dibutuhkan view
-        return $orders->map(function($order) {
-            return (object) [
-                'id' => $order->id,
-                'order_id' => 'ORD-' . str_pad($order->id, 6, '0', STR_PAD_LEFT),
-                'user_name' => $order->user->name ?? 'User tidak ditemukan',
-                'user_email' => $order->user->email ?? '',
-                'barang_list' => $this->formatBarangList($order->items),
-                'total' => $order->total,
-                'status' => $order->status,
-                'transaction_date' => $order->created_at
-            ];
-        });
-    }
+    return $orders->map(function($order) {
+        return (object) [
+            'id' => $order->id,
+            'order_id' => 'ORD-' . str_pad($order->id, 6, '0', STR_PAD_LEFT),
+            'user_name' => optional($order->user)->name ?? 'User tidak ditemukan',
+            'user_email' => optional($order->user)->email ?? '-',
+            'barang_list' => $this->formatBarangList($order->items),
+            'total' => $order->total,
+            'status' => $order->status,
+            'transaction_date' => $order->created_at
+        ];
+    });
+}
 
     /**
-     * Method untuk format daftar barang
+     * Format daftar barang untuk ditampilkan
      */
     private function formatBarangList($items)
     {
@@ -95,7 +90,7 @@ class DashboardController extends Controller
         }
 
         return $items->map(function($item) {
-            $barangName = $item->barang ? $item->barang->name : 'Barang tidak ditemukan';
+            $barangName = optional($item->barang)->name_barang ?? 'Barang tidak ditemukan';
             return $barangName . ' (x' . $item->quantity . ')';
         })->implode(', ');
     }

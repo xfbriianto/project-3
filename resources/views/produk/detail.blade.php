@@ -1,4 +1,4 @@
-{{-- resources/views/produk/detail.blade.php --}}
+{{-- filepath: c:\Users\LENOVO\cctv-web\resources\views\produk\detail.blade.php --}}
 @extends('layouts.public')
 
 @section('title', $barang->name . ' - SecureView CCTV')
@@ -25,7 +25,7 @@
                    @if($barang->image)
                      style='background-image: url("{{ asset('storage/' . $barang->image) }}");'
                    @else
-                     style='background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e2e8f0'/%3E%3Cpath d='M150 120h100v60h-100zm40 20h20v20h-20z' fill='%2394a3b8'/%3E%3C/svg%3E");'
+                     style='background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 300\'%3E%3Crect width=\'400\' height=\'300\' fill=\'%23e2e8f0\'/%3E%3Cpath d=\'M150 120h100v60h-100zm40 20h20v20h-20z\' fill=\'%2394a3b8\'/%3E%3C/svg%3E");'
                    @endif
               ></div>
               
@@ -106,55 +106,112 @@
           <div class="flex flex-wrap gap-x-8 gap-y-6 p-4">
             <!-- Rating Display -->
             <div class="flex flex-col gap-2">
-              <p class="text-[#0e141b] text-4xl font-black leading-tight tracking-[-0.033em]">5.0</p>
+              @php
+                $avgRating = $barang->ratings()->avg('rating');
+                $ratingsCount = $barang->ratings()->count();
+              @endphp
+              <p class="text-[#0e141b] text-4xl font-black leading-tight tracking-[-0.033em]">
+                {{ $avgRating ? number_format($avgRating, 1) : '0.0' }}
+              </p>
               <div class="flex gap-0.5">
-                @for($i = 0; $i < 5; $i++)
-                  <div class="text-[#1669c9]" data-icon="Star" data-size="18px" data-weight="fill">
+                @for($i = 1; $i <= 5; $i++)
+                  <div class="{{ $avgRating >= $i ? 'text-[#1669c9]' : 'text-[#d0dbe7]' }}" data-icon="Star" data-size="18px" data-weight="fill">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
                       <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
                     </svg>
                   </div>
                 @endfor
               </div>
-              <p class="text-[#0e141b] text-base font-normal leading-normal">{{ $barang->reviews_count ?? '0' }} reviews</p>
+              <p class="text-[#0e141b] text-base font-normal leading-normal">{{ $ratingsCount }} reviews</p>
             </div>
 
             <!-- Rating Breakdown -->
             <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
-              <p class="text-[#0e141b] text-sm font-normal leading-normal">5</p>
-              <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
-                <div class="rounded-full bg-[#1669c9]" style="width: 0%;"></div>
-              </div>
-              <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">0%</p>
-              
-              <p class="text-[#0e141b] text-sm font-normal leading-normal">4</p>
-              <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
-                <div class="rounded-full bg-[#1669c9]" style="width: 0%;"></div>
-              </div>
-              <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">0%</p>
-              
-              <p class="text-[#0e141b] text-sm font-normal leading-normal">3</p>
-              <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
-                <div class="rounded-full bg-[#1669c9]" style="width: 0%;"></div>
-              </div>
-              <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">0%</p>
-              
-              <p class="text-[#0e141b] text-sm font-normal leading-normal">2</p>
-              <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
-                <div class="rounded-full bg-[#1669c9]" style="width: 0%;"></div>
-              </div>
-              <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">0%</p>
-              
-              <p class="text-[#0e141b] text-sm font-normal leading-normal">1</p>
-              <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
-                <div class="rounded-full bg-[#1669c9]" style="width: 0%;"></div>
-              </div>
-              <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">0%</p>
+              @for($star = 5; $star >= 1; $star--)
+                @php
+                  $count = $barang->ratings()->where('rating', $star)->count();
+                  $percent = $ratingsCount ? round(($count / $ratingsCount) * 100) : 0;
+                @endphp
+                <p class="text-[#0e141b] text-sm font-normal leading-normal">{{ $star }}</p>
+                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
+                  <div class="rounded-full bg-[#1669c9]" style="width: {{ $percent }}%;"></div>
+                </div>
+                <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">{{ $percent }}%</p>
+              @endfor
             </div>
+          </div>
+
+          <!-- Form Rating untuk User -->
+          @auth
+  <div class="p-4">
+    <h4 class="font-semibold mb-2">
+      {{ $userRating ? 'Edit Rating & Ulasan Anda' : 'Beri Rating & Ulasan' }}
+    </h4>
+    <form method="POST" action="{{ route('rating.store') }}" id="ratingForm">
+      @csrf
+      <input type="hidden" name="barang_id" value="{{ $barang->id }}">
+      <div class="flex items-center gap-2 mb-2">
+        <label for="rating" class="block">Rating:</label>
+        <select name="rating" id="rating" required class="border px-2 py-1">
+          <option value="">Pilih rating</option>
+          @for($i=1; $i<=5; $i++)
+            <option value="{{ $i }}" {{ $userRating && $userRating->rating == $i ? 'selected' : '' }}>{{ $i }}</option>
+          @endfor
+        </select>
+      </div>
+      <input type="text" name="review" placeholder="Tulis ulasan (opsional)" class="border px-2 py-1 mb-2 w-full"
+        value="{{ $userRating ? $userRating->review : '' }}">
+      <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded">
+        {{ $userRating ? 'Update' : 'Kirim' }}
+      </button>
+    </form>
+  </div>
+@endauth
+          <!-- Tampilkan Ulasan Pengguna -->
+          <div class="p-4">
+            <h4 class="font-semibold mb-2">Ulasan Pengguna:</h4>
+            @forelse($barang->ratings as $rating)
+              <div class="border-b py-2">
+                <div>
+                  <span class="font-bold">{{ $rating->user->name ?? 'User' }}</span>
+                  <span class="ml-2">⭐ {{ $rating->rating }}/5</span>
+                </div>
+                <div class="text-sm text-gray-700">{{ $rating->review }}</div>
+              </div>
+            @empty
+              <div class="text-gray-500">Belum ada ulasan.</div>
+            @endforelse
           </div>
 
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+document.getElementById('ratingForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+    const data = new FormData(form);
+    fetch(form.action, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': data.get('_token'),
+            'Accept': 'application/json'
+        },
+        body: data
+    })
+    .then(response => response.json())
+    .then(res => {
+        if(res.success) {
+            alert(res.message);
+            form.style.display = 'none'; // Hide form
+            location.reload(); // Reload page to show updated rating & edit form
+        } else {
+            alert('Gagal menyimpan rating');
+        }
+    })
+    .catch(() => alert('Gagal mengirim rating'));
+});
+</script>
 @endsection

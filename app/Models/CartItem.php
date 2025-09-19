@@ -13,15 +13,20 @@ class CartItem extends Model
         'user_id',
         'barang_id',
         'quantity',
+        'paket_id',
     ];
 
     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+{
+    return $this->belongsTo(User::class);
+}
+public function barang()
+{
+    return $this->belongsTo(Barang::class);
+}
 
-    public function barang()
-    {
-        return $this->belongsTo(Barang::class);
-    }
+public function paket()
+{
+    return $this->belongsTo(Paket::class, 'paket_id');
+}
 }

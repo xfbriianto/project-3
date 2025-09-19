@@ -22,16 +22,15 @@ class OrderItem extends Model
     // protected $table = 'order_items';
 
     // Relasi ke barang - pastikan foreign key dan local key benar
-    public function barang(): BelongsTo
-    {
-        return $this->belongsTo(\App\Models\Barang::class, 'barang_id', 'id');
-    }
-
-    // Relasi ke order
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class, 'order_id', 'id');
-    }
+public function barang()
+{
+    return $this->belongsTo(Barang::class, 'barang_id', 'id');
 }
 
+// Relasi ke order
+public function order(): BelongsTo
+{
+    return $this->belongsTo(Order::class, 'order_id', 'id');
+}
 
+}
