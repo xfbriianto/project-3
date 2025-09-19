@@ -103,4 +103,14 @@ class BarangController extends Controller
     return view('produk.index', compact('produk'));
 }
 
+public function show($id)
+{
+    $barang = Barang::with(['ratings.user'])->findOrFail($id);
+    $userRating = null;
+    if (auth()->check()) {
+        $userRating = $barang->ratings->where('user_id', auth()->id())->first();
+    }
+    return view('produk.detail', compact('barang', 'userRating'));
+}
+
 }

@@ -33,7 +33,7 @@
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="bg-white rounded-lg shadow-lg p-5" style="max-width: 400px; width: 100%;">
       <!-- Judul Form -->
-      <h2 class="text-center mb-4 font-bold text-2xl">Log In</h2>
+      <h2 class="text-center mb-4 font-bold text-2xl">Please Log In dulu Le</h2>
 
       <!-- FORM MULAI -->
       <form action="{{ route('login') }}" method="POST">

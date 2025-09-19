@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-//use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Carbon\Carbon;
-use App\Models\Barang; // Tambahkan ini
+use App\Models\Barang;
 use App\Models\SalesReport;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -45,18 +44,34 @@ public function index(Request $request)
     /**
      * Menampilkan detail penjualan
      */
-    public function detail($id)
-    {
-        $report = SalesReport::with(['user', 'orderItems.barang'])->findOrFail($id);
-        
-        $html = view('admin.laporan-detail', compact('report'))->render();
-        
+
+public function detail($id)
+{
+    // Pastikan relasi orderItems dan barang sudah benar di model
+    $report = SalesReport::with([
+        'user',
+        'orderItems.barang'
+    ])->find($id);
+
+    if (!$report) {
         return response()->json([
-            'success' => true,
-            'html' => $html
+            'success' => false,
+            'html' => '<div class="text-red-500">Data tidak ditemukan</div>'
         ]);
     }
 
+    // Pastikan orderItems sudah ter-load
+    if ($report->orderItems->isEmpty()) {
+        $report->load('orderItems.barang');
+    }
+
+    $html = view('admin.laporan-detail', compact('report'))->render();
+
+    return response()->json([
+        'success' => true,
+        'html' => $html
+    ]);
+}
     /**
      * Export laporan ke Excel
      */
@@ -210,4 +225,6 @@ public function index(Request $request)
         $filename = 'laporan-penjualan-' . date('Y-m-d') . '.xlsx';
         return $writer->save('php://output', $filename);
     }
+
+    
 }

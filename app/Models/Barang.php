@@ -35,10 +35,9 @@ class Barang extends Model
      * Relasi ke order items
      */
     public function orderItems(): HasMany
-    {
-        return $this->hasMany(OrderItem::class, 'barang_id', 'id');
-    }
-
+{
+    return $this->hasMany(OrderItem::class, 'barang_id');
+}
     /**
      * Scope untuk search
      */
@@ -47,4 +46,11 @@ class Barang extends Model
         return $query->where('name', 'LIKE', "%{$keyword}%")
                      ->orWhere('description', 'LIKE', "%{$keyword}%");
     }
+
+ public function ratings()
+{
+    return $this->hasMany(Rating::class, 'barang_id', 'id');
+}
+
+
 }

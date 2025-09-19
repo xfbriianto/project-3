@@ -19,30 +19,53 @@ class CartController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Validasi input barang_id
+        // Validasi input
         $request->validate([
-            'barang_id' => 'required|exists:barangs,id',
+            'barang_id' => 'nullable|exists:barangs,id',
+            'paket_id'  => 'nullable|exists:pakets,id',
         ]);
 
-        $barangId = $request->input('barang_id');
-
-        // Cek apakah item sudah ada di cart milik user ini
-        $cartItem = CartItem::where('user_id', $user->id)
-                            ->where('barang_id', $barangId)
-                            ->first();
-
-        if ($cartItem) {
-            $cartItem->quantity += 1;
-            $cartItem->save();
-        } else {
-            CartItem::create([
-                'user_id'   => $user->id,
-                'barang_id' => $barangId,
-                'quantity'  => 1,
-            ]);
+        // Jika paket_id diisi, tambahkan CartItem dengan paket_id saja
+        if ($request->filled('paket_id')) {
+            $paketId = $request->input('paket_id');
+            $cartItem = CartItem::where('user_id', $user->id)
+                ->where('paket_id', $paketId)
+                ->whereNull('barang_id')
+                ->first();
+            if ($cartItem) {
+                $cartItem->quantity += 1;
+                $cartItem->save();
+            } else {
+                CartItem::create([
+                    'user_id'  => $user->id,
+                    'paket_id' => $paketId,
+                    'quantity' => 1,
+                ]);
+            }
+            return redirect()->back()->with('success', 'Paket berhasil ditambahkan ke keranjang.');
         }
 
-        return redirect()->back()->with('success', 'Barang berhasil ditambahkan ke keranjang.');
+        // Jika barang_id diisi, tambahkan CartItem dengan barang_id saja
+        if ($request->filled('barang_id')) {
+            $barangId = $request->input('barang_id');
+            $cartItem = CartItem::where('user_id', $user->id)
+                ->where('barang_id', $barangId)
+                ->whereNull('paket_id')
+                ->first();
+            if ($cartItem) {
+                $cartItem->quantity += 1;
+                $cartItem->save();
+            } else {
+                CartItem::create([
+                    'user_id'   => $user->id,
+                    'barang_id' => $barangId,
+                    'quantity'  => 1,
+                ]);
+            }
+            return redirect()->back()->with('success', 'Barang berhasil ditambahkan ke keranjang.');
+        }
+
+        return redirect()->back()->with('error', 'Tidak ada barang atau paket yang dipilih.');
     }
 
     /**
@@ -61,14 +84,19 @@ class CartController extends Controller
             ]);
         }
 
-        // Ambil semua CartItem untuk user yang sedang login, beserta relasi barang
-        $cartItems = CartItem::with('barang')
+        // Ambil semua CartItem untuk user yang sedang login, beserta relasi barang dan paket (beserta items pada paket)
+        $cartItems = CartItem::with(['barang', 'paket.items'])
             ->where('user_id', Auth::id())
             ->get();
 
         // Hitung subtotal (harga * quantity)
         $subtotal = $cartItems->sum(function ($item) {
-            return $item->barang->price * $item->quantity;
+            if ($item->paket_id && $item->paket) {
+                return $item->paket->price * $item->quantity;
+            } elseif ($item->barang_id && $item->barang) {
+                return $item->barang->price * $item->quantity;
+            }
+            return 0;
         });
 
         // Contoh: biaya shipping tetap atau bisa diubah sesuai logika bisnis
