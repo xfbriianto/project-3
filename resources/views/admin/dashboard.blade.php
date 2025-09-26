@@ -58,47 +58,47 @@
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
           </tr>
       </thead>
-    <tbody class="bg-white divide-y divide-gray-200"> 
-@forelse($laporan as $report)
-    <tr>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->id }}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-            {{ $report->order_id ?? 'ORD-' . str_pad($report->id, 6, '0', STR_PAD_LEFT) }}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-            {{ $report->user_name ?? 'User tidak ditemukan' }}
-        </td>
-        <td class="px-6 py-4 text-sm text-gray-900 max-w-xs">
-            {{ $report->barang_list ?? 'Barang tidak tersedia' }}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-            Rp {{ number_format($report->total, 0, ',', '.') }}
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap">
-            @switch($report->status)
-                @case('completed')
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai</span>
-                    @break
-                @case('pending')
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                    @break
-                @case('cancelled')
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Dibatalkan</span>
-                    @break
-                @default
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">{{ ucfirst($report->status) }}</span>
-            @endswitch
-        </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-            {{ $report->transaction_date ? \Carbon\Carbon::parse($report->transaction_date)->format('d/m/Y H:i') : '-' }}
-        </td>
-    </tr>
-@empty
-    <tr>
-        <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Tidak ada data penjualan</td>
-    </tr>
-@endforelse
-</tbody>
+        <tbody class="bg-white divide-y divide-gray-200"> 
+    @forelse($laporan as $report)
+        <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $report->id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->order_id }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->user_name }}
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-900 max-w-xs">
+                {{ $report->barang_list }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                Rp {{ number_format($report->total, 0, ',', '.') }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                @switch($report->status)
+                    @case('completed')
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai</span>
+                        @break
+                    @case('pending')
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                        @break
+                    @case('cancelled')
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Dibatalkan</span>
+                        @break
+                    @default
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">{{ ucfirst($report->status) }}</span>
+                @endswitch
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ $report->transaction_date ? \Carbon\Carbon::parse($report->transaction_date)->format('d/m/Y H:i') : '-' }}
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Tidak ada data penjualan</td>
+        </tr>
+    @endforelse
+    </tbody>
 
 
       </table>

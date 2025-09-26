@@ -121,7 +121,7 @@
                 </table>
             </div>
         </div>
-        
+    
         <!-- Order Summary -->
         <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
             <div class="flex justify-end">
@@ -155,6 +155,8 @@
                 </div>
             </div>
         </div>
+
+        
         
         <!-- Actions -->
         <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">

@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/cari', [ProdukController::class, 'cari']);
 Route::get('/produk/{id}', [ProdukController::class, 'show']);
+
+// ✅ MIDTRANS CALLBACK (tidak perlu auth)
+
+Route::post('/midtrans/callback', [PaymentController::class, 'handleCallback']);
