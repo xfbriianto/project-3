@@ -27,6 +27,7 @@ Route::get('/about', function () { return view('about'); })->name('about');
 Route::get('/service', function () { return view('service.index'); })->name('service');
 Route::get('/contact', function () { return view('contact'); })->name('contact');
 Route::get('/checkout', function () { return view('checkout'); })->name('checkout');
+Route::post('/checkout', [PaymentController::class, 'createTransaction'])->name('checkout.store');
 
 // Produk
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
