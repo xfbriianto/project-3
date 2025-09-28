@@ -48,7 +48,7 @@ class GoogleController extends Controller
                 Auth::login($user);
             }
 
-            return redirect()->intended('/dashboard'); // Redirect to dashboard or home
+            return redirect('/'); // Redirect to homepage
         } catch (\Exception $e) {
             Log::error('Google OAuth callback error: ' . $e->getMessage());
             return redirect('/login')->withErrors(['error' => 'Google login failed.']);
