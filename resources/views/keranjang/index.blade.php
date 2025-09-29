@@ -205,6 +205,84 @@
                                 </div>
                             </div>
                         </div>
+                        @elseif($item->komponen_id && !$item->paket_id && !$item->barang_id)
+                            <!-- Komponen Item -->
+                            <div class="px-6 py-6 hover:bg-gray-50 transition duration-200">
+                                <div class="grid grid-cols-12 gap-4 items-center">
+                                    <!-- Komponen Info -->
+                                    <div class="col-span-5">
+                                        <div class="flex items-center space-x-4">
+                                            @if(isset($item->komponen->gambar) && $item->komponen->gambar)
+                                                <img src="{{ asset('storage/' . $item->komponen->gambar) }}" 
+                                                     alt="{{ $item->komponen->nama }}" 
+                                                     class="w-16 h-16 object-cover rounded-lg border border-gray-200 shadow-sm">
+                                            @else
+                                                <div class="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center shadow-sm">
+                                                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                </div>
+                                            @endif
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-gray-800 text-lg">{{ $item->komponen->nama }}</h4>
+                                                @if(isset($item->komponen->deskripsi) && $item->komponen->deskripsi)
+                                                    <p class="text-sm text-gray-500 mt-1">{{ Str::limit($item->komponen->deskripsi, 80) }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Price -->
+                                    <div class="col-span-2 text-center">
+                                        <span class="text-lg font-semibold text-gray-800">
+                                            Rp {{ number_format($item->komponen->harga, 0, ',', '.') }}
+                                        </span>
+                                    </div>
+                                    <!-- Quantity -->
+                                    <div class="col-span-2 text-center">
+                                        <div class="inline-flex items-center bg-gray-100 rounded-lg">
+                                            <form method="POST" action="{{ route('cart.update', $item->id) }}" class="inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="decrement" value="1">
+                                                <button type="submit" class="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-l-lg transition duration-200">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                            <span class="px-4 py-2 font-semibold text-gray-800 text-lg min-w-[50px] text-center">{{ $item->quantity }}</span>
+                                            <form method="POST" action="{{ route('cart.update', $item->id) }}" class="inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="increment" value="1">
+                                                <button type="submit" class="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-r-lg transition duration-200">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Subtotal -->
+                                    <div class="col-span-2 text-center">
+                                        <span class="text-xl font-bold text-blue-600">
+                                            Rp {{ number_format($item->komponen->harga * $item->quantity, 0, ',', '.') }}
+                                        </span>
+                                    </div>
+                                    <!-- Delete Button -->
+                                    <div class="col-span-1 text-center">
+                                        <form method="POST" action="{{ route('cart.remove', $item->id) }}" class="inline" onsubmit="return confirm('Hapus komponen ini dari keranjang?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition duration-200">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     @endforeach
                 </div>
@@ -218,6 +296,12 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
                                 </svg>
                                 Lanjut Belanja
+                            </a>
+                            <a href="{{ route('service.installation.index') }}" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Ajukan Pemasangan
                             </a>
                         </div>
 
@@ -241,12 +325,12 @@
                                     </span>
                                 </div>
                             </div>
-                            <button id="pay-button" class="w-full inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition duration-200 transform hover:scale-105">
+                            <a href="{{ route('checkout') }}" class="w-full inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition duration-200 transform hover:scale-105">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                                 </svg>
                                 Bayar Sekarang
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

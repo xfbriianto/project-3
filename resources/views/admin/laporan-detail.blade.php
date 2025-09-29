@@ -64,7 +64,7 @@
                 @forelse($report->orderItems as $item)
                 <tr>
                     <td class="px-4 py-2 text-sm text-gray-900">
-    {{ optional($item->barang)->nama ?? 'Produk tidak ditemukan' }}
+    {{ optional($item->barang)->name ?? 'Produk tidak ditemukan' }}
 </td>
                     <td class="px-4 py-2 text-sm text-gray-900">
                         Rp {{ number_format($item->price ?? 0, 0, ',', '.') }}
@@ -78,7 +78,12 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="px-4 py-2 text-center text-sm text-gray-500">Tidak ada item pembelian</td>
+                    <td colspan="4" class="px-4 py-3 text-center text-sm text-gray-600">
+                        Tidak ada item pembelian terhubung.
+                        @if(!empty($report->barang))
+                            <div class="mt-2 text-xs text-gray-500">Produk (ringkas): {{ $report->barang }}</div>
+                        @endif
+                    </td>
                 </tr>
                 @endforelse
             </tbody>

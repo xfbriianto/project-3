@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Data Pembeli')
+@section('title', 'Data Customer')
 
 @section('content')
 <div class="relative flex flex-col min-h-screen bg-slate-50">
@@ -9,7 +9,7 @@
     <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
       <!-- Header Section -->
       <div class="flex flex-wrap justify-between gap-3 p-4">
-        <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">Data Pembeli</p>
+        <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">Data Customer</p>
       </div>
 
       <!-- Search Bar -->
@@ -39,8 +39,7 @@
               <tr class="bg-gray-50">
                 <th class="table-column-120 px-4 py-3 text-left text-[#101518] w-[400px] text-sm font-medium leading-normal">Nama</th>
                 <th class="table-column-240 px-4 py-3 text-left text-[#101518] w-[400px] text-sm font-medium leading-normal">Email</th>
-                <th class="table-column-360 px-4 py-3 text-left text-[#101518] w-[400px] text-sm font-medium leading-normal">No. Telepon</th>
-                <th class="table-column-480 px-4 py-3 text-left text-[#101518] w-[400px] text-sm font-medium leading-normal">Alamat</th>
+                <th class="table-column-360 px-4 py-3 text-left text-[#101518] w-[400px] text-sm font-medium leading-normal">Role</th>
                 <th class="table-column-600 px-4 py-3 text-left text-[#101518] w-[400px] text-sm font-medium leading-normal">Tanggal Registrasi</th>
                 <th class="table-column-720 px-4 py-3 text-left text-[#101518] w-60 text-sm font-medium leading-normal">Status</th>
               </tr>
@@ -53,7 +52,13 @@
                     <!-- Display User Data -->
                     <td class="px-4 py-3 text-[#0d151c] text-sm">{{ $user->name }}</td>
                     <td class="px-4 py-3 text-[#5c748a] text-sm">{{ $user->email }}</td>
+                    <td class="px-4 py-3 text-[#5c748a] text-sm">{{ $user->role ?? '-' }}</td>
                     <td class="px-4 py-3 text-[#5c748a] text-sm">{{ $user->created_at ? $user->created_at->format('d/m/Y') : '-' }}</td>
+                    <td class="px-4 py-3 text-[#5c748a] text-sm">
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ ($user->email_verified_at ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800') }}">
+                        {{ $user->email_verified_at ? 'Verified' : 'Unverified' }}
+                      </span>
+                    </td>
                   </tr>
                 @endforeach
               @else
@@ -65,6 +70,11 @@
             </tbody>
           </table>
         </div>
+        @if(method_exists($users, 'links'))
+        <div class="mt-4">
+          {{ $users->links() }}
+        </div>
+        @endif
       </div>
     </div>
   </div>

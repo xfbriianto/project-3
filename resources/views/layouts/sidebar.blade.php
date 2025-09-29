@@ -65,6 +65,28 @@
             </div>
             <span class="text-[#0d151c] text-sm font-medium">Laporan Penjualan</span>
           </a>
+          
+          <!-- Users Management -->
+          <a href="{{ route('admin.customers.index') }}" 
+             class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.customers.*') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">
+            <div class="text-[#0d151c] w-5 h-5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-4.418 0-8 2.015-8 4.5V21h16v-2.5c0-2.485-3.582-4.5-8-4.5z"/>
+              </svg>
+            </div>
+            <span class="text-[#0d151c] text-sm font-medium">Users</span>
+          </a>
+
+          <!-- Installation Requests -->
+          <a href="{{ route('admin.installations.index') }}" 
+             class="flex items-center gap-3 px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.installations.*') ? 'bg-[#e7edf4]' : 'hover:bg-[#f1f5f9]' }} transition-colors duration-200">
+            <div class="text-[#0d151c] w-5 h-5">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span class="text-[#0d151c] text-sm font-medium">Pemasangan</span>
+          </a>
     </div>
   </div>
 </div>

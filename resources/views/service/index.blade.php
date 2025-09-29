@@ -60,6 +60,13 @@
                     ></path>
                   </svg>
                 </div>
+                <div class="mt-3">
+                  @auth
+                  <a href="{{ route('service.installation.index') }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Ajukan Pemasangan</a>
+                  @else
+                  <a href="{{ route('login') }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Login untuk Ajukan</a>
+                  @endauth
+                </div>
                 <div class="flex flex-col gap-2">
                   <h2 class="text-[#0e141b] text-lg font-bold leading-tight group-hover:text-blue-800 transition-colors duration-300">Installation</h2>
                   <p class="text-[#4e7097] text-sm font-normal leading-relaxed group-hover:text-slate-600 transition-colors duration-300">Professional setup of your CCTV system with expert precision and attention to detail.</p>

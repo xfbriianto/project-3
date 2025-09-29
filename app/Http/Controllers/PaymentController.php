@@ -6,13 +6,143 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CartItem;
 use App\Models\SalesReport;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 use Midtrans\Notification;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\OrderItem;
 
 class PaymentController extends Controller
 {
+    /**
+     * Tampilkan form checkout dengan data keranjang.
+     */
+    public function showCheckout()
+    {
+        $cartItems = CartItem::with(['barang', 'paket', 'komponen'])
+            ->where('user_id', Auth::id())
+            ->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
+        }
+
+        $subtotal = $cartItems->sum(function ($item) {
+            if ($item->barang) {
+                return $item->barang->price * $item->quantity;
+            } elseif ($item->paket) {
+                return $item->paket->price * $item->quantity;
+            } elseif ($item->komponen) {
+                return $item->komponen->harga * $item->quantity;
+            }
+            return 0;
+        });
+
+        // Clear any login-related errors that might be carried over
+        session()->forget(['errors']);
+
+        return view('checkout', compact('cartItems', 'subtotal'));
+    }
+
+    /**
+     * Proses data checkout dan lanjut ke pembayaran.
+     */
+    public function processCheckout(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'address_street' => 'required|string|max:255',
+            'address_city' => 'required|string|max:255',
+            'address_province' => 'required|string|max:255',
+            'address_postal_code' => 'required|string|max:10',
+            'shipping_method' => 'required|in:JNE,J&T,Grab,Gojek,ambil di toko',
+            'address_notes' => 'nullable|string|max:500',
+        ]);
+
+        // Ambil data keranjang
+        $cartItems = CartItem::with(['barang', 'paket', 'komponen'])
+            ->where('user_id', Auth::id())
+            ->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong');
+        }
+
+        // Hitung total
+        $total = $cartItems->sum(function ($item) {
+            if ($item->barang) {
+                return $item->barang->price * $item->quantity;
+            } elseif ($item->paket) {
+                return $item->paket->price * $item->quantity;
+            } elseif ($item->komponen) {
+                return $item->komponen->harga * $item->quantity;
+            }
+            return 0;
+        });
+
+        // Generate order_id unik
+        $orderId = 'ORD' . time() . Auth::id();
+
+        // Buat order dengan status pending
+        $orderData = [
+            'order_id' => $orderId,
+            'user_id' => Auth::id(),
+            'total' => $total,
+            'status' => 'pending',
+        ];
+
+        // Tambahkan data checkout
+        $checkoutFields = [
+            'full_name', 'email', 'phone', 'address_street', 'address_city',
+            'address_province', 'address_postal_code', 'shipping_method', 'address_notes'
+        ];
+        foreach ($checkoutFields as $field) {
+            $orderData[$field] = $request->input($field);
+        }
+
+        $order = Order::create($orderData);
+
+        // Buat order items
+        foreach ($cartItems as $item) {
+            $orderItemData = [
+                'order_id' => $order->id, // menggunakan id order, bukan order_id
+                'quantity' => $item->quantity,
+            ];
+
+            if ($item->barang_id) {
+                $orderItemData['barang_id'] = $item->barang_id;
+                $orderItemData['price'] = $item->barang->price;
+            } elseif ($item->paket_id) {
+                $orderItemData['paket_id'] = $item->paket_id;
+                $orderItemData['price'] = $item->paket->price;
+            } elseif ($item->komponen_id) {
+                $orderItemData['komponen_id'] = $item->komponen_id;
+                $orderItemData['price'] = $item->komponen->harga;
+            }
+
+            OrderItem::create($orderItemData);
+        }
+
+        // Hapus keranjang setelah order dibuat
+        CartItem::where('user_id', Auth::id())->delete();
+
+        // Simpan order_id ke session untuk digunakan di createTransaction
+        session(['current_order_id' => $orderId]);
+
+        // Redirect ke halaman pembayaran
+        return redirect()->route('payment.page');
+    }
+
+    /**
+     * Menampilkan halaman pembayaran.
+     */
+    public function showPayment()
+    {
+        return view('payment');
+    }
+
     /**
      * Membuat transaksi pembayaran dan mengirim Snap Token ke frontend.
      */
@@ -23,39 +153,71 @@ class PaymentController extends Controller
         \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
         \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
 
-        $cartItems = CartItem::with('barang')
-            ->where('user_id', Auth::id())
-            ->get();
+        // Ambil order_id dari session
+        $orderId = session('current_order_id');
 
-        if ($cartItems->isEmpty()) {
-            return response()->json(['error' => 'Keranjang Anda kosong'], 400);
+        if (!$orderId) {
+            return response()->json(['error' => 'Order ID tidak ditemukan'], 400);
         }
 
-        $subtotal = $cartItems->sum(function ($item) {
-            return $item->barang->price * $item->quantity;
-        });
+        // Ambil order dan items
+        $order = Order::with('items.barang', 'items.paket', 'items.komponen')->where('order_id', $orderId)->first();
 
-        $total = $subtotal;
+        if (!$order) {
+            return response()->json(['error' => 'Order tidak ditemukan'], 400);
+        }
 
-        // Buat order_id unik
-        $orderId = 'ORD' . time() . Auth::id();
+        $total = $order->total;
+
+        // Get checkout data from session
+        $checkoutData = session('checkout_data', []);
 
         $params = [
             'transaction_details' => [
                 'order_id' => $orderId,
                 'gross_amount' => $total,
             ],
-            'customer_details' => [
-                'first_name' => Auth::user()->name,
-                'email' => Auth::user()->email,
-                'phone' => Auth::user()->phone ?? '08123456789',
+            'callbacks' => [
+                'notification_url' => route('payment.callback'),
             ],
-            'item_details' => $cartItems->map(function ($item) {
+            'customer_details' => [
+                'first_name' => $checkoutData['full_name'] ?? Auth::user()->name,
+                'last_name' => '',
+                'email' => $checkoutData['email'] ?? Auth::user()->email,
+                'phone' => $checkoutData['phone'] ?? Auth::user()->phone ?? '08123456789',
+                'billing_address' => [
+                    'first_name' => $checkoutData['full_name'] ?? Auth::user()->name,
+                    'last_name' => '',
+                    'address' => $checkoutData['address_street'] ?? '',
+                    'city' => $checkoutData['address_city'] ?? '',
+                    'postal_code' => $checkoutData['address_postal_code'] ?? '',
+                    'phone' => $checkoutData['phone'] ?? Auth::user()->phone ?? '08123456789',
+                    'country_code' => 'IDN'
+                ],
+                'shipping_address' => [
+                    'first_name' => $checkoutData['full_name'] ?? Auth::user()->name,
+                    'last_name' => '',
+                    'address' => $checkoutData['address_street'] ?? '',
+                    'city' => $checkoutData['address_city'] ?? '',
+                    'postal_code' => $checkoutData['address_postal_code'] ?? '',
+                    'phone' => $checkoutData['phone'] ?? Auth::user()->phone ?? '08123456789',
+                    'country_code' => 'IDN'
+                ],
+            ],
+            'item_details' => $order->items->map(function ($item) {
+                $name = '';
+                if ($item->barang) {
+                    $name = $item->barang->name;
+                } elseif ($item->paket) {
+                    $name = $item->paket->name;
+                } elseif ($item->komponen) {
+                    $name = $item->komponen->nama;
+                }
                 return [
-                    'id' => $item->barang->id,
-                    'price' => $item->barang->price,
+                    'id' => $item->id,
+                    'price' => $item->price,
                     'quantity' => $item->quantity,
-                    'name' => $item->barang->name,
+                    'name' => $name,
                 ];
             })->toArray(),
         ];
@@ -64,9 +226,17 @@ class PaymentController extends Controller
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
             // Simpan data ke sales_reports dengan status pending, hindari duplikasi order_id
-             $barangList = $cartItems->map(function ($item) {
-            return $item->barang->name . ' (x' . $item->quantity . ')';
-        })->implode(', ');
+            $barangList = $order->items->map(function ($item) {
+                $name = '';
+                if ($item->barang) {
+                    $name = $item->barang->name;
+                } elseif ($item->paket) {
+                    $name = $item->paket->name;
+                } elseif ($item->komponen) {
+                    $name = $item->komponen->nama;
+                }
+                return $name . ' (x' . $item->quantity . ')';
+            })->implode(', ');
 
             SalesReport::updateOrCreate(
             ['order_id' => $orderId],
@@ -76,6 +246,8 @@ class PaymentController extends Controller
                 'status' => 'pending',
                 'transaction_date' => now(),
                 'barang' => $barangList, // ✅ simpan nama barang di kolom 'barang'
+                // Store checkout data in sales_reports for callback use
+                'checkout_data' => json_encode($checkoutData),
             ]
         );
 
@@ -89,65 +261,75 @@ class PaymentController extends Controller
      * Callback dari Midtrans untuk update status pembayaran.
      */
     public function handleCallback(Request $request)
-{
-    $notification = new \Midtrans\Notification();
+    {
+        try {
+            $notification = new \Midtrans\Notification();
 
-    $transactionStatus = $notification->transaction_status;
-    $orderId = $notification->order_id;
+            $transactionStatus = $notification->transaction_status;
+            $orderId = $notification->order_id;
 
-    $salesReport = SalesReport::where('order_id', $orderId)->first();
-
-    if ($salesReport) {
-        $userId = $salesReport->user_id;
-
-        if (in_array($transactionStatus, ['settlement', 'capture'])) {
-            $salesReport->update([
-                'status' => 'completed',
-                'transaction_date' => now(),
+            // Log callback data for debugging
+            \Log::info('Midtrans Callback Received', [
+                'order_id' => $orderId,
+                'transaction_status' => $transactionStatus,
+                'payment_type' => $notification->payment_type ?? null,
+                'gross_amount' => $notification->gross_amount ?? null,
+                'request_data' => $request->all(),
             ]);
 
-            // ✅ Simpan ke tabel orders dan order_items
-            $existingOrder = \App\Models\Order::where('id', $salesReport->order_id)->first();
+            $salesReport = SalesReport::where('order_id', $orderId)->first();
 
-            if (!$existingOrder && $userId) {
-                // Buat order baru
-                $order = \App\Models\Order::create([
+            if ($salesReport) {
+                $userId = $salesReport->user_id;
+
+                // Log sales report data
+                \Log::info('Sales Report Found', [
+                    'sales_report_id' => $salesReport->id,
                     'user_id' => $userId,
-                    'total' => $salesReport->total,
-                    'status' => 'completed',
+                    'checkout_data' => $salesReport->checkout_data,
                 ]);
 
-                // Ambil data cart user
-                $cartItems = \App\Models\CartItem::where('user_id', $userId)->with('barang')->get();
+                $order = Order::where('order_id', $orderId)->first();
 
-                foreach ($cartItems as $item) {
-                    $order->items()->create([
-                        'barang_id' => $item->barang_id,
-                        'quantity' => $item->quantity,
-                        'price' => $item->barang->price,
+                if (in_array($transactionStatus, ['settlement', 'capture'])) {
+                    $salesReport->update([
+                        'status' => 'completed',
+                        'transaction_date' => now(),
                     ]);
-                }
 
-                // Hapus cart setelah transaksi sukses
-                \App\Models\CartItem::where('user_id', $userId)->delete();
+                    if ($order) {
+                        $order->update(['status' => 'completed']);
+                    }
+
+                } elseif ($transactionStatus == 'pending') {
+                    $salesReport->update(['status' => 'pending']);
+                    if ($order) {
+                        $order->update(['status' => 'pending']);
+                    }
+                } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
+                    $salesReport->update(['status' => 'cancelled']);
+                    if ($order) {
+                        $order->update(['status' => 'cancelled']);
+                    }
+                }
+            } else {
+                // Jika belum ada, buat data sales_reports baru
+                \App\Models\SalesReport::create([
+                    'order_id' => $orderId,
+                    'user_id' => null,
+                    'total' => 0,
+                    'status' => $transactionStatus == 'pending' ? 'pending' : ($transactionStatus == 'settlement' || $transactionStatus == 'capture' ? 'completed' : 'cancelled'),
+                    'transaction_date' => now(),
+                ]);
             }
 
-        } elseif ($transactionStatus == 'pending') {
-            $salesReport->update(['status' => 'pending']);
-        } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
-            $salesReport->update(['status' => 'cancelled']);
+            return response()->json(['message' => 'Callback processed']);
+        } catch (\Exception $e) {
+            \Log::error('Callback Error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return response()->json(['error' => 'Callback processing failed'], 500);
         }
-    } else {
-        // Jika belum ada, buat data sales_reports baru
-        \App\Models\SalesReport::create([
-            'order_id' => $orderId,
-            'user_id' => null,
-            'total' => 0,
-            'status' => $transactionStatus == 'pending' ? 'pending' : ($transactionStatus == 'settlement' || $transactionStatus == 'capture' ? 'completed' : 'cancelled'),
-            'transaction_date' => now(),
-        ]);
     }
-
-    return response()->json(['message' => 'Callback processed']);
-}
 }
