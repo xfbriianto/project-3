@@ -22,6 +22,7 @@ class CartController extends Controller
         // Validasi input
         $request->validate([
             'barang_id' => 'nullable|exists:barangs,id',
+            'komponen_id' => 'nullable|exists:komponens,id',
             'paket_id'  => 'nullable|exists:pakets,id',
         ]);
 
@@ -43,6 +44,27 @@ class CartController extends Controller
                 ]);
             }
             return redirect()->back()->with('success', 'Paket berhasil ditambahkan ke keranjang.');
+        }
+
+        // Jika komponen_id diisi, tambahkan CartItem dengan komponen_id saja
+        if ($request->filled('komponen_id')) {
+            $komponenId = $request->input('komponen_id');
+            $cartItem = CartItem::where('user_id', $user->id)
+                ->where('komponen_id', $komponenId)
+                ->whereNull('barang_id')
+                ->whereNull('paket_id')
+                ->first();
+            if ($cartItem) {
+                $cartItem->quantity += 1;
+                $cartItem->save();
+            } else {
+                CartItem::create([
+                    'user_id'     => $user->id,
+                    'komponen_id' => $komponenId,
+                    'quantity'    => 1,
+                ]);
+            }
+            return redirect()->back()->with('success', 'Komponen berhasil ditambahkan ke keranjang.');
         }
 
         // Jika barang_id diisi, tambahkan CartItem dengan barang_id saja
@@ -85,7 +107,7 @@ class CartController extends Controller
         }
 
         // Ambil semua CartItem untuk user yang sedang login, beserta relasi barang dan paket (beserta items pada paket)
-        $cartItems = CartItem::with(['barang', 'paket.items'])
+        $cartItems = CartItem::with(['barang', 'paket.items', 'komponen'])
             ->where('user_id', Auth::id())
             ->get();
 
@@ -95,6 +117,8 @@ class CartController extends Controller
                 return $item->paket->price * $item->quantity;
             } elseif ($item->barang_id && $item->barang) {
                 return $item->barang->price * $item->quantity;
+            } elseif ($item->komponen_id && $item->komponen) {
+                return $item->komponen->harga * $item->quantity;
             }
             return 0;
         });

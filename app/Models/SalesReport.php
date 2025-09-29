@@ -16,11 +16,13 @@ class SalesReport extends Model
         'total',
         'status',
         'transaction_date',
-        'barang_list',
+        'barang',
+        'checkout_data',
     ];
 
     protected $casts = [
         'transaction_date' => 'datetime',
+        'checkout_data' => 'array',
     ];
 
     /**
