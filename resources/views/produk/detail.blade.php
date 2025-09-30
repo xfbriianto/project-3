@@ -103,83 +103,114 @@
           </p>
 
           <!-- Reviews and Ratings Section -->
-          <div class="flex flex-wrap gap-x-8 gap-y-6 p-4">
-            <!-- Rating Display -->
-            <div class="flex flex-col gap-2">
-              @php
-                $avgRating = $barang->ratings()->avg('rating');
-                $ratingsCount = $barang->ratings()->count();
-              @endphp
-              <p class="text-[#0e141b] text-4xl font-black leading-tight tracking-[-0.033em]">
-                {{ $avgRating ? number_format($avgRating, 1) : '0.0' }}
-              </p>
-              <div class="flex gap-0.5">
-                @for($i = 1; $i <= 5; $i++)
-                  <div class="{{ $avgRating >= $i ? 'text-[#1669c9]' : 'text-[#d0dbe7]' }}" data-icon="Star" data-size="18px" data-weight="fill">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+            <div class="flex flex-wrap gap-x-8 gap-y-6">
+              <!-- Rating Display -->
+              <div class="flex flex-col gap-3 items-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl min-w-[200px]">
+                @php
+                  $avgRating = $barang->ratings()->avg('rating');
+                  $ratingsCount = $barang->ratings()->count();
+                @endphp
+                <p class="text-gray-900 text-5xl font-black leading-tight">
+                  {{ $avgRating ? number_format($avgRating, 1) : '0.0' }}
+                </p>
+                <div class="flex gap-1">
+                  @for($i = 1; $i <= 5; $i++)
+                    <svg class="w-5 h-5 {{ $avgRating >= $i ? 'text-yellow-400' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                     </svg>
+                  @endfor
+                </div>
+                <p class="text-gray-600 text-sm font-medium">{{ $ratingsCount }} reviews</p>
+              </div>
+
+              <!-- Rating Breakdown -->
+              <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_50px] items-center gap-y-3">
+                @for($star = 5; $star >= 1; $star--)
+                  @php
+                    $count = $barang->ratings()->where('rating', $star)->count();
+                    $percent = $ratingsCount ? round(($count / $ratingsCount) * 100) : 0;
+                  @endphp
+                  <p class="text-gray-700 text-sm font-medium">{{ $star }}</p>
+                  <div class="flex h-2.5 flex-1 overflow-hidden rounded-full bg-gray-200">
+                    <div class="rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 transition-all duration-300" style="width: {{ $percent }}%;"></div>
                   </div>
+                  <p class="text-gray-600 text-sm font-medium text-right">{{ $percent }}%</p>
                 @endfor
               </div>
-              <p class="text-[#0e141b] text-base font-normal leading-normal">{{ $ratingsCount }} reviews</p>
-            </div>
-
-            <!-- Rating Breakdown -->
-            <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
-              @for($star = 5; $star >= 1; $star--)
-                @php
-                  $count = $barang->ratings()->where('rating', $star)->count();
-                  $percent = $ratingsCount ? round(($count / $ratingsCount) * 100) : 0;
-                @endphp
-                <p class="text-[#0e141b] text-sm font-normal leading-normal">{{ $star }}</p>
-                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#d0dbe7]">
-                  <div class="rounded-full bg-[#1669c9]" style="width: {{ $percent }}%;"></div>
-                </div>
-                <p class="text-[#4e7097] text-sm font-normal leading-normal text-right">{{ $percent }}%</p>
-              @endfor
             </div>
           </div>
 
           <!-- Form Rating untuk User -->
           @auth
-  <div class="p-4">
-    <h4 class="font-semibold mb-2">
-      {{ $userRating ? 'Edit Rating & Ulasan Anda' : 'Beri Rating & Ulasan' }}
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+    <h4 class="text-lg font-semibold text-gray-900 mb-4">
+      {{ $userRating ? '✏️ Edit Rating & Ulasan Anda' : '✍️ Beri Rating & Ulasan' }}
     </h4>
     <form method="POST" action="{{ route('rating.store') }}" id="ratingForm">
       @csrf
       <input type="hidden" name="barang_id" value="{{ $barang->id }}">
-      <div class="flex items-center gap-2 mb-2">
-        <label for="rating" class="block">Rating:</label>
-        <select name="rating" id="rating" required class="border px-2 py-1">
-          <option value="">Pilih rating</option>
+      
+      <div class="mb-4">
+        <label for="rating" class="block text-sm font-medium text-gray-700 mb-2">Rating:</label>
+        <div class="flex gap-2">
           @for($i=1; $i<=5; $i++)
-            <option value="{{ $i }}" {{ $userRating && $userRating->rating == $i ? 'selected' : '' }}>{{ $i }}</option>
+            <label class="cursor-pointer group">
+              <input type="radio" name="rating" value="{{ $i }}" class="hidden peer" required {{ $userRating && $userRating->rating == $i ? 'checked' : '' }}>
+              <svg class="w-10 h-10 text-gray-300 peer-checked:text-yellow-400 group-hover:text-yellow-300 transition-colors" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            </label>
           @endfor
-        </select>
+        </div>
       </div>
-      <input type="text" name="review" placeholder="Tulis ulasan (opsional)" class="border px-2 py-1 mb-2 w-full"
-        value="{{ $userRating ? $userRating->review : '' }}">
-      <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded">
-        {{ $userRating ? 'Update' : 'Kirim' }}
+
+      <div class="mb-4">
+        <label for="review" class="block text-sm font-medium text-gray-700 mb-2">Ulasan (opsional):</label>
+        <input type="text" name="review" id="review" placeholder="Tulis ulasan Anda..." 
+          class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          value="{{ $userRating ? $userRating->review : '' }}">
+      </div>
+
+      <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow">
+        {{ $userRating ? 'Edit' : 'Kirim' }}
       </button>
     </form>
   </div>
 @endauth
+
           <!-- Tampilkan Ulasan Pengguna -->
-          <div class="p-4">
-            <h4 class="font-semibold mb-2">Ulasan Pengguna:</h4>
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-4">Ulasan Pengguna:</h4>
             @forelse($barang->ratings as $rating)
-              <div class="border-b py-2">
-                <div>
-                  <span class="font-bold">{{ $rating->user->name ?? 'User' }}</span>
-                  <span class="ml-2">⭐ {{ $rating->rating }}/5</span>
+              <div class="border-b border-gray-100 last:border-0 py-4 first:pt-0">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                    {{ substr($rating->user->name ?? 'U', 0, 1) }}
+                  </div>
+                  <div>
+                    <span class="font-semibold text-gray-900">{{ $rating->user->name ?? 'User' }}</span>
+                    <div class="flex items-center gap-1">
+                      @for($i = 1; $i <= 5; $i++)
+                        <svg class="w-4 h-4 {{ $i <= $rating->rating ? 'text-yellow-400' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      @endfor
+                      <span class="text-sm text-gray-600 ml-1">{{ $rating->rating }}/5</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="text-sm text-gray-700">{{ $rating->review }}</div>
+                @if($rating->review)
+                  <div class="text-sm text-gray-700 ml-12">{{ $rating->review }}</div>
+                @endif
               </div>
             @empty
-              <div class="text-gray-500">Belum ada ulasan.</div>
+              <div class="text-center py-8">
+                <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+                <p class="text-gray-500 font-medium">Belum ada ulasan.</p>
+              </div>
             @endforelse
           </div>
 

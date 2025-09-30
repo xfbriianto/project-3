@@ -5,33 +5,64 @@ require_once 'vendor/autoload.php';
 $app = require_once 'bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
-// Simulate Midtrans callback by setting $_POST data
-$_POST = [
-    'order_id' => 'ORD175917102437',
-    'transaction_status' => 'settlement',
-    'gross_amount' => '2500000.00',
-    'payment_type' => 'bank_transfer',
-    'transaction_time' => now()->toISOString(),
-    'transaction_id' => 'test-transaction-123',
-    'status_code' => '200',
-    'signature_key' => 'test-signature',
-];
+// Simulate Midtrans callback by directly calling the logic
+$orderId = 'ORD175920714837';
+$transactionStatus = 'capture';
 
-// Create a mock request
-$request = new Illuminate\Http\Request();
-$request->merge($_POST);
+// Simulate the callback logic
+$salesReport = \App\Models\SalesReport::where('order_id', $orderId)->first();
 
-// Call the callback handler
-$paymentController = new \App\Http\Controllers\PaymentController();
-$response = $paymentController->handleCallback($request);
+if ($salesReport) {
+    $userId = $salesReport->user_id;
 
-echo "Callback response: " . $response->getContent() . "\n";
+    $order = \App\Models\Order::with('items.barang')->where('order_id', $orderId)->first();
 
-// Check if order was created
-$order = \App\Models\Order::where('order_id', 'ORD175917102437')->first();
-if ($order) {
-    echo "Order created successfully with ID: " . $order->id . "\n";
-    echo "Order data: " . json_encode($order->toArray()) . "\n";
+    if (in_array($transactionStatus, ['settlement', 'capture'])) {
+        $salesReport->update([
+            'status' => 'completed',
+            'transaction_date' => now(),
+        ]);
+
+        if ($order) {
+            $order->update(['status' => 'completed']);
+
+            // Kurangi stok barang setelah pembayaran berhasil
+            foreach ($order->items as $item) {
+                if ($item->barang) {
+                    $barang = $item->barang;
+                    $barang->stock = max(0, $barang->stock - $item->quantity);
+                    $barang->save();
+                }
+            }
+        }
+
+        echo "Callback processed successfully\n";
+    } else {
+        echo "Transaction status not completed\n";
+    }
 } else {
-    echo "Order was not created\n";
+    echo "Sales report not found\n";
+}
+
+// Check if order exists
+$order = \App\Models\Order::where('order_id', 'ORD175920714837')->first();
+if ($order) {
+    echo "Order found with ID: " . $order->id . "\n";
+    echo "Order status: " . $order->status . "\n";
+    echo "Order items: " . $order->items->count() . "\n";
+    foreach ($order->items as $item) {
+        if ($item->barang) {
+            echo "Item: " . $item->barang->name . " qty: " . $item->quantity . " stock before: " . $item->barang->stock . "\n";
+        }
+    }
+} else {
+    echo "Order was not found\n";
+}
+
+// Check sales report
+$salesReport = \App\Models\SalesReport::where('order_id', 'ORD175920714837')->first();
+if ($salesReport) {
+    echo "Sales report found with status: " . $salesReport->status . "\n";
+} else {
+    echo "Sales report not found\n";
 }

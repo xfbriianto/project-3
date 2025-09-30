@@ -1,6 +1,3 @@
-- [x] Fix formatBarangList in DashboardController: change ->name_barang to ->name
-- [x] Add dynamic count for Permintaan Pemasangan: count all InstallationRequest
-- [x] Remove Keluhan Pelanggan card
-- [x] Fix bar chart value: change $totalPenjualan * 0.8 to $totalPenjualan
-- [x] Update dashboard.blade.php to use dynamic values instead of hardcoded
-- [ ] Test the dashboard to ensure data is accurate
+- [x] Reduce average rating font size from text-6xl to text-4xl in resources/views/produk/detail.blade.php
+- [x] Reduce star size from w-6 h-6 to w-5 h-5 in the average rating display
+- [x] Reduce card padding from p-8 to p-6 in the rating overview card
