@@ -289,7 +289,7 @@ class PaymentController extends Controller
                     'checkout_data' => $salesReport->checkout_data,
                 ]);
 
-                $order = Order::where('order_id', $orderId)->first();
+                $order = Order::with('items.barang')->where('order_id', $orderId)->first();
 
                 if (in_array($transactionStatus, ['settlement', 'capture'])) {
                     $salesReport->update([
@@ -299,6 +299,15 @@ class PaymentController extends Controller
 
                     if ($order) {
                         $order->update(['status' => 'completed']);
+
+                        // Kurangi stok barang setelah pembayaran berhasil
+                        foreach ($order->items as $item) {
+                            if ($item->barang) {
+                                $barang = $item->barang;
+                                $barang->stock = max(0, $barang->stock - $item->quantity);
+                                $barang->save();
+                            }
+                        }
                     }
 
                 } elseif ($transactionStatus == 'pending') {
@@ -329,7 +338,11 @@ class PaymentController extends Controller
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            return response()->json(['error' => 'Callback processing failed'], 500);
+            \Log::error('Callback Error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return response()->json(['error' => 'Callback processing failed: ' . $e->getMessage()], 500);
         }
     }
 }
