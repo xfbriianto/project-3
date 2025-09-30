@@ -20,25 +20,18 @@
       <p class="text-[#078838] text-base font-medium leading-normal">+15%</p>
     </div>
     
-    <!-- Card Jadwal Teknisi -->
+    <!-- Card Permintaan Pemasangan -->
     <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
-      <p class="text-[#0d151c] text-base font-medium leading-normal">Jadwal Teknisi</p>
-      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">12</p>
+      <p class="text-[#0d151c] text-base font-medium leading-normal">Permintaan Pemasangan</p>
+      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">{{ $permintaanPemasangan }}</p>
       <p class="text-[#078838] text-base font-medium leading-normal">+5%</p>
     </div>
-    
+
     <!-- Card Stok Produk -->
     <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
       <p class="text-[#0d151c] text-base font-medium leading-normal">Stok Produk</p>
       <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">{{ $totalStok }}</p>
       <p class="text-[#078838] text-base font-medium leading-normal">+2%</p>
-    </div>
-    
-    <!-- Card Keluhan Pelanggan -->
-    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-[#cedce8] bg-white shadow-sm">
-      <p class="text-[#0d151c] text-base font-medium leading-normal">Keluhan Pelanggan</p>
-      <p class="text-[#0d151c] tracking-light text-2xl font-bold leading-tight">8</p>
-      <p class="text-[#e73908] text-base font-medium leading-normal">-3%</p>
     </div>
   </div>
 
