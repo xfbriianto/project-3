@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Order;
+use App\Models\InstallationRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -42,12 +43,16 @@ class DashboardController extends Controller
         // Ambil data penjualan terbaru
         $laporan = $this->getRecentPurchases();
 
+        // Hitung permintaan pemasangan
+        $permintaanPemasangan = InstallationRequest::count();
+
         return view('admin.dashboard', compact(
             'totalStok',
             'totalPenjualan',
             'labels',
             'data',
-            'laporan'
+            'laporan',
+            'permintaanPemasangan'
         ));
     }
 
@@ -90,7 +95,7 @@ class DashboardController extends Controller
         }
 
         return $items->map(function($item) {
-            $barangName = optional($item->barang)->name_barang ?? 'Barang tidak ditemukan';
+            $barangName = optional($item->barang)->name ?? 'Barang tidak ditemukan';
             return $barangName . ' (x' . $item->quantity . ')';
         })->implode(', ');
     }
