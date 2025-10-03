@@ -41,7 +41,7 @@ class PaymentController extends Controller
         // Clear any login-related errors that might be carried over
         session()->forget(['errors']);
 
-        return view('checkout', compact('cartItems', 'subtotal'));
+        return view('keranjang.checkout', compact('cartItems', 'subtotal'));
     }
 
     /**
@@ -140,7 +140,7 @@ class PaymentController extends Controller
      */
     public function showPayment()
     {
-        return view('payment');
+        return view('keranjang.payment');
     }
 
     /**
