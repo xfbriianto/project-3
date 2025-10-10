@@ -15,6 +15,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ServiceInstallationController;
+use App\Http\Controllers\Admin\InstallationRequestController as AdminInstallationRequestController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Auth\SalesReportController;
 use App\Models\Komponen;
@@ -26,8 +28,17 @@ Route::get('/index', function () { return view('index'); })->name('index');
 Route::get('/about', function () { return view('about'); })->name('about');
 Route::get('/service', function () { return view('service.index'); })->name('service');
 Route::get('/contact', function () { return view('contact'); })->name('contact');
-Route::get('/checkout', function () { return view('checkout'); })->name('checkout');
-Route::post('/checkout', [PaymentController::class, 'createTransaction'])->name('checkout.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
+    Route::post('/checkout', [PaymentController::class, 'processCheckout'])->name('checkout.process');
+    Route::get('/payment', [PaymentController::class, 'showPayment'])->name('payment.page');
+});
+
+// Service Installation (auth required)
+Route::middleware('auth')->group(function () {
+    Route::get('/service/installation', [ServiceInstallationController::class, 'index'])->name('service.installation.index');
+    Route::post('/service/installation', [ServiceInstallationController::class, 'store'])->name('service.installation.store');
+});
 
 // Produk
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
@@ -48,6 +59,11 @@ Route::get('/komponen', function () {
     $komponens = Komponen::all();
     return view('komponen.index', compact('komponens'));
 })->name('komponen.index');
+// Detail komponen (partial HTML untuk modal)
+Route::get('/komponen/{id}', function ($id) {
+    $komponen = Komponen::findOrFail($id);
+    return view('komponen.detail-partial', compact('komponen'));
+});
 
 // Keranjang
 Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index')->middleware('auth');
@@ -85,8 +101,9 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     // Barang CRUD
     Route::prefix('databarang')->name('databarang.')->group(function () {
         Route::get('/', [BarangController::class, 'index'])->name('index');
+        Route::get('/create', function() { return view('admin.barang.create'); })->name('create');
         Route::post('/', [BarangController::class, 'store'])->name('store');
-        Route::get('/{barang}/edit', [BarangController::class, 'edit'])->name('edit');
+        Route::get('/{barang}/edit', function(\App\Models\Barang $barang) { return view('admin.barang.edit', compact('barang')); })->name('edit');
         Route::put('/{barang}', [BarangController::class, 'update'])->name('update');
         Route::delete('/{barang}', [BarangController::class, 'destroy'])->name('destroy');
     });
@@ -119,13 +136,21 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
         Route::get('/laporan-detail', [LaporanPenjualanController::class, 'detail'])->name('detail');
     });
 
+    // Customer (Users)
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+
     // Order detail
     Route::prefix('orders')->name('orders.')->group(function () {
         Route::get('/{order}', [OrderController::class, 'show'])->name('show');
     });
     
 
-    Route::get('/admin/laporan-penjualan/{id}/detail', [LaporanPenjualanController::class, 'detail'])
-    ->name('admin.laporan-penjualan.detail');
+    // AJAX detail laporan penjualan (untuk modal detail pada halaman laporan)
+    Route::get('/laporan-penjualan/{id}/detail', [LaporanPenjualanController::class, 'detail'])
+        ->name('laporan-penjualan.detail-json');
+
+    // Installation service requests (admin)
+    Route::get('/installations', [AdminInstallationRequestController::class, 'index'])->name('installations.index');
+    Route::patch('/installations/{installation}/status', [AdminInstallationRequestController::class, 'updateStatus'])->name('installations.update-status');
 });
        

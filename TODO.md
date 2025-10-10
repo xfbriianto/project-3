@@ -1,0 +1,3 @@
+- [x] Reduce average rating font size from text-6xl to text-4xl in resources/views/produk/detail.blade.php
+- [x] Reduce star size from w-6 h-6 to w-5 h-5 in the average rating display
+- [x] Reduce card padding from p-8 to p-6 in the rating overview card

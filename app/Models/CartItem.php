@@ -12,6 +12,7 @@ class CartItem extends Model
     protected $fillable = [
         'user_id',
         'barang_id',
+        'komponen_id',
         'quantity',
         'paket_id',
     ];
@@ -28,5 +29,10 @@ public function barang()
 public function paket()
 {
     return $this->belongsTo(Paket::class, 'paket_id');
+}
+
+public function komponen()
+{
+    return $this->belongsTo(Komponen::class, 'komponen_id');
 }
 }

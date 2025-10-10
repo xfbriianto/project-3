@@ -10,10 +10,9 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', 'customer')
-                     ->orderBy('created_at', 'desc')
-                     ->get();
-                     
+        $users = User::orderBy('created_at', 'desc')
+                      ->paginate(15);
+        
         return view('admin.customer.index', compact('users'));
     }
 }

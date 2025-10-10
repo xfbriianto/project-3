@@ -13,7 +13,7 @@ class BarangController extends Controller
     {
         $barangs = Barang::all();
         $pakets = Paket::with('items')->get();
-        return view('admin.databarang', compact('barangs', 'pakets'));
+        return view('admin.barang.index', compact('barangs', 'pakets'));
     }
 
     public function store(Request $request)
