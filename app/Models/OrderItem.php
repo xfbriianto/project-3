@@ -14,6 +14,8 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'barang_id',
+        'paket_id',
+        'komponen_id',
         'quantity',
         'price',
     ];
@@ -31,6 +33,18 @@ public function barang()
 public function order(): BelongsTo
 {
     return $this->belongsTo(Order::class, 'order_id', 'id');
+}
+
+// Relasi ke paket
+public function paket()
+{
+    return $this->belongsTo(\App\Models\Paket::class, 'paket_id', 'id');
+}
+
+// Relasi ke komponen
+public function komponen()
+{
+    return $this->belongsTo(\App\Models\Komponen::class, 'komponen_id', 'id');
 }
 
 }

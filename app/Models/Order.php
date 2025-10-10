@@ -12,10 +12,19 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'user_id',
         'total',
         'status',
-        // tambahkan kolom lain sesuai kebutuhan
+        'full_name',
+        'email',
+        'phone',
+        'address_street',
+        'address_city',
+        'address_province',
+        'address_postal_code',
+        'shipping_method',
+        'address_notes',
     ];
 
     // Relasi ke user (pelanggan)

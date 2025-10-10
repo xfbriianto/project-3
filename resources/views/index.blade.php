@@ -87,7 +87,7 @@
         Hubungi kami sekarang untuk konsultasi gratis!
       </p>
       <div class="mt-6">
-        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition">
+      <a href="{{ route('service.installation.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition">
           Pasang Sekarang
         </a>
       </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Order;
+use App\Models\InstallationRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -98,7 +99,7 @@ class DashboardController extends Controller
         }
 
         return $items->map(function($item) {
-            $barangName = optional($item->barang)->name_barang ?? 'Barang tidak ditemukan';
+            $barangName = optional($item->barang)->name ?? 'Barang tidak ditemukan';
             return $barangName . ' (x' . $item->quantity . ')';
         })->implode(', ');
     }
