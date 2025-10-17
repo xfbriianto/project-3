@@ -23,6 +23,9 @@ class DashboardController extends Controller
             // Total penjualan dari order yang selesai
             $totalPenjualan = Order::where('status', 'completed')->sum('total');
 
+            // Total permintaan pemasangan
+            $permintaanPemasangan = InstallationRequest::count();
+
             // Penjualan 6 bulan terakhir
             $penjualanBulanan = Order::select(
                     DB::raw('DATE_FORMAT(created_at, "%b %Y") as bulan'),
@@ -50,6 +53,7 @@ class DashboardController extends Controller
             return view('admin.dashboard', compact(
                 'totalStok',
                 'totalPenjualan',
+                'permintaanPemasangan',
                 'labels',
                 'data',
                 'laporan'
