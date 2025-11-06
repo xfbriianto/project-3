@@ -10,16 +10,16 @@ class CreatePaketsTable extends Migration
     public function up()
     {
         Schema::create('pakets', function (Blueprint $table) {
-    $table->id();              // bigIncrements
-    $table->string('name');
-    $table->unsignedBigInteger('price');
-    $table->timestamps();
-});
+            $table->id();              // bigIncrements
+            $table->string('name');
+            $table->unsignedBigInteger('price');
+            $table->timestamps();
+        });
 
     }
 
     public function down()
     {
-        Schema::dropIfExists('barang_paket');
+        Schema::dropIfExists('pakets');
     }
 }
