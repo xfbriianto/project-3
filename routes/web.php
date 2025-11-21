@@ -88,6 +88,9 @@ Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->
         Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('reset.password');
         Route::post('/reset-password', [ForgotPasswordController::class, 'processReset'])->name('reset.password.post');
 
+        // Dashboard route
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
         // Google OAuth
         Route::get('/auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle'])->name('auth.google');
         Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
